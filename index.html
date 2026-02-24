@@ -13,3 +13,115 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>     
+    <!-- 顶部导航栏（简化版） -->     
+    <nav class="navbar">        
+        <div class="container navbar-container">    
+            <!-- logo -->
+            <a href="index.html" class="logo">                 
+                <i class="fas fa-school logo-icon"></i>                 
+                校园知识库             
+            </a>    
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">                
+                <i class="fas fa-bars"></i>             
+            </button> 
+            
+            <div class="nav-links" id="navLinks">                 
+                <a href="index.html" class="nav-link active">                     
+                    <i class="fas fa-home"></i>                     
+                    首页                 
+                </a>                 
+                <a href="tasks.html" class="nav-link">                     
+                    <i class="fas fa-tasks"></i>                     
+                    校园事务管理  
+                </a>                 
+                <a href="life.html" class="nav-link">                     
+                    <i class="fas fa-life"></i>  
+                    校园生活管理
+                </a>                
+                <a href="home and school.html" class="nav-link">                     
+                    <i class="fas fa-home and school"></i>                     
+                    家校管理    
+                </a>
+                    <a href="personal.html" class="nav-link">                    
+                        <i class="fas fa-user"><fa/i>                   
+                    个人中心                   
+                    </a>             
+            </div>         
+        </div>     
+    </nav>
+
+    <div class="login-card">
+        <!-- 登录标题 -->
+        <div class="login-title">
+            <h2>校园多功能管理器</h2>
+            <p>请输入账号密码登录</p>
+        </div>
+
+        <!-- 登录表单 -->
+        <form id="loginForm">
+            <!-- 账号输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" class="form-input" id="username" placeholder="请输入手机号/学生帐号名" required>
+                </div>
+                <div class="error-message" id="usernameError">请输入有效的手机号/学生帐号名</div>
+            </div>
+
+            <!-- 密码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" class="form-input" id="password" placeholder="请输入密码" required>
+                </div>
+                <div class="error-message" id="passwordError">密码长度不能少于6位</div>
+            </div>
+
+            <!-- 表单选项 -->
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe"> 记住密码
+                </label>
+                <a href="forgot-password.html" class="forgot-password">忘记密码？</a>
+            </div>
+
+            <!-- 登录按钮 -->
+            <button type="submit" class="login-btn" id="loginBtn">登录</button>
+        </form>
+
+        <!-- 注册提示 -->
+        <div class="register-tip">
+            还没有账号？<a href="register.html">立即注册</a>
+        </div>
+    </div>
+                            
+         <!-- 注册界面 --> 
+         // 没有帐号时，跳转到注册界面
+            alert('即将跳转到注册页');
+                window.location.href = 'registration.html'; 
+
+    <div class="register-card">
+        <!-- 注册标题 -->
+        <div class="register-title">
+            <h2>校园多功能管理器</h2>
+            <p>填写信息完成注册</p>
+        </div>
+
+        <!-- 注册表单 -->
+        <form id="registerForm">
+            <!-- 学号/工号输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-id-card input-icon"></i>
+                    <input type="text" class="form-input" id="stuId" placeholder="请输入学号/工号" required>
+                </div>
+                <div class="error-message" id="stuIdError">请输入有效的学号/工号（仅数字）</div>
+            </div>                        
+                            
+            <!-- 表单验证JS -->                
+            // 登录成功，跳转到首页
+                alert('登录成功！即将跳转到首页');
+                window.location.href = 'index.html';            
