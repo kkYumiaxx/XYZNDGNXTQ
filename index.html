@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- 图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/8.0.0/css/all.min.css">
 </head>
 <body>     
     <!-- 顶部导航栏（简化版） -->     
@@ -21,7 +21,7 @@
             <!-- logo -->
             <a href="index.html" class="logo">                 
                 <i class="fas fa-school logo-icon"></i>                 
-                校园知识库             
+                校园管理器             
             </a>    
             
             <button class="mobile-menu-toggle" id="mobileMenuToggle">                
@@ -42,7 +42,7 @@
                     校园生活管理
                 </a>                
                 <a href="home and school.html" class="nav-link">                     
-                    <i class="fas fa-home and school"></i>                     
+                    <i class="fas fa-home-and-school"></i>                     
                     家校管理    
                 </a>
                     <a href="personal.html" class="nav-link">                    
@@ -53,6 +53,40 @@
         </div>     
     </nav>
 
+    <!-- 英雄区域 -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">校园多功能管理器（学生端）</h1>
+                <p class="hero-subtitle">校园管理一站式服务</p>                        
+                <a href="login.html" class="hero-btn">立即登录</a>
+        </div>
+    </section>
+
+    <!-- 功能亮点（英雄区域下方，补充说明） -->
+    <div class="features">
+        <div class="feature-card">
+            <i class="fas fa-tasks feature-icon"></i>
+            <h3>个人事务管理</h3>
+            <p>一键查询班级课表、考勤记录，成绩分析、校园卡管理一键操作，任务记录、作业清单一目了然</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-life feature-icon"></i>
+            <h3>校园生活管理</h3>
+            <p>宿舍管理、活动报名、图书借阅一站式服务</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-home-and-school feature-icon"></i>
+            <h3>家校管理</h3>
+            <p>学生信息、成长档案、学生到校离校一目了然，请假申请、家校沟通、接送登记一键操作</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-user feature-icon"></i>
+            <h3>个人中心</h3>
+            <p>历史记录、校园卡余额、事情状态、消息通知一目了然，一键管理个人资料、帐号安全</p>
+    </div>
+
+    <!-- 登录与注册 -->    
     <div class="login-card">
         <!-- 登录标题 -->
         <div class="login-title">
@@ -66,9 +100,9 @@
             <div class="form-group">
                 <div class="input-wrapper">
                     <i class="fas fa-user input-icon"></i>
-                    <input type="text" class="form-input" id="username" placeholder="请输入手机号/学生帐号ID" required>
+                    <input type="text" class="form-input" id="userID" placeholder="请输入学生帐号ID" required>
                 </div>
-                <div class="error-message" id="usernameError">请输入有效的11位手机号/学生帐号ID</div>
+                <div class="error-message" id="usernameError">请输入有效的学生帐号ID</div>
             </div>
 
             <!-- 密码输入框 -->
@@ -125,10 +159,10 @@
             <！--学生帐号ID输入框 -->
             <div class="form-group">
                 <div class="input-wrapper">
-                    <i class="fas fa-id-card input-icon"></i>
-                    <input type="text" class="form-input" id="id-card"="请输入学生帐号ID" required>
+                    <i class="fas fa-userID input-icon"></i>
+                    <input type="text" class="form-input" id="userID"="请输入学生帐号ID" required>
                 </div>
-                <div class="error-message" id="id-cardError">请输入学生帐号ID</div>
+                <div class="error-message" id="userIDError">请输入学生帐号ID</div>
             </div>
                 
             <!-- 手机号输入框 -->
@@ -184,7 +218,7 @@
                 //获取所有元素
                 const registerForm = document.getElementById('registerForm');
                 const name = document.getElementById('name');
-                const id-card = document.getElementById（'id-card')
+                const id-card = document.getElementById（'userID');
                 const phone = document.getElementById('phone');
                 const getVerifyBtn = document.getElementById('getVerifyBtn');
                 const verifyCode = document.getElementById('verifyCode');
@@ -194,8 +228,8 @@
                 const registerBtn = document.getElementById('registerBtn');
             
                 // 错误提示元素
-                const stuIdError = document.getElementById('stuIdError');
                 const nameError = document.getElementById('nameError');
+                const id-cardError = document.getElementById('userIDError');
                 const phoneError = document.getElementById('phoneError');
                 const verifyCodeError = document.getElementById('verifyCodeError');
                 const passwordError = document.getElementById('passwordError');
@@ -307,7 +341,7 @@
 
         // 4. 实时验证
         name.addEventListener('input', validateForm);
-        id-card.addEventListener('input',validateForm);        
+        userID.addEventListener('input',validateForm);        
         phone.addEventListener('input', validateForm);
         verifyCode.addEventListener('input', validateForm);
         password.addEventListener('input', validateForm);
@@ -345,8 +379,266 @@
             }, 1500);
         });
     </script>
+
+                <!--个人事务管理-->
+                <div class="tasks-container">
+                    <div class="tasks">
+                        <i class="fas fa-tasks tasks-icon"></i>
+                        课表查询/自定义
+                        <div class="container">
+                        <!-- 标题与操作按钮 -->
+                        <div class="schedule-header">
+                            <h2 class="schedule-title">课表查询/自定义</h2>
+                            <button class="btn btn-primary" id="customCourseBtn">
+                                 <i class="fas fa-plus"></i> 自定义课程/换课
+                    </button>
+                 </div>
+
+                <!-- 筛选区域 -->
+                <div class="schedule-fliters">
+                    <div class="filter-group">
+                        <label for="weekdayFilter">星期：</label>
+                        <select id="weekdayFilter" class="filter-select">
+                             <option value="">全部</option>
+                             <option value="Monday">星期一</option>
+                             <option value="Tuesday">星期二</option>
+                             <option value="Wednesday">星期三</option>
+                             <option value="Thursday">星期四</option>
+                            <option value="Friday">星期五</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sectionFilter">节次：</label>
+                <select id="sectionFilter" class="filter-select">
+                    <option value="">全部</option>
+                    <option value="1">第1节 (08:00-08:40)</option>
+                    <option value="2">第2节 (08:50-09:30)</option>
+                    <option value="3">第3节 (10:00-10:40)</option>
+                    <option value="4">第4节 (10:50-11:30)</option>
+                    <option value="5">第5节 (14:20-15:00)</option>
+                    <option value="6">第6节 (15:10-15:50)</option>
+                    <option value="7">第7节 (16:00-16:40)</option>
+                    <option value="8">第8节 (16:50-17:30)</option>
+                </select>
+            </div>
+        </div>
+
+         <!-- 课表展示表格 -->
+        <table class="schedule-table" id="scheduleTable">
+            <thead>
+                <tr>
+                    <th>节次/时间</th>
+                    <th>星期一</th>
+                    <th>星期二</th>
+                    <th>星期三</th>
+                    <th>星期四</th>
+                    <th>星期五</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1<br>08:00-08:50</td>
+                    <td id="Mon1"></td>
+                    <td id="Tue1"></td>
+                    <td id="Wed1"></td>
+                    <td id="Thu1"></td>
+                    <td id="Fri1"></td>
+                </tr>
+                <tr>
+                    <td>2<br>08:50-09:40</td>
+                    <td id="Mon2"></td>
+                    <td id="Tue2"></td>
+                    <td id="Wed2"></td>
+                    <td id="Thu2"></td>
+                    <td id="Fri2"></td>
+                </tr>
+                <tr>
+                    <td>3<br>10:00-10:50</td>
+                    <td id="Mon3"></td>
+                    <td id="Tue3"></td>
+                    <td id="Wed3"></td>
+                    <td id="Thu3"></td>
+                    <td id="Fri3"></td>
+                </tr>
+                <tr>
+                    <td>4<br>10:50-11:40</td>
+                    <td id="Mon4"></td>
+                    <td id="Tue4"></td>
+                    <td id="Wed4"></td>
+                    <td id="Thu4"></td>
+                    <td id="Fri4"></td>
+                </tr>
+                <tr>
+                    <td>5<br>14:00-14:50</td>
+                    <td id="Mon5"></td>
+                    <td id="Tue5"></td>
+                    <td id="Wed5"></td>
+                    <td id="Thu5"></td>
+                    <td id="Fri5"></td>
+                </tr>
+                <tr>
+                    <td>6<br>14:50-15:40</td>
+                    <td id="Mon6"></td>
+                    <td id="Tue6"></td>
+                    <td id="Wed6"></td>
+                    <td id="Thu6"></td>
+                    <td id="Fri6"></td>
+                </tr>
+                <tr>
+                    <td>7<br>16:00-16:50</td>
+                    <td id="Mon7"></td>
+                    <td id="Tue7"></td>
+                    <td id="Wed7"></td>
+                    <td id="Thu7"></td>
+                    <td id="Fri7"></td>
+                </tr>
+                <tr>
+                    <td>8<br>16:50-17:40</td>
+                    <td id="Mon8"></td>
+                    <td id="Tue8"></td>
+                    <td id="Wed8"></td>
+                    <td id="Thu8"></td>
+                    <td id="Fri8"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 自定义/换课弹窗 -->
+    <div class="modal-overlay" id="courseModal">
+        <div class="modal">
+            <h3 class="modal-title" id="modalTitle">自定义课程</h3>
+            <form id="courseForm">
+                <div class="form-group">
+                    <label class="form-label">星期</label>
+                    <select id="modalWeekday" class="form-input" required>
+                        <option value="">请选择</option>
+                        <option value="Monday">星期一</option>
+                        <option value="Tuesday">星期二</option>
+                        <option value="Wednesday">星期三</option>
+                        <option value="Thursday">星期四</option>
+                        <option value="Friday">星期五</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">节次</label>
+                    <select id="modalSection" class="form-input" required>
+                        <option value="">请选择</option>
+                        <option value="1">第1节 (08:00-08:40)</option>
+                        <option value="2">第2节 (08:50-09:30)</option>
+                        <option value="3">第3节 (10:00-10:40)</option>
+                        <option value="4">第4节 (10:50-11:30)</option>
+                        <option value="5">第5节 (14:20-15:00)</option>
+                        <option value="6">第6节 (15:10-15:50)</option>
+                        <option value="7">第7节 (16:00-16:40)</option>
+                        <option value="8">第8节 (16:50-17:30)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">课程名称</label>
+                    <input type="text" id="modalCourseName" class="form-input" placeholder="如：高等数学/换课-英语" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">授课老师</label>
+                    <input type="text" id="modalTeacher" class="form-input" placeholder="如：张老师">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label">备注（换课说明）</label>
+                    <input type="text" id="modalRemark" class="form-input" placeholder="如：原课程调至周四第3节">
+                </div>
+                <input type="hidden" id="editMode" value="false">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeModal">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--考勤管理-->
+    <div class="container">
+        <h2 class="title">
+            <i class="fas fa-history"></i> 查看考勤记录
+        </h2>
+
+        <table class="record-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>时间</th>
+                    <th>内容</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody id="recordList">
+                <!-- 记录会自动渲染在这里 -->
+            </tbody>
+        </table>
+
+        <div id="noData" class="no-data" style="display: none;">
+            暂无记录
+        </div>
+    </div>
+                  
+    <div class="container">
+    <h2 class="title">
+        <i class="fas fa-paper-plane"></i> 申请提交
+    </h2>
+    <form id="applyForm">
+        <div class="form-group">
+            <label>申请人</label>
+            <input type="text" class="form-control" id="name" placeholder="请输入姓名">
+        </div>
+        <div class="form-group">
+            <label>申请类型</label>
+            <select class="form-control" id="type">
+                <option value="请假">请假</option>
+                <option value="换课">换课</option>
+                <option value="报修">报修</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>申请时间</label>
+            <input type="datetime-local" class="form-control" id="time">
+        </div>
+        <div class="form-group">
+            <label>申请原因/说明</label>
+            <textarea class="form-control" id="reason" placeholder="请详细说明原因"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">提交申请</button>
+    </form>
+</div>                    
+
+         <div class="container">
+        <h2 class="title">
+            <i class="fas fa-history"></i> 查看申请记录
+        </h2>
+
+        <table class="record-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>时间</th>
+                    <th>内容</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody id="recordList">
+                <!-- 记录会自动渲染在这里 -->
+            </tbody>
+        </table>
+
+        <div id="noData" class="no-data" style="display: none;">
+            暂无记录
+        </div>
+    </div>               
+                        
+</div>  
+</div>
 </body>
 </html>
+                            
                             
                 
                             
