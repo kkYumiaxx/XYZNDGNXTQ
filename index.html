@@ -915,7 +915,7 @@
                     <option>灯</option>
                     <option>门</option>
                     <option>空调</option>
-                    <option>床</option>
+                    <option>床、桌、柜</option>
                     <option>水龙头</option>                    
                     <option>马桶</option>                     
                     <option>淋浴喷头</option>                     
@@ -924,6 +924,8 @@
                     <option>窗户</option>                     
                     <option>电话机</option>                     
                     <option>下水道</option>
+                    <option>其他</option>
+                    <option>热水卡</option>
                 </select>
             </div>
             <div class="form-item">
@@ -958,8 +960,66 @@
          <div id="noData" class="no-data" style="display: none;">             
              暂无记录          
          </div>     
-        </div>        
-                        
+        </div>  
+                
+                 <h2>申请更换宿舍</h2>
+        <form id="repairForm">
+            <div class="form-item">
+                <label>姓名</label>
+                <input type="text" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-item">
+                <label>联系电话</label>                 
+                <input type="tel" placeholder="请输入电话" required>             
+            </div>             
+            <div class="form-item">
+                <label>原宿舍号</label>                 
+                <input type="number" placeholder="请输入宿舍号" required>             
+            </div>             
+            <div class="form-item"> 
+                <label>原床号</label>                 
+                <input type="number" placeholder="请输入床号" required>            
+            </div>             
+                <label>更换宿舍号</label>
+                <input type="text" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-item">
+                <label>更换床号</label>                 
+                <input type="tel" placeholder="请输入电话" required>             
+            </div>             
+            <div class="form-item">
+                <label>申请原因</label>                 
+                <input type="number" placeholder="请输入宿舍号" required>             
+            </div>             
+
+            活动报名
+            <div class="container"> 
+                <h2 class="title">                              
+                    <i class="fas fa-activities registration"></i> 查看校园活动/讲座/竞赛                     
+                </h2>  
+                <table class="record-table">            
+                   <thead>                 
+                       <tr>                     
+                           <th>序号</th>                    
+                           <th>学期</th>                    
+                           <th>时间</th>                     
+                           <th>活动类型</th>                                         
+                           <th>活动</th>                                         
+                           <th>讲座</th>                                          
+                           <th>竞赛</th>                    
+                           <th>其他</th>                     
+                           <th>状态</th>                 
+                       </tr>             
+                   </thead>             
+                    <tbody id="recordList">                 
+                        <!-- 新活动会自动渲染在这里 -->             
+                    </tbody>         
+                </table> 
+         <div id="noData" class="no-data" style="display: none;">             
+             暂无活动          
+         </div>     
+            </div> 
+             
 </div>  
 </div>
 </body>
