@@ -380,13 +380,29 @@
         });
     </script>
 
-                <!--个人事务管理-->
-                <div class="tasks-container">
-                    <div class="tasks">
-                        <i class="fas fa-tasks tasks-icon"></i>
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
                         课表查询/自定义
                         <div class="container">
-                        <!-- 标题与操作按钮 -->
                         <div class="schedule-header">
                             <h2 class="schedule-title">课表查询/自定义</h2>
                             <button class="btn btn-primary" id="customCourseBtn">
@@ -555,7 +571,7 @@
         </div>
     </div>
 
-    <!--考勤管理-->
+    考勤管理                     
     <div class="container">
         <h2 class="title">
             <i class="fas fa-history"></i> 查看考勤记录
@@ -566,7 +582,7 @@
                 <tr>
                     <th>序号</th>
                     <th>时间</th>
-                    <th>内容</th>
+                    <th>考勤类型</th>
                     <th>状态</th>
                 </tr>
             </thead>
@@ -632,7 +648,317 @@
         <div id="noData" class="no-data" style="display: none;">
             暂无记录
         </div>
-    </div>               
+    </div>    
+                        
+         成绩管理系统                   
+         <div class="container">         
+             <h2 class="title">             
+                 <i class="fas fa-history"></i> 查看历史成绩        
+             </h2> 
+
+              <table class="record-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>学期</th>
+                    <th>时间</th>
+                    <th>考试类型</th>                     
+                    <th>科目</th>                     
+                    <th>答题卡</th>                     
+                    <th>成绩</th>
+                    <th>评语</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody id="recordList">
+                <!-- 记录会自动渲染在这里 -->
+            </tbody>
+        </table>
+
+        <div id="noData" class="no-data" style="display: none;">
+            暂无记录 
+        </div>
+    </div>
+                        
+        <!-- 筛选区域 -->                 
+            <div class="schedule-fliters">                     
+                <div class="filter-group">                         
+                    <label for="semesterFilter">学期：</label>                         
+                    <select id="semesterFilter" class="filter-select">                             
+                        <option value="">全部</option>                              
+                        <option value="the first semester">第一学期</option>                              
+                        <option value="the second semester">第二学期</option>                              
+                        <option value="the third semester">第三学期</option>                             
+                        <option value="the fourth semester">第四学期</option>                            
+                        <option value="the fifth semester">第五学期</option>
+                        <option value="the sixth semester">第六学期</option>
+                    </select>             
+                </div> 
+              <div class="schedule-fliters">                     
+                <div class="filter-group">                         
+                    <label for="subjectFilter">学科：</label>                         
+                    <select id="subjectFilter" class="filter-select">                             
+                        <option value="">全部</option>                              
+                        <option value="Chinese">语文</option>                              
+                        <option value="math">数学</option>                              
+                        <option value="English">英语</option>                             
+                        <option value="physics">物理</option>                            
+                        <option value="chemistry">化学</option>
+                        <option value="biology">生物</option>
+                        <option value="politics">政治</option>                                                     
+                        <option value="history">历史</option>                         
+                        <option value="geography">地理</option>
+                    </select> 
+                </div>
+
+                 <button class="btn-analyze" onclick="analyzeScore()">开始分析成绩</button>
+
+    <!-- 分析结果 -->
+    <div class="result-box" id="result" style="display:none;">
+        <div class="result-title">📊 成绩统计结果</div>
+        <div class="score-info">平均分：<span id="avg"></span></div>
+        <div class="score-info">总分：<span id="total"></span></div>
+        <div class="score-info">及格科目数：<span id="passCount"></span></div>
+        <div class="score-info weak-info">薄弱/不及格科目：<span class="weak-list" id="weak"></span></div>
+        <div class="score-info pass-info">待提升科目：<span class="pass-list" id="medium"></span></div>
+        <div class="score-info good-info">优势科目：<span class="good-list" id="good"></span></div>
+    </div>
+</div> 
+
+                作业管理系统
+                <div class="container">
+    <h2 class="title"><i class="fas fa-book"></i> 作业管理系统</h2>
+
+    <div class="tabs">
+        <div class="tab active" onclick="go(0)">接收作业</div>
+        <div class="tab" onclick="go(1)">提交作业</div>
+        <div class="tab" onclick="go(2)">查询批改结果</div>
+    </div>
+
+    <!-- 接收作业 -->
+    <div class="page active" id="page0">
+        <h3>已发布作业</h3>
+        <table class="table" id="taskList">
+            <thead>
+                <tr>
+                    <th>科目</th>
+                    <th>作业内容</th>
+                    <th>截止时间</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- 提交作业 -->
+    <div class="page" id="page1">
+        <h3>提交作业</h3>
+        <div class="form-group">
+            <label>选择作业</label>
+            <select class="form-control" id="taskId"></select>
+        </div>
+        <div class="form-group">
+            <label>你的答案/内容</label>
+            <textarea class="form-control" id="answer" rows="4"></textarea>
+        </div>
+        <button class="btn" onclick="submitTask()">提交作业</button>
+    </div>
+
+    <!-- 查询批改结果 -->
+    <div class="page" id="page2">
+        <h3>我的作业批改结果</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>科目</th>
+                    <th>作业内容</th>
+                    <th>我的答案</th>
+                    <th>得分</th>
+                    <th>评语</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody id="resultList"></tbody>
+        </table>
+    </div>
+</div>
+
+                校园卡管理系统
+                <div class="container">
+    <h2 class="title">
+        <i class="fas fa-wallet"></i> 校园卡余额查询
+    </h2>
+
+    <div class="balance-box">
+        <div class="balance-label">当前余额</div>
+        <div class="balance-num" id="balance">500.00</div>
+    </div>
+
+    <button class="btn-refresh" onclick="refreshBalance()">
+        <i class="fas fa-sync-alt"></i> 刷新余额
+    </button>
+</div>
+                
+                 <div class="container">                       
+                     <h2 class="title">                               
+                         <i class="fas fa-history"></i> 查看消费记录 
+                 </h2>  
+               <table class="record-table">             
+                   <thead>                 
+                       <tr>                     
+                           <th>序号</th>                     
+                           <th>时间</th>                     
+                           <th>内容</th>                     
+                           <th>状态</th>                 
+                       </tr>             
+                   </thead>             
+                   <tbody id="recordList">                 
+                       <!-- 记录会自动渲染在这里 -->             
+                   </tbody>         
+               </table>
+        </div>
+    </div>
+                        
+                        <div class="container">
+    <h2 class="title">
+        <i class="fas fa-id-card"></i> 校园卡挂失·解挂·缴费
+    </h2>
+
+    <div class="tabs">
+        <div class="tab active" onclick="setTab(0)">挂失申请</div>
+        <div class="tab" onclick="setTab(1)">解挂申请</div>
+        <div class="tab" onclick="setTab(2)">缴费</div>
+    </div>
+
+    <!-- 挂失 -->
+    <div class="page active" id="page0">
+        <div class="info">
+            挂失后卡片将暂停使用，需缴纳费用 10 元
+        </div>
+        <div class="form-group">
+            <label>姓名</label>
+            <input type="text" class="form-control" id="loss_name">
+        </div>
+        <div class="form-group">
+            <label>帐号ID</label>
+            <input type="text" class="form-control" id="loss_userID">
+        </div>
+        <div class="form-group">
+            <label>挂失原因</label>
+            <textarea class="form-control" id="loss_reason" rows="3"></textarea>
+        </div>
+        <button class="btn btn-danger" onclick="applyLoss()">提交挂失申请</button>
+    </div>
+
+    <!-- 解挂 -->
+    <div class="page" id="page1">
+        <div class="form-group">
+            <label>姓名</label>
+            <input type="text" class="form-control" id="rel_name">
+        </div>
+        <div class="form-group">
+            <label>帐号ID</label>
+            <input type="text" class="form-control" id="rel_userID">
+        </div>
+        <div class="form-group">
+            <label>解挂说明</label>
+            <textarea class="form-control" id="rel_reason" rows="3">已找回校园卡</textarea>
+        </div>
+        <button class="btn btn-success" onclick="applyRelieve()">提交解挂申请</button>
+    </div>
+
+    <!-- 缴费 -->
+    <div class="page" id="page2">
+        <div class="info">
+            费用：<strong>10 元</strong>
+        </div>
+        <div class="form-group">
+            <label>姓名</label>
+            <input type="text" class="form-control" id="pay_name">
+        </div>
+        <div class="form-group">
+            <label>帐号ID</label>
+            <input type="text" class="form-control" id="pay_userID">
+        </div>
+        <button class="btn" onclick="pay()">立即支付 10 元</button>
+    </div>
+</div>
+
+        <!--校园生活管理-->                 
+         <div class="life-container">                    
+            <div class="life">                         
+                <i class="fas fa-life life-icon"></i>
+                宿舍管理系统
+                <div class="box">
+        <h2>设备报修提交</h2>
+        <form id="repairForm">
+            <div class="form-item">
+                <label>姓名</label>
+                <input type="text" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-item">
+                <label>联系电话</label>                 
+                <input type="tel" placeholder="请输入电话" required>             
+            </div>             
+            <div class="form-item">
+                <label>宿舍号</label>                 
+                <input type="number" placeholder="请输入宿舍号" required>             
+            </div>             
+            <div class="form-item"> 
+                <label>床号</label>                 
+                <input type="number" placeholder="请输入床号" required>            
+            </div>             
+            <div class="form-item">
+                <label>设备类型</label>
+                <select required>
+                    <option value="">请选择</option>
+                    <option>灯</option>
+                    <option>门</option>
+                    <option>空调</option>
+                    <option>床</option>
+                    <option>水龙头</option>                    
+                    <option>马桶</option>                     
+                    <option>淋浴喷头</option>                     
+                    <option>水管</option>
+                    <option>风扇</option>                     
+                    <option>窗户</option>                     
+                    <option>电话机</option>                     
+                    <option>下水道</option>
+                </select>
+            </div>
+            <div class="form-item">
+                <label>故障描述</label>
+                <textarea rows="4" placeholder="简单描述故障" required></textarea>
+            </div>
+            <button type="submit">提交报修</button>
+        </form>
+    </div>
+
+        <div class="container">                       
+            <h2 class="title">                               
+                <i class="fas fa-history"></i> 查看宿舍卫生评分                      
+            </h2>  
+               <table class="record-table">            
+                   <thead>                
+                       <tr>                     
+                           <th>序号</th>
+                           <th>周次</th>
+                           <th>学期</th>
+                           <th>时间</th>                     
+                           <th>扣分处</th>                                                
+                           <th>扣分原因</th>                                                 
+                           <th>加分处</th>                                                 
+                           <th>加分原因</th>                            
+                       </tr>             
+                   </thead>             
+                   <tbody id="recordList">                 
+                       <!-- 记录会自动渲染在这里 -->             
+                   </tbody>         
+               </table> 
+         <div id="noData" class="no-data" style="display: none;">             
+             暂无记录          
+         </div>     
+        </div>        
                         
 </div>  
 </div>
