@@ -380,27 +380,11 @@
         });
     </script>
 
-               
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+         <!--个人事务管理--> 
+        <div class="tasks">   
+        <div class="tasks-container">                                
+        <i class="fas fa-tasks tasks-icon"></i>
+            
                         课表查询/自定义
                         <div class="container">
                         <div class="schedule-header">
@@ -1018,7 +1002,200 @@
          <div id="noData" class="no-data" style="display: none;">             
              暂无活动          
          </div>     
-            </div> 
+        </div> 
+
+             图书借阅
+             <div class="container">
+        <h2 class="title">
+            <i class="fas fa-book"></i> 图书馆藏书查询
+        </h2>
+
+                 <!-- 搜索筛选区域 -->
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询">
+            <select class="search-select" id="categoryFilter">
+                <option value="">全部分类</option>
+                <option value="文学">文学类</option>
+                <option value="理科">理科类</option>
+                <option value="工科">工科类</option>
+                <option value="社科">社科类</option>
+                <option value="教辅">教辅类</option>
+                <option value="艺术">艺术类</option>
+                <option value="英语">英语类</option>
+                <option value="法律">法律类</option>
+                <option value="心理学">心理学类</option>
+                <option value="政治">政治类</option>
+                <option value="其他">其他类型</option>
+                
+            </select>
+            <button class="search-btn" onclick="searchBooks()">
+                <i class="fas fa-search"></i> 搜索
+            </button>
+        </div>
+
+        <!-- 藏书列表展示 -->
+        <div class="book-list" id="bookList">
+            <!-- 书籍信息会动态渲染 -->
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="title">
+            <i class="fas fa-book"></i> 图书馆预约借书
+        </h2>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">发起预约</div>go
+            <div class="tab" onclick="switchTab(1)">我的预约记录</div>
+            <div class="tab" onclick="switchTab(2)">申请续借</div>
+        </div>
+
+        <!-- 预约借书 -->
+        <div class="page active" id="page0">
+            <div class="form-group">
+                <label>预约类型</label>
+                <select class="form-control" id="book" required>    
+                    <option value="">请选择书籍类型</option>
+                    <option value="文学">文学类</option>                 
+                    <option value="理科">理科类</option>                 
+                    <option value="工科">工科类</option>                                                                    
+                    <option value="社科">社科类</option>                
+                    <option value="教辅">教辅类</option>                 
+                    <option value="艺术">艺术类</option>                 
+                    <option value="英语">英语类</option>                 
+                    <option value="法律">法律类</option>                 
+                    <option value="心理学">心理学类</option>                 
+                    <option value="政治">政治类</option>                 
+                    <option value="地理">地理类</option>
+                    <option value="其他">其他类型</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>预约人姓名</label>
+                <input type="text" class="form-control" id="reserveName" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-group">
+                <label>班级</label>
+            <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
+        </div>
+        <div class="form-group">
+                <label>学号</label>
+            <input type="text" class="form-control" id="stuId" placeholder="请输入学号"required>
+        </div>
+        <div class="form-group">
+                <label>联系电话</label>
+                <input type="tel" class="form-control" id="reservePhone" placeholder="请输入电话" required>
+            </div>
+            <div class="form-group">
+                <label>预计取书时间</label>
+                <div class="time-group">
+                    <input type="date" class="form-control" id="takeDate" placeholder="取书日期" required>
+                    <input type="time" class="form-control" id="takeTime" placeholder="取书时间" required>
+                </div>
+            <button class="btn" onclick="submitBorrow()">提交预约申请</button>
+        </div>
+
+        <!-- 我的预约记录页面 -->
+        <div class="page" id="page1">
+            <table class="record-table" id="reserveTable">
+                <thead>
+                    <tr>
+                        <th>书籍</th>
+                        <th>取书日期</th>
+                        <th>取书时间</th>
+                        <th>预约人姓名</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="reserveList">
+                    <!-- 预约记录动态渲染 -->
+                </tbody>
+            </table>
+            <div class="empty-tip" id="emptyTip" style="display: none;">
+                暂无预约记录
+            </div>
+        </div>
+    </div>
+
+        <!-- 2. 我的借阅记录页面 -->
+        <div class="page" id="page1">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>书籍名称</th>
+                        <th>借阅人</th>
+                        <th>借阅时间</th>
+                        <th>到期时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="borrowList"></tbody>
+            </table>
+            <div class="empty" id="emptyBorrow" style="display:none">暂无借阅记录</div>
+        </div>
+
+        <!-- 3. 申请续借页面 -->
+        <div class="page" id="page2">
+            <div class="form-group">
+                <label>选择需续借的书籍</label>
+                <select class="form-control" id="renewBook">
+                    <option value="">请先选择借阅中的书籍</option>
+                    <!-- 动态加载可续借书籍 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>续借原因（选填）</label>
+                <textarea class="form-control" id="renewReason" rows="3" placeholder="如：未看完，需要续借7天"></textarea>
+            </div>
+            <div class="form-group">
+                <label>期望续借时长（天）</label>
+                <input type="number" class="form-control" id="renewDays" min="1" max="14" placeholder="最多续借14天">
+            </div>
+            <button class="btn" onclick="submitRenew()">提交续借申请</button>
+        </div>
+    </div>
+
+             <div class="container">
+        <h2 class="title">
+            <i class="fas fa-borrowBell"></i> 借阅逾期提醒
+        </h2>
+
+                 <!-- 4. 超时记录页面 -->
+        <div class="page" id="page2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>书籍名称</th>
+                        <th>借阅人</th>
+                        <th>到期时间</th>
+                        <th>超时天数</th>
+                        <th>滞纳金（元）</th>
+                        <th>是否缴纳</th>
+                    </tr>
+                </thead>
+                <tbody id="overdueList"></tbody>
+            </table>
+            <div class="empty" id="emptyOverdue" style="display:none">暂无超时记录</div>
+        </div>
+    </div>
+
+                 <!-- 借阅逾期提醒 -->
+<div class="timeout-modal" id="borrowBell">
+    <div class="timeout-box">
+        <div class="timeout-title">
+          <i class="fas fa-exclamation-circle"></i> 借阅超时提醒
+        </div>
+        <div class="timeout-desc">
+            您借阅此书已超出归还时间，需缴纳滞纳金，具体费用请前往【超时记录】页面查看<br>
+        </div>
+        <div class="modal-text" id="modalText"></div>
+        <button class="timeout-btn" onclick="closeOverdueModal()">知道了</button>
+    </div>
+</div>
+                
+             
              
 </div>  
 </div>
