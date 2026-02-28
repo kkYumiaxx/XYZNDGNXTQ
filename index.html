@@ -41,7 +41,7 @@
                     <i class="fas fa-life"></i>  
                     校园生活管理
                 </a>                
-                <a href="home and school.html" class="nav-link">                     
+                <a href="home-and-school.html" class="nav-link">                     
                     <i class="fas fa-home-and-school"></i>                     
                     家校管理    
                 </a>
@@ -872,6 +872,7 @@
          <div class="life-container">                    
             <div class="life">                         
                 <i class="fas fa-life life-icon"></i>
+                
                 宿舍管理系统
                 <div class="box">
         <h2>设备报修提交</h2>
@@ -1194,8 +1195,121 @@
         <button class="timeout-btn" onclick="closeOverdueModal()">知道了</button>
     </div>
 </div>
-                
-             
+
+             心理咨询预约
+             <div class="container">
+        <h2 class="title">
+            <i class="fas fa-book"></i> 心理咨询预约
+        </h2>
+
+                 <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">发起预约</div>
+            <div class="tab" onclick="switchTab(1)">我的预约记录</div>
+        </div>
+
+                  <!-- 预约咨询 -->
+        <div class="page active" id="page0">
+            <div class="form-group">
+                <label>选择咨询类型</label>
+                   class="form-control" id="psychologicalCounseling" required>    
+                    <option value="">请选择咨询类型</option>
+                    <option value="学业规划">发展类</option>                 
+                    <option value="人际关系">社交类</option>                 
+                    <option value="焦虑、抑郁、压力、失眠">情绪类</option>                                                                    
+                    <option value="PTSD、意外、性侵">生理创伤类</option>                
+                    <option value="网瘾、烟瘾">上瘾类</option>                 
+                    <option value="厌学">叛逆类</option>                 
+                    <option value="早恋">情感类</option>                 
+                    <option value="自杀倾向、急性应激">危机类</option>                 
+                    <option value="学业倦怠、人际冲突、在校压力">职场类</option>                 
+                    <option value="网络暴力、校园霸凌、家暴">暴力创伤类</option>                 
+                    <option value="日常事情">日常类</option>
+                    <option value="其他">其他类型</option>
+                </select>
+            </div>
+            
+        <div class="page active" id="page0">             
+            <div class="form-group">                
+                <label>选择咨询方式</label>                    
+                class="form-control" id="psychologicalCounseling" required>                         
+                <option value="">请选择咨询方式</option>                     
+                <option value="心理咨询室咨询">线下面对面类</option>                                     
+                <option value="文字、视频、语音咨询">线上类</option> 
+                <option value="电话咨询">紧急类</option>
+            <div class="form-group">
+                <label>预约人姓名</label>
+                <input type="text" class="form-control" id="reserveName" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-group">
+                <label>班级</label>
+            <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
+        </div>
+        <div class="form-group">
+                <label>学号</label>
+            <input type="text" class="form-control" id="stuId" placeholder="请输入学号"required>
+        </div>
+        <div class="form-group">
+                <label>联系电话</label>
+                <input type="tel" class="form-control" id="reservePhone" placeholder="请输入电话" required>
+            </div>
+            <div class="form-group">
+                <label>预约时间</label>
+                <div class="time-group">
+                    <input type="date" class="form-control" id="reserveDate" placeholder="预约日期" required>
+                    <input type="time" class="form-control" id="reserveTime" placeholder="预约时间" required>
+                </div>
+            <button class="btn" onclick="submitBorrow()">提交预约申请</button>
+        </div>
+
+                <!--家校管理-->          
+                <div class="home-and-school">            
+                    <div class="home-and-school-container">                                         
+                        <i class="fas fa-home-and-school home-and-school-icon"></i> 
+
+                学生信息查看                        
+                        <div class="container">         
+                            <h2 class="title">             
+                                <i class="fas fa-id-card"></i> 学生信息查看        
+                            </h2>        
+        <!-- 学生信息 -->
+        <div class="page active" id="p0">
+            <table class="table"
+            <thead>
+            <tr>
+                <th>信息项</th>
+                <th>详情</th>
+            </tr>
+        </thead>  
+        <tbody>        
+           <tr>
+                    <th>信息项</th>
+                    <th>详情</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>姓名</td>
+                <td>李四</td>
+            </tr>
+            <tr>
+                <td>班级</td>
+                <td>高一2班</td>
+            </tr>
+            <tr>
+                <td>班主任</td>
+                <td>王老师</td>
+            </tr>
+            <tr>
+                <td>学号</td>
+                <td>8</td>
+            </tr>
+        </tbody>    
+     </table>
+ </div>
+
+                        
+
+            
              
 </div>  
 </div>
