@@ -895,7 +895,7 @@
             </div>             
             <div class="form-item">
                 <label>设备类型</label>
-                <select required>
+                <select class="form-control" id="repairForm" multiple size="14">required>
                     <option value="">请选择</option>
                     <option>灯</option>
                     <option>门</option>
@@ -1054,8 +1054,8 @@
         <!-- 预约借书 -->
         <div class="page active" id="page0">
             <div class="form-group">
-                <label>预约类型</label>
-                <select class="form-control" id="book" required>    
+                <label>选择书籍(可多选)</label>
+                <select class="form-control" id="borrowBook" multiple size="13"required>    
                     <option value="">请选择书籍类型</option>
                     <option value="文学">文学类</option>                 
                     <option value="理科">理科类</option>                 
@@ -1068,6 +1068,7 @@
                     <option value="心理学">心理学类</option>                 
                     <option value="政治">政治类</option>                 
                     <option value="地理">地理类</option>
+                    <option value="信息技术">电脑类</option>
                     <option value="其他">其他类型</option>
                 </select>
             </div>
