@@ -1021,6 +1021,28 @@
          </div>     
         </div> 
 
+             <!-- 活动参与记录 -->
+ <div class="page" id="p5">
+     <h3 style="margin-bottom:12px;">活动参与记录</h3>
+     <table class="table">
+         <thead>
+             <tr>
+                 <th>活动名称</th>
+                 <th>活动时间</th>
+                 <th>参与状态</th>
+                 <th>备注</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td colspan="4" style="text-align:center; padding:20px; color:#999;">
+                     暂无活动参与记录
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+ </div>
+
              图书借阅
              <div class="container">
         <h2 class="title">
@@ -1330,7 +1352,6 @@
          </div>
      </div>
 
-
                             <！-- 3 到校离校提醒 -->
     <div class="page" id="p1">
          <div class="item">
@@ -1359,6 +1380,12 @@
             <div class="user">                         
                 <i class="fas fa-user user-icon"></i>
 
+                <div class="tab">
+    <button onclick="go(0)" class="active">个人信息</button>
+    <button onclick="go(1)">消息通知</button>
+    <!-- 其他标签... -->
+</div>
+                
                                 <!-- 个人信息 -->
  <div class="page active" id="p0">
      <table class="table">
