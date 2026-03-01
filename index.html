@@ -1392,6 +1392,51 @@
            </div>
          </tbody>
      </table>
+
+                                <!-- 消息通知 -->
+ <div class="page" id="p1">
+     <div class="notify-tabs">
+         <button class="notify-tab active" onclick="switchNotifyTab('unread')">未读消息</button>
+         <button class="notify-tab" onclick="switchNotifyTab('read')">已读消息</button>
+         <button class="notify-tab" onclick="switchNotifyTab('setting')">通知设置</button>
+     </div>
+     <!-- 未读消息 -->
+     <div class="notify-content active" id="unread">
+         <div class="notify-item unread">
+             <div class="notify-title">【系统】新书上架提醒</div>
+             <div class="notify-desc">《Python编程：从入门到实践》已到馆，可预约借阅</div>
+             <div class="notify-time">2026-03-05 10:23</div>
+         </div>
+     </div>
+
+     <!-- 已读消息 -->
+     <div class="notify-content" id="read">
+         <div class="notify-item read">
+             <div class="notify-title">【系统】密码修改成功</div>
+             <div class="notify-desc">您的账号密码已于2026-03-01修改成功</div>
+             <div class="notify-time">2026-03-01 14:30</div>
+         </div>
+     </div>
+
+     <!-- 通知设置 -->
+     <div class="notify-content" id="setting">
+         <div class="setting-item">
+             <span>接收短信通知</span>
+             <label class="switch">
+                 <input type="checkbox" id="smsSwitch" checked>
+                 <span class="slider"></span>
+             </label>
+         </div>
+         <div class="setting-item">
+             <span>接收站内信通知</span>
+             <label class="switch">
+                 <input type="checkbox" id="inboxSwitch" checked>
+                 <span class="slider"></span>
+             </label>
+         </div>
+         <button class="btn" onclick="saveNotifySettings()">保存设置</button>
+     </div>
+ </div>
              
                                 
                                 
