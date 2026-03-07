@@ -552,3 +552,2167 @@
    color: #4361ee;
    text-decoration: none;
       }
+/* 个人事务管理-课表模块 */
+.tasks {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+.tasks-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+
+/* 图标 + 标题区域 */
+.tasks-icon {
+  font-size: 24px;
+  color: #4361ee;
+  margin-bottom: 16px;
+  display: block; /* 图标单独成行 */
+}
+
+/* 课表头部（标题+按钮） */
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.schedule-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #4361ee;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #324bd1;
+}
+
+.btn i {
+  margin-right: 6px;
+}
+
+/* 筛选区域 */
+.schedule-filters { /* 修正拼写后的类名 */
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap; /* 适配移动端换行 */
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  outline: none;
+}
+
+.filter-select:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+/* 课表展示表格样式 */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 表格头部 */
+.schedule-table thead {
+  background: #4361ee;
+  color: #fff;
+}
+
+.schedule-table th {
+  padding: 12px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+/* 表格主体 */
+.schedule-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.schedule-table tbody tr:nth-child(even) {
+  background: #f9fafb; /* 隔行变色，提升可读性 */
+}
+
+.schedule-table td {
+  padding: 10px 6px;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  vertical-align: middle;
+  min-height: 60px; /* 保证单元格高度统一 */
+}
+
+/* 节次/时间列样式 */
+.schedule-table td:first-child {
+  background: #f3f4f6;
+  font-weight: 500;
+  color: #374151;
+  width: 120px; /* 固定宽度，防止变形 */
+}
+
+/* 课程单元格样式（有内容时） */
+.schedule-table td:not(:first-child):not(:empty) {
+  background: #e0e7ff;
+  border-radius: 4px;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.schedule-table td:not(:first-child):not(:empty):hover {
+  background: #c7d2fe;
+}
+
+/* 无数据提示（兜底样式） */
+.schedule-empty {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+/* 弹窗遮罩层 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* 确保弹窗在最上层 */
+  display: none; /* 初始隐藏 */
+}
+
+/* 弹窗容器 */
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 450px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 弹窗标题 */
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 弹窗表单 */
+#courseForm .form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+/* 弹窗底部按钮区 */
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #4361ee;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #324bd1;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+}
+/* 考勤管理整体容器 */
+.attendance-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块标题 */
+.attendance-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.attendance-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 考勤/申请记录表格 */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th,
+.record-table td {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.record-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.record-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 状态列样式（差异化显示） */
+.record-table td:nth-child(4) {
+  font-weight: 500;
+}
+
+.status-normal {
+  color: #10b981; /* 正常/通过 */
+}
+
+.status-abnormal {
+  color: #ef4444; /* 缺勤/驳回 */
+}
+
+.status-pending {
+  color: #f59e0b; /* 待审核 */
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 请假申请表单 */
+.leave-form {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+}
+
+.leave-form .form-group {
+  margin-bottom: 16px;
+}
+
+.leave-form .form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.leave-form .form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.leave-form .form-control:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.leave-form textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 提交按钮 */
+.btn-submit {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: #324bd1;
+}
+/* 成绩管理整体容器 */
+.score-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块主标题 */
+.score-main-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #4361ee;
+}
+
+/* 子标题 */
+.score-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 20px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 成绩表格 */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th,
+.record-table td {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.record-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap; /* 防止表头换行 */
+}
+
+.record-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 成绩列样式（差异化显示） */
+.score-cell {
+  font-weight: 500;
+}
+
+.score-pass {
+  color: #10b981; /* 及格 */
+}
+
+.score-fail {
+  color: #ef4444; /* 不及格 */
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 筛选区域（修正拼写） */
+.schedule-filters {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #374151;
+  outline: none;
+}
+
+.filter-select:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+/* 分析按钮 */
+.btn-analyze {
+  padding: 8px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-analyze:hover {
+  background: #324bd1;
+}
+
+.btn-analyze:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+/* 分析结果容器 */
+.result-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 分析结果卡片 */
+.result-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  padding: 24px;
+  margin: 20px 0;
+  border-left: 4px solid #4361ee; /* 侧边强调色 */
+}
+
+/* 结果标题 */
+.result-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-title i {
+  color: #4361ee;
+  font-size: 20px;
+}
+
+/* 成绩信息行 */
+.score-info {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* 不同类型信息的颜色区分 */
+.score-info span {
+  font-weight: 500;
+}
+
+/* 平均分/总分 - 基础色 */
+.score-info:not(.weak-info):not(.pass-info):not(.good-info) span {
+  color: #4361ee;
+}
+
+/* 薄弱科目 - 红色 */
+.weak-info span {
+  color: #ef4444;
+}
+
+/* 待提升科目 - 黄色 */
+.pass-info span {
+  color: #f59e0b;
+}
+
+/* 优势科目 - 绿色 */
+.good-info span {
+  color: #10b981;
+}
+
+/* 无分析结果提示 */
+.no-result {
+  text-align: center;
+  padding: 20px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+/* 作业管理整体容器 */
+.homework-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块主标题 */
+.homework-main-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #4361ee;
+}
+
+/* 子标题 */
+.homework-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 20px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.homework-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 标签页样式 */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #4361ee;
+  color: #fff;
+}
+
+.tab:hover:not(.active) {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* 页面容器（默认隐藏） */
+.page {
+  display: none;
+  padding: 20px 0;
+}
+
+.page.active {
+  display: block;
+}
+
+/* 表格样式 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+  padding: 12px 10px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 表单样式 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.form-control textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #324bd1;
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 状态列样式 */
+.status-unchecked {
+  color: #f59e0b; /* 未批改 */
+}
+
+.status-checked {
+  color: #10b981; /* 已批改 */
+}
+
+.status-excellent {
+  color: #4361ee; /* 优秀 */
+}
+/* 校园卡管理整体容器 */
+.card-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块主标题 */
+.card-main-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #4361ee;
+}
+
+/* 子标题 */
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 20px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 余额展示盒子 */
+.balance-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  padding: 30px 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.balance-label {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.balance-num {
+  font-size: 32px;
+  font-weight: 700;
+  color: #4361ee;
+}
+
+/* 刷新按钮 */
+.btn-refresh {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.btn-refresh:hover {
+  background: #324bd1;
+}
+
+.btn-refresh:active {
+  transform: scale(0.98); /* 点击反馈 */
+}
+
+/* 标签页样式 */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #4361ee;
+  color: #fff;
+}
+
+.tab:hover:not(.active) {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* 消费记录表格 */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th,
+.record-table td {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.record-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.record-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 消费状态样式 */
+.status-success {
+  color: #10b981; /* 消费成功 */
+}
+
+.status-fail {
+  color: #ef4444; /* 消费失败 */
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 标签页内容区域 */
+.tab-content {
+  display: none;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.tab-content.active {
+  display: block;
+}
+/* 页面容器（默认隐藏） */
+.page {
+  display: none;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-top: 10px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* 提示信息框 */
+.info {
+  padding: 12px 16px;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border-left: 4px solid #f59e0b;
+}
+
+/* 表单组样式 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.form-control textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 按钮样式统一 */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 危险按钮（挂失） */
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+/* 成功按钮（解挂） */
+.btn-success {
+  background: #10b981;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #059669;
+}
+
+/* 主要按钮（缴费） */
+.btn-primary {
+  background: #4361ee;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #324bd1;
+}
+
+/* 重置按钮 */
+.btn-reset {
+  background: #f3f4f6;
+  color: #4b5563;
+  margin-left: 10px;
+}
+
+.btn-reset:hover {
+  background: #e5e7eb;
+}
+/* 校园生活整体容器 */
+.life-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块主标题 */
+.life-main-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #4361ee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.life-main-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 表单通用样式 */
+.form-box {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+}
+
+.form-box h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.form-item, .form-group {
+  margin-bottom: 16px;
+}
+
+.form-item label, .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-control, .form-item input, .form-item select, .form-item textarea,
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus, .form-item input:focus, .form-item select:focus, .form-item textarea:focus,
+.form-group input:focus, .form-group textarea:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.form-item textarea, .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 按钮样式 */
+.btn-submit {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: #324bd1;
+}
+
+/* 报修进度样式 */
+.repair-list {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+}
+
+.repair-item {
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 12px;
+}
+
+.repair-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.repair-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.repair-info {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.repair-status {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.status-wait {
+  color: #f59e0b; /* 待处理 */
+}
+
+.status-processing {
+  color: #4361ee; /* 处理中 */
+}
+
+.status-done {
+  color: #10b981; /* 已完成 */
+}
+
+.repair-progress {
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #4361ee;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* 卫生评分表格 */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th, .record-table td {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap; /* 防止换行 */
+}
+
+.record-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.record-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+/* 活动/图书管理通用容器 */
+.activity-book-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块主标题 */
+.main-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #4361ee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 子标题 */
+.sub-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 20px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sub-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 活动表格样式 */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th, .record-table td {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.record-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.record-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 活动状态样式 */
+.status-not-started {
+  color: #6b7280; /* 未开始 */
+}
+
+.status-ongoing {
+  color: #4361ee; /* 报名中 */
+}
+
+.status-ended {
+  color: #10b981; /* 已结束 */
+}
+
+/* 无数据提示 */
+.no-data {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 活动参与记录表格 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 图书搜索区域 */
+.search-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.search-select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-select:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s ease;
+}
+
+.search-btn:hover {
+  background: #324bd1;
+}
+
+/* 图书列表样式 */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.book-item {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
+
+.book-item:hover {
+  transform: translateY(-4px);
+}
+
+.book-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.book-info {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.book-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.status-available {
+  background: #d1fae5;
+  color: #059669; /* 可借阅 */
+}
+
+.status-unavailable {
+  background: #fee2e2;
+  color: #dc2626; /* 已借出 */
+}
+/* 标签页样式 */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #4361ee;
+  color: #fff;
+}
+
+.tab:hover:not(.active) {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* 页面容器（默认隐藏） */
+.page {
+  display: none;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-top: 10px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* 表单通用样式 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+.form-control select[multiple] {
+  height: auto;
+}
+
+/* 时间选择组 */
+.time-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.time-group .form-control {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #324bd1;
+}
+
+/* 表格样式 */
+.record-table, .table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th, .record-table td,
+.table th, .table td {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.record-table th, .table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.record-table tbody tr:hover, .table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 空数据提示 */
+.empty-tip, .empty {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 逾期提醒模态框 */
+.timeout-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none; /* 默认隐藏 */
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.timeout-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.timeout-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ef4444;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeout-title i {
+  font-size: 18px;
+}
+
+.timeout-desc {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.modal-text {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.timeout-btn {
+  width: 100%;
+  padding: 10px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.timeout-btn:hover {
+  background: #324bd1;
+}
+
+/* 状态样式 */
+.status-pending {
+  color: #f59e0b; /* 待处理 */
+}
+
+.status-success {
+  color: #10b981; /* 已完成 */
+}
+
+.status-overdue {
+  color: #ef4444; /* 已逾期 */
+}
+/* 心理咨询模块通用样式（与之前模块风格统一） */
+.psych-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+/* 模块主标题 */
+.psych-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 24px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #4361ee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.psych-title i {
+  color: #4361ee;
+  font-size: 18px;
+}
+
+/* 标签页样式 */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #4361ee;
+  color: #fff;
+}
+
+.tab:hover:not(.active) {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* 页面容器（默认隐藏） */
+.page {
+  display: none;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-top: 10px;
+}
+
+.page.active {
+  display: block;
+}
+
+/* 表单通用样式 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+/* 时间选择组 */
+.time-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.time-group .form-control {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #324bd1;
+}
+
+/* 预约记录表格 */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.record-table th, .record-table td {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.record-table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.record-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 空数据提示 */
+.empty-tip {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* 状态样式 */
+.status-pending {
+  color: #f59e0b; /* 待审核 */
+}
+
+.status-approved {
+  color: #10b981; /* 已通过 */
+}
+
+.status-canceled {
+  color: #ef4444; /* 已取消 */
+}
+/* 家校管理模块样式 */
+.home-and-school {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+.home-and-school-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.home-and-school-icon {
+  font-size: 24px;
+  color: #4361ee;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+/* 通用页面容器 */
+.page {
+  display: none;
+  padding: 16px 0;
+}
+
+.page.active {
+  display: block;
+}
+
+/* 表格样式 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 通知/消息项样式 */
+.item, .notify-item {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.item h4, .notify-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.item p, .notify-desc {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.notify-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.notify-item.unread {
+  border-left: 4px solid #4361ee;
+}
+
+.notify-item.read {
+  border-left: 4px solid #9ca3af;
+}
+
+/* 标签页按钮 */
+.tab {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab button {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab button.active {
+  background: #4361ee;
+  color: #fff;
+}
+
+/* 消息通知子标签 */
+.notify-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.notify-tab {
+  padding: 8px 16px;
+  background: #f3f4f6;
+  color: #6b7280;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notify-tab.active {
+  background: #4361ee;
+  color: #fff;
+}
+
+.notify-content {
+  display: none;
+}
+
+.notify-content.active {
+  display: block;
+}
+
+/* 开关样式 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4361ee;
+}
+
+input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
+/* 设置项/小按钮 */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-small:hover {
+  background: #324bd1;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 16px;
+}
+
+.btn:hover {
+  background: #324bd1;
+}
+
+  .form-group strong {
+    font-size: 16px;
+    color: #1f2937;
+  }
+
+  .logout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .logout-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+</style>
+
+
+/* 页脚样式 */
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 30px;
+  border-radius: 8px;
+}
