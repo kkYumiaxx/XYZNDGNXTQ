@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>校园多功能管理器</title>
+    <title>校园学习管理器</title>
     <link rel="stylesheet" href="resources/styles/variables.css">
     <link rel="stylesheet" href="resources/styles/main.css">
     <link rel="stylesheet" href="resources/styles/responsive.css">
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- 图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/8.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>     
     <!-- 顶部导航栏（简化版） -->     
@@ -35,18 +35,14 @@
                 </a>                 
                 <a href="tasks.html" class="nav-link">                     
                     <i class="fas fa-tasks"></i>                     
-                    校园事务管理  
+                    个人学习事务管理  
                 </a>                 
-                <a href="life.html" class="nav-link">                     
-                    <i class="fas fa-life"></i>  
-                    校园生活管理
+                <a href="book.html" class="nav-link">                     
+                    <i class="fas fa-book"></i>  
+                    预约借书
                 </a>                
-                <a href="home-and-school.html" class="nav-link">                     
-                    <i class="fas fa-home-and-school"></i>                     
-                    家校管理    
-                </a>
-                    <a href="personal.html" class="nav-link">                    
-                        <i class="fas fa-user"><fa/i>                   
+                <a href="user.html" class="nav-link">                     
+                    <i class="fas fa-user"></i>                       
                     个人中心                   
                     </a>             
             </div>         
@@ -68,17 +64,12 @@
         <div class="feature-card">
             <i class="fas fa-tasks feature-icon"></i>
             <h3>个人事务管理</h3>
-            <p>一键查询班级课表、考勤记录，成绩分析、校园卡管理一键操作，任务记录、作业清单一目了然</p>
+            <p>一键查询班级课表，成绩分析、作业清单一目了然</p>
         </div>
         <div class="feature-card">
-            <i class="fas fa-life feature-icon"></i>
-            <h3>校园生活管理</h3>
+            <i class="fas fa-book feature-icon"></i>
+            <h3>预约借书</h3>
             <p>宿舍管理、活动报名、图书借阅一站式服务</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-home-and-school feature-icon"></i>
-            <h3>家校管理</h3>
-            <p>学生信息、成长档案、学生到校离校一目了然，请假申请、家校沟通、接送登记一键操作</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-user feature-icon"></i>
@@ -156,11 +147,11 @@
                 <div class="error-message" id="nameError">请输入真实姓名</div>
             </div>
 
-            <！--学生帐号ID输入框 -->
+            <!--学生帐号ID输入框 -->
             <div class="form-group">
                 <div class="input-wrapper">
-                    <i class="fas fa-userID input-icon"></i>
-                    <input type="text" class="form-input" id="userID"="请输入学生帐号ID" required>
+                    <i class="fas fa-ID input-icon"></i>
+                    <input type="text" class="form-input" id="userID"placeholder="请输入学生帐号ID" required>
                 </div>
                 <div class="error-message" id="userIDError">请输入学生帐号ID</div>
             </div>
@@ -213,174 +204,7 @@
         </div>
     </div>
                             
-            <!-- 表单验证JS --> 
-            <script>
-                //获取所有元素
-                const registerForm = document.getElementById('registerForm');
-                const name = document.getElementById('name');
-                const id-card = document.getElementById（'userID');
-                const phone = document.getElementById('phone');
-                const getVerifyBtn = document.getElementById('getVerifyBtn');
-                const verifyCode = document.getElementById('verifyCode');
-                const password = document.getElementById('password');
-                const passwordToggle = document.getElementById('passwordToggle');
-                const confirmPwd = document.getElementById('confirmPwd');
-                const registerBtn = document.getElementById('registerBtn');
-            
-                // 错误提示元素
-                const nameError = document.getElementById('nameError');
-                const id-cardError = document.getElementById('userIDError');
-                const phoneError = document.getElementById('phoneError');
-                const verifyCodeError = document.getElementById('verifyCodeError');
-                const passwordError = document.getElementById('passwordError');
-                const confirmPwdError = document.getElementById('confirmPwdError');
-
-                // 1. 密码显示/隐藏切换
-        passwordToggle.addEventListener('click', function() {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            // 切换图标
-            this.className = type === 'password' ? 'fas fa-eye-slash password-toggle' : 'fas fa-eye password-toggle';
-        });
-
-                // 2. 获取验证码倒计时
-        getVerifyBtn.addEventListener('click', function() {
-            if (!validatePhone()) return;
-
-                // 倒计时60秒             
-            let count = 60;             
-            this.disabled = true;             
-            this.textContent = `${count}秒后重新获取`; 
-            
-             const timer = setInterval(() => {                 
-                 count--;                 
-                 this.textContent = `${count}秒后重新获取`;                 
-                 if (count <= 0) {                    
-                     clearInterval(timer);                     
-                     this.disabled = false;                     
-                     this.textContent = '获取验证码';                
-                 }            
-             }, 1000); 
-            
-             // 模拟发送验证码（实际项目替换为真实接口）             
-            alert('验证码已发送：123456（仅测试）');         
-        });
-                
-        // 3. 表单验证函数
-        function validateForm() {
-            let isValid = true;
-            
-            // 验证姓名
-            if (name.value.trim() === '') {
-                nameError.style.display = 'block';
-                isValid = false;
-            } else {
-                nameError.style.display = 'none';
-            }
-
-            // 验证账号
-            if (username.value.trim() === '') {
-                usernameError.style.display = 'block';
-                isValid = false;
-            } else {
-                usernameError.style.display = 'none';
-            }
-
-            //验证帐号ID
-            if (id-card.value.trim() === '') {
-                id-cardError.style,display = 'block';
-                isValid = false;
-            } else {
-                id-cardError.style.display = 'none';
-            }
-       
-            // 验证手机号
-            if (!validatePhone()) {
-                isValid = false;
-            }
-
-            // 验证验证码（6位数字）
-            const verifyCodeVal = verifyCode.value.trim();
-            if (verifyCodeVal === '' || !/^[0-9]{6}$/.test(verifyCodeVal)) {
-                verifyCodeError.style.display = 'block';
-                isValid = false;
-            } else {
-                verifyCodeError.style.display = 'none';
-            }
-
-            // 验证密码
-            if (password.value.length < 6) {
-                passwordError.style.display = 'block';
-                isValid = false;
-            } else {
-                passwordError.style.display = 'none';
-            }
-
-            // 验证确认密码
-            if (confirmPwd.value !== password.value) {
-                confirmPwdError.style.display = 'block';
-                isValid = false;
-            } else {
-                confirmPwdError.style.display = 'none';
-            }
-
-            return isValid;
-        }
-
-                // 手机号单独验证函数
-        function validatePhone() {
-            const phoneVal = phone.value.trim();
-            if (phoneVal === '' || !/^1[3-9]\d{9}$/.test(phoneVal)) {
-                phoneError.style.display = 'block';
-                return false;
-            } else {
-                phoneError.style.display = 'none';
-                return true;
-            }
-        }
-
-        // 4. 实时验证
-        name.addEventListener('input', validateForm);
-        userID.addEventListener('input',validateForm);        
-        phone.addEventListener('input', validateForm);
-        verifyCode.addEventListener('input', validateForm);
-        password.addEventListener('input', validateForm);
-        confirmPwd.addEventListener('input', validateForm);        
-                    
-                // 5. 表单提交事件
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // 阻止默认提交
-
-            // 验证表单
-            if (!validateForm()) {
-                return;
-            }
-
-            // 禁用注册按钮，防止重复提交
-            registerBtn.disabled = true;
-            registerBtn.textContent = '注册中...';
-
-            // 模拟注册请求（实际项目替换为真实接口）
-            setTimeout(function() {
-                alert('注册成功！即将跳转到登录页');
-                window.location.href = 'login.html'; // 跳回登录页
-
-                // 登录成功，跳转到首页
-                alert('登录成功！即将跳转到首页');
-                window.location.href = 'index.html'; 
-
-                // 恢复按钮状态（实际登录失败时使用）
-                // loginBtn.disabled = false;
-                // loginBtn.textContent = '登录';
-
-                // 恢复按钮状态（注册失败时使用）
-                // registerBtn.disabled = false;
-                // registerBtn.textContent = '注册';
-            }, 1500);
-        });
-    </script>
-
-         <!--个人事务管理--> 
+         <!--个人学习事务管理--> 
         <div class="tasks">   
         <div class="tasks-container">                                
         <i class="fas fa-tasks tasks-icon"></i>
@@ -391,11 +215,15 @@
                             <h2 class="schedule-title">课表查询/自定义</h2>
                             <button class="btn btn-primary" id="customCourseBtn">
                                  <i class="fas fa-plus"></i> 自定义课程/换课
-                    </button>
-                 </div>
+                            </button>
+                            <button class="btn btn-success" id="downloadScheduleBtn" style="margin-left: 10px;">
+                                 <i class="fas fa-download"></i> 下载课表    
+                            </button>
+                        </div>
+                    </div>              
 
                 <!-- 筛选区域 -->
-                <div class="schedule-fliters">
+                <div class="schedule-filters">
                     <div class="filter-group">
                         <label for="weekdayFilter">星期：</label>
                         <select id="weekdayFilter" class="filter-select">
@@ -422,87 +250,6 @@
                 </select>
             </div>
         </div>
-
-         <!-- 课表展示表格 -->
-        <table class="schedule-table" id="scheduleTable">
-            <thead>
-                <tr>
-                    <th>节次/时间</th>
-                    <th>星期一</th>
-                    <th>星期二</th>
-                    <th>星期三</th>
-                    <th>星期四</th>
-                    <th>星期五</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1<br>08:00-08:50</td>
-                    <td id="Mon1"></td>
-                    <td id="Tue1"></td>
-                    <td id="Wed1"></td>
-                    <td id="Thu1"></td>
-                    <td id="Fri1"></td>
-                </tr>
-                <tr>
-                    <td>2<br>08:50-09:40</td>
-                    <td id="Mon2"></td>
-                    <td id="Tue2"></td>
-                    <td id="Wed2"></td>
-                    <td id="Thu2"></td>
-                    <td id="Fri2"></td>
-                </tr>
-                <tr>
-                    <td>3<br>10:00-10:50</td>
-                    <td id="Mon3"></td>
-                    <td id="Tue3"></td>
-                    <td id="Wed3"></td>
-                    <td id="Thu3"></td>
-                    <td id="Fri3"></td>
-                </tr>
-                <tr>
-                    <td>4<br>10:50-11:40</td>
-                    <td id="Mon4"></td>
-                    <td id="Tue4"></td>
-                    <td id="Wed4"></td>
-                    <td id="Thu4"></td>
-                    <td id="Fri4"></td>
-                </tr>
-                <tr>
-                    <td>5<br>14:00-14:50</td>
-                    <td id="Mon5"></td>
-                    <td id="Tue5"></td>
-                    <td id="Wed5"></td>
-                    <td id="Thu5"></td>
-                    <td id="Fri5"></td>
-                </tr>
-                <tr>
-                    <td>6<br>14:50-15:40</td>
-                    <td id="Mon6"></td>
-                    <td id="Tue6"></td>
-                    <td id="Wed6"></td>
-                    <td id="Thu6"></td>
-                    <td id="Fri6"></td>
-                </tr>
-                <tr>
-                    <td>7<br>16:00-16:50</td>
-                    <td id="Mon7"></td>
-                    <td id="Tue7"></td>
-                    <td id="Wed7"></td>
-                    <td id="Thu7"></td>
-                    <td id="Fri7"></td>
-                </tr>
-                <tr>
-                    <td>8<br>16:50-17:40</td>
-                    <td id="Mon8"></td>
-                    <td id="Tue8"></td>
-                    <td id="Wed8"></td>
-                    <td id="Thu8"></td>
-                    <td id="Fri8"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
     <!-- 自定义/换课弹窗 -->
     <div class="modal-overlay" id="courseModal">
@@ -554,91 +301,7 @@
             </form>
         </div>
     </div>
-
-    考勤管理                     
-    <div class="container">
-        <h2 class="title">
-            <i class="fas fa-history"></i> 查看考勤记录
-        </h2>
-
-        <table class="record-table">
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>时间</th>
-                    <th>考勤类型</th>
-                    <th>状态</th>
-                </tr>
-            </thead>
-            <tbody id="recordList">
-                <!-- 记录会自动渲染在这里 -->
-            </tbody>
-        </table>
-
-        <div id="noData" class="no-data" style="display: none;">
-            暂无记录
-        </div>
-    </div>
-            
-       <h2>请假申请</h2>           
-    <div class="container">
-    <h2 class="title">
-        <i class="fas fa-leave-of-absence"></i> 请假申请提交
-    </h2>
-    <form id="applyForm">
-        <div class="form-group">
-            <label>申请人</label>
-            <input type="text" class="form-control" id="name" placeholder="请输入姓名">
-        </div>
-        <div class="form-group">
-            <label>申请类型</label>
-            <select class="form-control" id="type">
-                <option value="事假">事假</option>
-                <option value="病假">病假</option>
-                <option value="调休">调休</option>
-                <option value="其他">其他</option>
-            </select>
-        </div>
-        <div class="form-item">
-            <label>申请时间</label>
-            <input type="datetime-local" class="form-control" id="time">
-        </div>
-        <div class="form-item">
-            <label>请假天数：</label>
-            <input type="number" id="days" placeholder="请输入天数" min="0.5" step="0.5">
-        </div>
-        <div class="form-item">
-            <label>申请原因/说明</label>
-            <textarea class="form-control" id="reason" placeholder="请详细说明原因"></textarea>
-        </div>
-        <button type="submit" class="btn-submit">提交申请</button>
-    </form>
-</div>                    
-
-         <div class="container">
-        <h2 class="title">
-            <i class="fas fa-history"></i> 查看申请记录
-        </h2>
-
-        <table class="record-table">
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>时间</th>
-                    <th>内容</th>
-                    <th>状态</th>
-                </tr>
-            </thead>
-            <tbody id="recordList">
-                <!-- 记录会自动渲染在这里 -->
-            </tbody>
-        </table>
-
-        <div id="noData" class="no-data" style="display: none;">
-            暂无记录
-        </div>
-    </div>    
-                        
+   
          成绩管理系统                   
          <div class="container">         
              <h2 class="title">             
@@ -683,6 +346,17 @@
                         <option value="the sixth semester">第六学期</option>
                     </select>             
                 </div> 
+              <div class="schedule-fliters">                                      
+                  <div class="filter-group">                                              
+                      <label for="semesterFilter">学期：</label>                                              
+                      <select id="semesterFilter" class="filter-select">                                                      
+                          <option value="">全部</option>                                                       
+                          <option value="the first semester">第一次月考</option>                                                       
+                          <option value="the second semester">期中考</option>                                                       
+                          <option value="the third semester">第二次月考</option>                                                      
+                          <option value="the fourth semester">期末考</option>                                                                      
+                      </select>                              
+                  </div>   
               <div class="schedule-fliters">                     
                 <div class="filter-group">                         
                     <label for="subjectFilter">学科：</label>                         
@@ -772,318 +446,10 @@
     </div>
 </div>
 
-                校园卡管理系统
-                <div class="container">
-    <h2 class="title">
-        <i class="fas fa-wallet"></i> 校园卡余额查询
-    </h2>
-
-    <div class="balance-box">
-        <div class="balance-label">当前余额</div>
-        <div class="balance-num" id="balance">500.00</div>
-    </div>
-
-    <button class="btn-refresh" onclick="refreshBalance()">
-        <i class="fas fa-sync-alt"></i> 刷新余额
-    </button>
-</div>
-                
-                 <div class="container">                       
-                     <h2 class="title">                               
-                         <i class="fas fa-history"></i> 查看消费记录 
-                 </h2>  
-               <table class="record-table">             
-                   <thead>                 
-                       <tr>                     
-                           <th>序号</th>                     
-                           <th>时间</th>                     
-                           <th>内容</th>                     
-                           <th>状态</th>                 
-                       </tr>             
-                   </thead>             
-                   <tbody id="recordList">                 
-                       <!-- 记录会自动渲染在这里 -->             
-                   </tbody>         
-               </table>
-        </div>
-    </div>
-                        
-                        <div class="container">
-    <h2 class="title">
-        <i class="fas fa-id-card"></i> 校园卡挂失·解挂·缴费
-    </h2>
-
-    <div class="tabs">
-        <div class="tab active" onclick="setTab(0)">挂失申请</div>
-        <div class="tab" onclick="setTab(1)">解挂申请</div>
-        <div class="tab" onclick="setTab(2)">缴费</div>
-    </div>
-
-    <!-- 挂失 -->
-    <div class="page active" id="page0">
-        <div class="info">
-            挂失后卡片将暂停使用，需缴纳费用 10 元
-        </div>
-        <div class="form-group">
-            <label>姓名</label>
-            <input type="text" class="form-control" id="loss_name">
-        </div>
-        <div class="form-group">
-            <label>帐号ID</label>
-            <input type="text" class="form-control" id="loss_userID">
-        </div>
-        <div class="form-group">
-            <label>挂失原因</label>
-            <textarea class="form-control" id="loss_reason" rows="3"></textarea>
-        </div>
-        <button class="btn btn-danger" onclick="applyLoss()">提交挂失申请</button>
-    </div>
-
-    <!-- 解挂 -->
-    <div class="page" id="page1">
-        <div class="form-group">
-            <label>姓名</label>
-            <input type="text" class="form-control" id="rel_name">
-        </div>
-        <div class="form-group">
-            <label>帐号ID</label>
-            <input type="text" class="form-control" id="rel_userID">
-        </div>
-        <div class="form-group">
-            <label>解挂说明</label>
-            <textarea class="form-control" id="rel_reason" rows="3">已找回校园卡</textarea>
-        </div>
-        <button class="btn btn-success" onclick="applyRelieve()">提交解挂申请</button>
-    </div>
-
-    <!-- 缴费 -->
-    <div class="page" id="page2">
-        <div class="info">
-            费用：<strong>10 元</strong>
-        </div>
-        <div class="form-group">
-            <label>姓名</label>
-            <input type="text" class="form-control" id="pay_name">
-        </div>
-        <div class="form-group">
-            <label>帐号ID</label>
-            <input type="text" class="form-control" id="pay_userID">
-        </div>
-        <button class="btn" onclick="pay()">立即支付 10 元</button>
-    </div>
-</div>
-
-        <!--校园生活管理-->                 
+        <!--图书借阅预约-->                 
          <div class="life-container">                    
             <div class="life">                         
                 <i class="fas fa-life life-icon"></i>
-                
-                宿舍管理系统
-                <div class="box">
-        <h2>设备报修提交</h2>
-        <form id="repairForm">
-            <div class="form-item">
-                <label>姓名</label>
-                <input type="text" placeholder="请输入姓名" required>
-            </div>
-            <div class="form-item">
-                <label>联系电话</label>                 
-                <input type="tel" placeholder="请输入电话" required>             
-            </div>             
-            <div class="form-item">
-                <label>宿舍号</label>                 
-                <input type="number" placeholder="请输入宿舍号" required>             
-            </div>             
-            <div class="form-item"> 
-                <label>床号</label>                 
-                <input type="number" placeholder="请输入床号" required>            
-            </div>             
-            <div class="form-item">
-                <label>设备类型</label>
-                <select class="form-control" id="repairForm" multiple size="14">required>
-                    <option value="">请选择</option>
-                    <option>灯</option>
-                    <option>门</option>
-                    <option>空调</option>
-                    <option>床、桌、柜</option>
-                    <option>水龙头</option>                    
-                    <option>马桶</option>                     
-                    <option>淋浴喷头</option>                     
-                    <option>水管</option>
-                    <option>风扇</option>                     
-                    <option>窗户</option>                     
-                    <option>电话机</option>                     
-                    <option>下水道</option>
-                    <option>其他</option>
-                    <option>热水卡</option>
-                </select>
-            </div>
-            <div class="form-item">
-                <label>故障描述</label>
-                <textarea rows="4" placeholder="简单描述故障" required></textarea>
-            </div>
-            <button type="submit">提交报修</button>
-        </form>
-    </div>
-
-                <!-- 宿舍报修进度 -->
- <div class="page" id="p4">
-     <h3 style="margin-bottom:12px;">宿舍报修进度</h3>
-     <div class="repair-list">
-         <div class="repair-item">
-             <div class="repair-title">水龙头漏水</div>
-             <div class="repair-info">宿舍：302　报修时间：2026-03-01</div>
-             <div class="repair-status status-wait">待处理</div>
-             <div class="repair-progress">
-                 <div class="progress-bar" style="width:25%"></div>
-             </div>
-             <div class="progress-text">进度：25%</div>
-         </div>
-     </div>
- </div>
-
-        <div class="container">                       
-            <h2 class="title">                               
-                <i class="fas fa-history"></i> 查看宿舍卫生评分                      
-            </h2>  
-               <table class="record-table">            
-                   <thead>                
-                       <tr>                     
-                           <th>序号</th>
-                           <th>周次</th>
-                           <th>学期</th>
-                           <th>时间</th>                     
-                           <th>扣分处</th>                                                
-                           <th>扣分原因</th>                                                 
-                           <th>加分处</th>                                                 
-                           <th>加分原因</th>                            
-                       </tr>             
-                   </thead>             
-                   <tbody id="recordList">                 
-                       <!-- 记录会自动渲染在这里 -->             
-                   </tbody>         
-               </table> 
-         <div id="noData" class="no-data" style="display: none;">             
-             暂无记录          
-         </div>     
-        </div>  
-                
-                 <h2>申请更换宿舍</h2>
-        <form id="repairForm">
-            <div class="form-item">
-                <label>姓名</label>
-                <input type="text" placeholder="请输入姓名" required>
-            </div>
-            <div class="form-item">
-                <label>联系电话</label>                 
-                <input type="tel" placeholder="请输入电话" required>             
-            </div>             
-            <div class="form-item">
-                <label>原宿舍号</label>                 
-                <input type="number" placeholder="请输入宿舍号" required>             
-            </div>             
-            <div class="form-item"> 
-                <label>原床号</label>                 
-                <input type="number" placeholder="请输入床号" required>            
-            </div>             
-                <label>更换宿舍号</label>
-                <input type="text" placeholder="请输入姓名" required>
-            </div>
-            <div class="form-item">
-                <label>更换床号</label>                 
-                <input type="tel" placeholder="请输入电话" required>             
-            </div>             
-            <div class="form-item">
-                <label>申请原因</label>                 
-                <input type="number" placeholder="请输入宿舍号" required>             
-            </div>   
-             
-              <h2>申请退宿</h2>
-             <h2 align="center">退宿申请表</h2>
- <div class="form-group">
-   <label>姓名：</label>
-   <input type="text" id="name" placeholder="请输入姓名">
- </div>
- <div class="form-group">
-   <label>学号：</label>
-   <input type="text" id="stuId" placeholder="请输入学号">
- </div>
- <div class="form-group">
-   <label>班级：</label>
-   <input type="text" id="className" placeholder="请输入班级">
- </div>
- <div class="form-group">
-   <label>宿舍号：</label>
-   <input type="text" id="dorm" placeholder="请输入宿舍号">
- </div>
- <div class="form-group">
-   <label>床号：</label>
-   <input type="text" id="dorm" placeholder="请输入床号">
- </div>            
- <div class="form-group">
-   <label>申请退宿日期：</label>
-   <input type="date" id="outDate">
- </div>
- <div class="form-group">
-   <label>退宿原因：</label>
-   <textarea id="reason" rows="5" placeholder="请详细说明退宿原因"></textarea>
- </div>
- <div class="form-group">
-   <label>家长联系方式：</label>
-   <input type="text" id="parentPhone" placeholder="请输入家长电话">
- </div>
- <button onclick="submitApply()">提交退宿申请</button>
- <div id="show"></div>
-
-            活动报名
-            <div class="container"> 
-                <h2 class="title">                              
-                    <i class="fas fa-activities registration"></i> 查看校园活动/讲座/竞赛                     
-                </h2>  
-                <table class="record-table">            
-                   <thead>                 
-                       <tr>                     
-                           <th>序号</th>                    
-                           <th>学期</th>                    
-                           <th>时间</th>                     
-                           <th>活动类型</th>                                         
-                           <th>活动</th>                                         
-                           <th>讲座</th>                                          
-                           <th>竞赛</th>                    
-                           <th>其他</th>                     
-                           <th>状态</th>                 
-                       </tr>             
-                   </thead>             
-                    <tbody id="recordList">                 
-                        <!-- 新活动会自动渲染在这里 -->             
-                    </tbody>         
-                </table> 
-         <div id="noData" class="no-data" style="display: none;">             
-             暂无活动          
-         </div>     
-        </div> 
-
-             <!-- 活动参与记录 -->
- <div class="page" id="p5">
-     <h3 style="margin-bottom:12px;">活动参与记录</h3>
-     <table class="table">
-         <thead>
-             <tr>
-                 <th>活动名称</th>
-                 <th>活动时间</th>
-                 <th>参与状态</th>
-                 <th>备注</th>
-             </tr>
-         </thead>
-         <tbody>
-             <tr>
-                 <td colspan="4" style="text-align:center; padding:20px; color:#999;">
-                     暂无活动参与记录
-                 </td>
-             </tr>
-         </tbody>
-     </table>
- </div>
 
              图书借阅
              <div class="container">
@@ -1106,6 +472,8 @@
                 <option value="法律">法律类</option>
                 <option value="心理学">心理学类</option>
                 <option value="政治">政治类</option>
+                <option value="地理">地理类</option>                     
+                <option value="信息技术">电脑类</option>
                 <option value="其他">其他类型</option>
                 
             </select>
@@ -1114,24 +482,13 @@
             </button>
         </div>
 
-        <!-- 藏书列表展示 -->
-        <div class="book-list" id="bookList">
-            <!-- 书籍信息会动态渲染 -->
-        </div>
-    </div>
-
-    <div class="container">
-        <h2 class="title">
-            <i class="fas fa-book"></i> 图书馆预约借书
-        </h2>
-
         <div class="tabs">
             <div class="tab active" onclick="switchTab(0)">发起预约</div>go
             <div class="tab" onclick="switchTab(1)">我的预约记录</div>
             <div class="tab" onclick="switchTab(2)">申请续借</div>
         </div>
 
-        <!-- 预约借书 -->
+        <!-- 预约借书/续借 -->
         <div class="page active" id="page0">
             <div class="form-group">
                 <label>选择书籍(可多选)</label>
@@ -1161,10 +518,6 @@
             <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
         </div>
         <div class="form-group">
-                <label>学号</label>
-            <input type="text" class="form-control" id="stuId" placeholder="请输入学号"required>
-        </div>
-        <div class="form-group">
                 <label>联系电话</label>
                 <input type="tel" class="form-control" id="reservePhone" placeholder="请输入电话" required>
             </div>
@@ -1173,7 +526,7 @@
                 <div class="time-group">
                     <input type="date" class="form-control" id="takeDate" placeholder="取书日期" required>
                     <input type="time" class="form-control" id="takeTime" placeholder="取书时间" required>
-                </div>
+            </div>
             <button class="btn" onclick="submitBorrow()">提交预约申请</button>
         </div>
 
@@ -1185,6 +538,7 @@
                         <th>书籍</th>
                         <th>取书日期</th>
                         <th>取书时间</th>
+                        <th>还书时间</th>
                         <th>预约人姓名</th>
                         <th>状态</th>
                         <th>操作</th>
@@ -1200,223 +554,6 @@
         </div>
     </div>
 
-        <!-- 2. 我的借阅记录页面 -->
-        <div class="page" id="page1">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>书籍名称</th>
-                        <th>借阅人</th>
-                        <th>借阅时间</th>
-                        <th>到期时间</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody id="borrowList"></tbody>
-            </table>
-            <div class="empty" id="emptyBorrow" style="display:none">暂无借阅记录</div>
-        </div>
-
-        <!-- 3. 申请续借页面 -->
-        <div class="page" id="page2">
-            <div class="form-group">
-                <label>选择需续借的书籍</label>
-                <select class="form-control" id="renewBook">
-                    <option value="">请先选择借阅中的书籍</option>
-                    <!-- 动态加载可续借书籍 -->
-                </select>
-            </div>
-            <div class="form-group">
-                <label>续借原因（选填）</label>
-                <textarea class="form-control" id="renewReason" rows="3" placeholder="如：未看完，需要续借7天"></textarea>
-            </div>
-            <div class="form-group">
-                <label>期望续借时长（天）</label>
-                <input type="number" class="form-control" id="renewDays" min="1" max="14" placeholder="最多续借14天">
-            </div>
-            <button class="btn" onclick="submitRenew()">提交续借申请</button>
-        </div>
-    </div>
-
-             <div class="container">
-        <h2 class="title">
-            <i class="fas fa-borrowBell"></i> 借阅逾期提醒
-        </h2>
-
-                 <!-- 4. 超时记录页面 -->
-        <div class="page" id="page2">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>书籍名称</th>
-                        <th>借阅人</th>
-                        <th>到期时间</th>
-                        <th>超时天数</th>
-                        <th>滞纳金（元）</th>
-                        <th>是否缴纳</th>
-                    </tr>
-                </thead>
-                <tbody id="overdueList"></tbody>
-            </table>
-            <div class="empty" id="emptyOverdue" style="display:none">暂无超时记录</div>
-        </div>
-    </div>
-
-                 <!-- 借阅逾期提醒 -->
-<div class="timeout-modal" id="borrowBell">
-    <div class="timeout-box">
-        <div class="timeout-title">
-          <i class="fas fa-exclamation-circle"></i> 借阅超时提醒
-        </div>
-        <div class="timeout-desc">
-            您借阅此书已超出归还时间，需缴纳滞纳金，具体费用请前往【超时记录】页面查看<br>
-        </div>
-        <div class="modal-text" id="modalText"></div>
-        <button class="timeout-btn" onclick="closeOverdueModal()">知道了</button>
-    </div>
-</div>
-
-             心理咨询预约
-             <div class="container">
-        <h2 class="title">
-            <i class="fas fa-book"></i> 心理咨询预约
-        </h2>
-
-                 <div class="tabs">
-            <div class="tab active" onclick="switchTab(0)">发起预约</div>
-            <div class="tab" onclick="switchTab(1)">我的预约记录</div>
-        </div>
-
-                  <!-- 预约咨询 -->
-        <div class="page active" id="page0">
-            <div class="form-group">
-                <label>选择咨询类型</label>
-                   class="form-control" id="psychologicalCounseling" required>    
-                    <option value="">请选择咨询类型</option>
-                    <option value="学业规划">发展类</option>                 
-                    <option value="人际关系">社交类</option>                 
-                    <option value="焦虑、抑郁、压力、失眠">情绪类</option>                                                                    
-                    <option value="PTSD、意外、性侵">生理创伤类</option>                
-                    <option value="网瘾、烟瘾">上瘾类</option>                 
-                    <option value="厌学">叛逆类</option>                 
-                    <option value="早恋">情感类</option>                 
-                    <option value="自杀倾向、急性应激">危机类</option>                 
-                    <option value="学业倦怠、人际冲突、在校压力">职场类</option>                 
-                    <option value="网络暴力、校园霸凌、家暴">暴力创伤类</option>                 
-                    <option value="日常事情">日常类</option>
-                    <option value="其他">其他类型</option>
-                </select>
-            </div>
-            
-        <div class="page active" id="page0">             
-            <div class="form-group">                
-                <label>选择咨询方式</label>                    
-                class="form-control" id="psychologicalCounseling" required>                         
-                <option value="">请选择咨询方式</option>                     
-                <option value="心理咨询室咨询">线下面对面类</option>                                     
-                <option value="文字、视频、语音咨询">线上类</option> 
-                <option value="电话咨询">紧急类</option>
-            <div class="form-group">
-                <label>预约人姓名</label>
-                <input type="text" class="form-control" id="reserveName" placeholder="请输入姓名" required>
-            </div>
-            <div class="form-group">
-                <label>班级</label>
-            <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
-        </div>
-        <div class="form-group">
-                <label>学号</label>
-            <input type="text" class="form-control" id="stuId" placeholder="请输入学号"required>
-        </div>
-        <div class="form-group">
-                <label>联系电话</label>
-                <input type="tel" class="form-control" id="reservePhone" placeholder="请输入电话" required>
-            </div>
-            <div class="form-group">
-                <label>预约时间</label>
-                <div class="time-group">
-                    <input type="date" class="form-control" id="reserveDate" placeholder="预约日期" required>
-                    <input type="time" class="form-control" id="reserveTime" placeholder="预约时间" required>
-                </div>
-            <button class="btn" onclick="submitBorrow()">提交预约申请</button>
-        </div>
-
-                <!-- 家校管理 -->          
-                <div class="home-and-school">            
-                    <div class="home-and-school-container">                                         
-                        <i class="fas fa-home-and-school home-and-school-icon"></i> 
-
-                学生信息查看                        
-                        <div class="container">         
-                            <h2 class="title">             
-                                <i class="fas fa-id-card"></i> 学生信息查看        
-                            </h2>        
-        <!-- 学生信息 -->
-        <div class="page active" id="p0">
-            <table class="table"
-            <thead>
-            <tr>
-                <th>信息项</th>
-                <th>详情</th>
-            </tr>
-        </thead>  
-            <tbody>
-            <tr>
-                <td>姓名</td>
-                <td>李四</td>
-            </tr>
-            <tr>
-                <td>班级</td>
-                <td>高一2班</td>
-            </tr>
-            <tr>
-                <td>班主任</td>
-                <td>王老师</td>
-            </tr>
-            <tr>
-                <td>学号</td>
-                <td>8</td>
-            </tr>
-        </tbody>    
-     </table>
- </div>
-                            
-                            <!-- 2 校园通知 -->
-     <div class="page" id="p1">
-         <div class="item">
-             <h4>【放假通知】3月8日妇女节放假半天</h4>
-             <p>发布时间：2026-03-01</p>
-         </div>
-         <div class="item">
-             <h4>【安全提醒】上下学请遵守交通规则</h4>
-             <p>发布时间：2026-03-01</p>
-         </div>
-     </div>
-
-                            <！-- 3 到校离校提醒 -->
-    <div class="page" id="p1">
-         <div class="item">
-             <h4>李四 已安全到校</h4>
-             <p>【到校时间】7:20</p>
-         </div>
-         <div class="item">
-             <h4>李四 已安全离校</h4>
-             <p>【离校时间】18:05</p>
-         </div>
-        </div>
-                                <!-- 4 家校沟通 -->
-     <div class="page" id="p3">
-         <div class="item">
-             <h4>家长：老师您好，孩子今天请假</h4>
-             <p>时间：2026-03-02 08:10</p>
-         </div>
-         <div class="item">
-             <h4>老师：收到，注意休息</h4>
-             <p>时间：2026-03-02 08:15</p>
-         </div>
-     </div>
-
                                 <!--个人中心-->                 
          <div class="user-container">                    
             <div class="user">                         
@@ -1425,7 +562,6 @@
                 <div class="tab">
     <button onclick="go(0)" class="active">个人信息</button>
     <button onclick="go(1)">消息通知</button>
-    <!-- 其他标签... -->
 </div>
                 
                                 <!-- 个人信息 -->
@@ -1464,10 +600,21 @@
                  <td>******</td>
                  <td><button class="btn-small" onclick="changePassword()">更改密码</button></td>
              </tr>
-             <tr>
-                 <td>绑定学生</td>
-                 <td id="studentText">已绑定：李四</td>
-                 <td><button class="btn-small" onclick="unbindStudent()">解绑学生</button></td>
+             <tr>                 
+                 <td>姓名</td>                 
+                 <td>李四</td>             
+             </tr>             
+             <tr>                 
+                 <td>班级</td>                 
+                 <td>高一2班</td>             
+             </tr>             
+             <tr>                 
+                 <td>班主任</td>                 
+                 <td>王老师</td>             
+             </tr>             
+             <tr>                 
+                 <td>学号</td>                 
+                 <td>8</td>             
              </tr>
              <tr>
                  <td>权限设置</td>
@@ -1483,7 +630,6 @@
      <div class="notify-tabs">
          <button class="notify-tab active" onclick="switchNotifyTab('unread')">未读消息</button>
          <button class="notify-tab" onclick="switchNotifyTab('read')">已读消息</button>
-         <button class="notify-tab" onclick="switchNotifyTab('setting')">通知设置</button>
      </div>
      <!-- 未读消息 -->
      <div class="notify-content active" id="unread">
@@ -1502,29 +648,8 @@
              <div class="notify-time">2026-03-01 14:30</div>
          </div>
      </div>
-
-     <!-- 通知设置 -->
-     <div class="notify-content" id="setting">
-         <div class="setting-item">
-             <span>接收短信通知</span>
-             <label class="switch">
-                 <input type="checkbox" id="smsSwitch" checked>
-                 <span class="slider"></span>
-             </label>
-         </div>
-         <div class="setting-item">
-             <span>接收站内信通知</span>
-             <label class="switch">
-                 <input type="checkbox" id="inboxSwitch" checked>
-                 <span class="slider"></span>
-             </label>
-         </div>
-         <button class="btn" onclick="saveNotifySettings()">保存设置</button>
-     </div>
- </div>
-
                             <div class="footer-bottom">
-                <p>© 2026 校园多功能管理器</p>
+                <p>© 2026 校园学习管理器</p>
             </div>
         </div>
     </footer>
@@ -1533,19 +658,7 @@
     <script src="resources/scripts/main.js"></script>
     <script src="resources/scripts/search.js"></script>
 </body>
-</html>
-
-               
-             
-                                
-                                
-
-                        
-
-            
-             
-
-                            
+</html>                            
                             
                 
                             
