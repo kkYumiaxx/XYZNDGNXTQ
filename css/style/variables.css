@@ -1,0 +1,49 @@
+/* CSS 全局变量定义统一管理颜色、间距、字体、圆角、阴影等样式变量 */
+:root {
+/* 主色调 */
+  --primary-color: #4361ee;       /* 主题蓝 */
+  --primary-light: #5a75f0;       /* 浅蓝 */
+  --primary-dark: #3a54d4;        /* 深蓝 */
+  --success-color: #22c55e;       /* 成功绿 */
+  --danger-color: #ef4444;        /* 危险红 */
+  --warning-color: #f59e0b;       /* 警告黄 */
+  --info-color: #06b6d4;          /* 信息青 */
+  --secondary-color: #64748b;     /* 次要灰蓝 */
+
+  /* 文本色 */
+  --text-color: #2b2d42;          /* 主文本 */
+  --text-gray: #64748b;           /* 次文本 */
+  --text-light: #8d99ae;          /* 浅文本 */
+  --white: #ffffff;               /* 白色 */
+
+  /* 背景色 */
+  --bg-color: #f8f9fa;            /* 页面背景 */
+  --gray-light: #edf2f4;          /* 浅灰背景 */
+  --gray: #d9e2ec;                /* 中灰背景 */
+  --gray-dark: #94a3b8;           /* 深灰背景 */
+
+  /* 字体 */
+  --font-main: 'Inter', sans-serif;       /* 主要字体 */
+  --font-heading: 'Poppins', sans-serif; /* 标题字体 */
+
+  /* 间距（px） */
+  --spacing-xs: 4px;    /* 超小间距 */
+  --spacing-sm: 8px;    /* 小间距 */
+  --spacing-md: 16px;   /* 中等间距 */
+  --spacing-lg: 24px;   /* 大间距 */
+  --spacing-xl: 32px;   /* 超大间距 */
+
+  /* 圆角 */
+  --border-radius-sm: 4px;    /* 小圆角 */
+  --border-radius-md: 8px;    /* 中等圆角 */
+  --border-radius-lg: 12px;   /* 大圆角 */
+  --border-radius-full: 999px;/* 圆形 */
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);    /* 小阴影 */
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.1);     /* 中阴影 */
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);   /* 大阴影 */
+
+  /* 过渡 */
+  --transition: all 0.3s ease;
+}
