@@ -11,7 +11,20 @@
     <!-- 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="css/style/variables.css">
     <link rel="stylesheet" href="css/style/main.css">
+    <link rel="stylesheet" href="css/style/responsive.css">
+
+    <style>
+        /* 全局控制：默认只显示登录，其他都隐藏 */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+    </style>
+    
 </head>
 <body>     
     <!-- 顶部导航栏（简化版） -->     
@@ -77,13 +90,14 @@
         </div>    
     </div>
 
-    <!-- 登录与注册 -->    
-    <div class="login-card">
-        <!-- 登录标题 -->
-        <div class="login-title">
-            <h2>校园学习管理器</h2>
-            <p>请输入账号密码登录</p>
-        </div>
+    <!-- 登录 --> 
+    <div class="page active" id="page-login">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-title">
+                    <h2>校园学习管理器</h2>
+                    <p>请输入账号密码登录</p>
+                </div>
         
         <!-- 登录表单 -->
         <form id="loginForm">
@@ -114,22 +128,26 @@
                 </a>
             </div>
             
-            <!-- 登录按钮 -->
-            <button type="submit" class="login-btn" id="loginBtn">登录</button>
-        </form>
+                <!-- 登录按钮 -->
+                <button type="submit" class="login-btn" id="loginBtn">登录</button>
+            </form>
             
-            <!-- 注册提示 -->
-            <div class="register-tip">
-            还没有账号？<a href="register.html">立即注册</a>
+                <!-- 注册提示 -->
+                <div class="register-tip">
+                还没有账号？<a href="register.html">立即注册</a>
+            </div>        
         </div>
     </div>
+</div> 
 
-    <div class="register-card">
-        <!-- 注册标题 -->
-        <div class="register-title">
-            <h2>校园学习管理器</h2>
-            <p>填写信息完成注册</p>
-        </div>
+<!-- 注册 -->        
+<div class="page" id="page-register">
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-title">
+                <h2>校园学习管理器</h2>
+                <p>填写信息完成注册</p>
+            </div>
         
         <!-- 注册表单 -->
         <form id="registerForm" class="register-form">
@@ -190,15 +208,17 @@
                 <div class="error-message" id="confirmPwdError" style="display: none;">两次输入的密码不一致</div>
             </div>
             
-            <!-- 注册按钮 -->
-            <button type="submit" class="register-btn" id="registerBtn">注册</button>
-        </form>
+                <!-- 注册按钮 -->
+                <button type="submit" class="register-btn" id="registerBtn">注册</button>
+            </form>
         
-            <!-- 登录提示（跳转回登录页） -->
-            <div class="login-tip">
-            已有账号？<a href="login.html">立即登录</a>
+                <!-- 登录提示（跳转回登录页） -->
+                <div class="login-tip">
+                已有账号？<a href="login.html">立即登录</a>
+            </div>
         </div>
     </div>
+</div>
                             
          <!--个人学习事务管理--> 
         <div class="tasks">   
@@ -557,6 +577,8 @@
             <div class="tab">
                 <button onclick="go(0)" class="active">个人信息</button>
                 <button onclick="go(1)">消息通知</button>
+                <button onclick="go('page-help')">帮助与反馈</button>
+<button onclick="go('page-logout')">退出登录</button>
             </div>
         </div>       
     </div>
@@ -629,6 +651,7 @@
              <button class="notify-tab" onclick="switchNotifyTab('read')">已读消息</button>
          </div>
      </div>
+                 
      <!-- 未读消息 -->
      <div class="notify-content active" id="unread">
          <div class="notify-item unread">
@@ -646,19 +669,64 @@
              <div class="notify-time">2026-03-01 14:30</div>
          </div>
      </div>
-                            <div class="footer-bottom">
-                <p>© 2026 校园学习管理器</p>
+
+     <!-- 帮助与反馈 -->
+     <div class="page" id="page-help">
+       <div class="help-container">
+         <div class="help-card">
+            <h2>帮助与反馈</h2>
+            <textarea placeholder="请输入你的问题或建议..." rows="5"></textarea>
+            <div class="help-buttons">
+                <button onclick="go('page-user')">返回</button>
+                <button onclick="submitFeedback()">提交反馈</button>
             </div>
+          </div>
         </div>
+    </div> 
+                 
+    <!-- 退出登录 -->
+    <div class="page" id="page-logout">
+      <div class="logout-container">
+        <div class="logout-card">
+          <h2>确认退出登录？</h2>
+          <p>退出后将返回登录页面</p>
+          <div class="logout-buttons">
+            <button onclick="go('page-user')">取消</button>
+            <button onclick="logout()">确认退出</button>
+          </div>
+        </div>
+      </div>
+    </div>                         
+                 
+    <div class="footer-bottom">
+        <p>© 2026 校园学习管理器</p>
+    </div>
     </footer>
                 
     <!-- 引入外部JS -->
-    <script src="resources/scripts/main.js"></script>
-    <script src="resources/scripts/search.js"></script>            
+    <script src="js/utils.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/login-register.js"></script>
+    <script src="js/schedule.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/homework.js"></script>
+    <script src="js/book.js"></script>
+    <script src="js/user-center.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/search.js"></script> 
 
-    <!-- 脚本 -->
-    <script src="resources/scripts/main.js"></script>
-    <script src="resources/scripts/search.js"></script>
+     <script>
+// 切换页面函数（你所有按钮都用这个）
+function go(pageId) {
+    // 隐藏所有 page
+    document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+    });
+    // 显示你要的页面
+    document.getElementById(pageId).classList.add('active');
+}
+</script>           
 </body>
 </html>                            
                             
