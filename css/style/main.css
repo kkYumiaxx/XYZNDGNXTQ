@@ -1,0 +1,1045 @@
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+button {
+  font-family: var(--font-main);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: var(--transition);
+}
+
+/* 容器通用样式 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* 顶部导航栏 */
+.navbar {
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: var(--spacing-sm) 0;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--primary-color);
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+/* 导航链接 */
+.nav-links {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+}
+
+.nav-link.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.nav-link:hover:not(.active) {
+  color: var(--primary-color);
+  background-color: var(--gray-light);
+}
+
+/* 移动端菜单按钮（默认隐藏） */
+.mobile-menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  padding: var(--spacing-sm);
+}
+
+/* ========== 英雄区域样式 ========== */
+ .hero-section {
+   background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+   color: var(--white);
+   padding: var(--spacing-xl) 0;
+   min-height: 60vh;
+   display: flex;
+   align-items: center;
+   text-align: center;
+ }
+ .hero-content {
+   max-width: 800px;
+   margin: 0 auto;
+ }
+ .hero-title {
+   font-family: var(--font-heading);
+   font-size: 2.5rem;
+   font-weight: 700;
+   margin-bottom: var(--spacing-md);
+   line-height: 1.2;
+ }
+ .hero-subtitle {
+   font-size: 1.1rem;
+   margin-bottom: var(--spacing-lg);
+   opacity: 0.9;
+ }
+ .hero-btn {
+   display: inline-block;
+   background-color: var(--white);
+   color: var(--primary-color);
+   padding: var(--spacing-md) var(--spacing-xl);
+   border-radius: var(--border-radius-md);
+   font-weight: 600;
+   font-size: 1rem;
+   transition: var(--transition);
+ }
+ .hero-btn:hover {
+   background-color: var(--gray-light);
+   transform: translateY(-2px);
+ }
+ /* ========== 功能亮点样式 ========== */
+ .features {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: var(--spacing-lg);
+   padding: var(--spacing-xl) 0;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding-left: var(--spacing-md);
+   padding-right: var(--spacing-md);
+ }
+ .feature-card {
+   background-color: var(--white);
+   padding: var(--spacing-lg);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-md);
+   text-align: center;
+   transition: var(--transition);
+ }
+ .feature-card:hover {
+   transform: translateY(-5px);
+   box-shadow: var(--shadow-md);
+ }
+ .feature-icon {
+   font-size: 2.5rem;
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-md);
+ }
+ .feature-card h3 {
+   font-family: var(--font-heading);
+   margin-bottom: var(--spacing-sm);
+   color: var(--text-color);
+ }
+ .feature-card p {
+   color: var(--text-light);
+   font-size: 0.95rem;
+}
+
+/* 页面容器样式 */
+.page {
+  padding: var(--spacing-xl) 0;
+  min-height: calc(100vh - 120px); /* 减去导航和底部高度 */
+}
+
+/* 登录/注册卡片通用样式 */
+.login-container, .register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.login-card, .register-card {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-title, .register-title {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.login-title h2, .register-title h2 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.login-title p, .register-title p {
+  color: var(--text-light);
+}
+
+/* 表单通用样式 */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-main);
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+/* 按钮通用样式 */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-outline {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-light);
+  color: var(--white);
+}
+
+/* 注册提示 */
+.register-tip {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  color: var(--text-light);
+}
+
+.register-tip a {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* 退出登录/帮助反馈卡片 */
+.logout-container, .help-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.logout-card, .help-card {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logout-card h2, .help-card h2 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.logout-buttons, .help-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+/* 页脚样式 */
+.footer {
+  background-color: var(--text-color);
+  color: var(--white);
+  padding: var(--spacing-lg) 0;
+  margin-top: var(--spacing-xl);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.feature-card h3 {
+  font-family: var(--font-heading);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+.feature-card p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+/* ========== 登录表单补充样式 ========== */
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+
+.form-input {
+  padding-left: var(--spacing-xl); /* 给图标留空间 */
+}
+
+.error-message {
+  color: var(--danger-color);
+  font-size: 0.85rem;
+  margin-top: var(--spacing-xs);
+}
+
+.register-btn {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-left: 4px;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* ========== 登录表单选项（记住密码/忘记密码） ========== */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--spacing-md) 0;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.remember-me input {
+  width: auto;
+  accent-color: var(--primary-color);
+}
+
+.forgot-password {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* ========== 登录/注册按钮样式 ========== */
+.login-btn, .register-btn {
+  width: 100%;
+  padding: var(--spacing-sm) 0;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: var(--transition);
+  margin-top: var(--spacing-sm);
+}
+
+.login-btn:hover, .register-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* ========== 注册表单专属样式 ========== */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+  min-height: calc(100vh - 80px);
+}
+
+.register-card {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  width: 100%;
+  max-width: 450px;
+}
+
+.register-title {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.register-title h2 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.register-title p {
+  color: var(--text-light);
+}
+
+/* 手机号+验证码按钮布局 */
+.input-wrapper {
+  position: relative;
+}
+
+.get-verify-btn {
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px var(--spacing-sm);
+  background-color: var(--primary-light);
+  color: var(--white);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+}
+
+.get-verify-btn:disabled {
+  background-color: var(--gray);
+  cursor: not-allowed;
+}
+
+/* 密码显示/隐藏按钮 */
+.password-toggle {
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+/* 登录提示（注册页） */
+.login-tip {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  color: var(--text-light);
+}
+
+.login-tip a {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* ========== 个人学习事务管理整体样式 ========== */
+ .tasks {
+   padding: var(--spacing-xl) 0;
+ }
+ .tasks-container {
+   background-color: var(--white);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-md);
+   padding: var(--spacing-lg);
+   margin-bottom: var(--spacing-xl);
+ }
+ .tasks-icon {
+   font-size: 2rem;
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-md);
+   display: block;
+ }
+ /* ========== 课表模块样式 ========== */
+ .schedule-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: var(--spacing-lg);
+   padding-bottom: var(--spacing-md);
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .schedule-title {
+   font-family: var(--font-heading);
+   color: var(--primary-color);
+   font-size: 1.5rem;
+ }
+ /* 筛选区域通用样式 */
+ .schedule-filters, .schedule-fliters {
+   display: flex;
+   gap: var(--spacing-lg);
+   align-items: center;
+   margin-bottom: var(--spacing-lg);
+   flex-wrap: wrap;
+ }
+ .filter-group {
+   display: flex;
+   align-items: center;
+   gap: var(--spacing-sm);
+ }
+ .filter-group label {
+   font-weight: 500;
+   color: var(--text-gray);
+ }
+ .filter-select {
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+   background-color: var(--white);
+   min-width: 180px;
+ }
+ .filter-select:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ /* 按钮通用样式 */
+ .btn {
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   font-weight: 500;
+   display: inline-flex;
+   align-items: center;
+   gap: var(--spacing-xs);
+ }
+ .btn-primary {
+   background-color: var(--primary-color);
+   color: var(--white);
+ }
+ .btn-primary:hover {
+   background-color: var(--primary-dark);
+ }
+ .btn-success {
+   background-color: var(--success-color);
+   color: var(--white);
+ }
+ .btn-success:hover {
+   background-color: #16a34a;
+ }
+ .btn-secondary {
+   background-color: var(--secondary-color);
+   color: var(--white);
+ }
+ .btn-secondary:hover {
+   background-color: #475569;
+ }
+ .btn-analyze {
+   background-color: var(--info-color);
+   color: var(--white);
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   font-weight: 500;
+   margin-left: var(--spacing-md);
+ }
+ .btn-analyze:hover {
+   background-color: #0891b2;
+ }
+ /* 自定义课程弹窗样式 */
+ .modal-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0,0,0,0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000;
+   display: none;
+ }
+ .modal-overlay.show {
+   display: flex;
+ }
+ .modal {
+   background-color: var(--white);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-lg);
+   padding: var(--spacing-lg);
+   width: 100%;
+   max-width: 500px;
+ }
+ .modal-title {
+   font-family: var(--font-heading);
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-lg);
+   font-size: 1.25rem;
+ }
+ .modal-footer {
+   display: flex;
+   gap: var(--spacing-md);
+   justify-content: flex-end;
+   margin-top: var(--spacing-lg);
+ }
+ /* ========== 成绩管理模块样式 ========== */
+ .title {
+   font-family: var(--font-heading);
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-lg);
+   display: flex;
+   align-items: center;
+   gap: var(--spacing-sm);
+ }
+ .record-table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   overflow: hidden;
+   box-shadow: var(--shadow-sm);
+ }
+ .record-table th, .record-table td {
+   padding: var(--spacing-md);
+   text-align: left;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .record-table th {
+   background-color: var(--gray-light);
+   font-weight: 600;
+   color: var(--text-gray);
+ }
+ .record-table tr:hover {
+   background-color: var(--gray-light);
+ }
+ .no-data {
+   text-align: center;
+   padding: var(--spacing-xl);
+   color: var(--text-light);
+   font-size: 1.1rem;
+ }
+ /* 成绩分析结果样式 */
+ .result-box {
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   padding: var(--spacing-lg);
+   box-shadow: var(--shadow-sm);
+   margin-top: var(--spacing-lg);
+ }
+ .result-title {
+   font-weight: 600;
+   font-size: 1.2rem;
+   margin-bottom: var(--spacing-md);
+   color: var(--primary-color);
+ }
+ .score-info {
+   margin-bottom: var(--spacing-sm);
+   padding: var(--spacing-sm) 0;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .weak-info {
+   color: var(--danger-color);
+ }
+ .pass-info {
+   color: var(--warning-color);
+ }
+ .good-info {
+   color: var(--success-color);
+ }
+ /* ========== 作业管理模块样式 ========== */
+ .tabs {
+   display: flex;
+   gap: 0;
+   background-color: var(--gray-light);
+   border-radius: var(--border-radius-sm);
+   margin-bottom: var(--spacing-lg);
+ }
+ .tab {
+   padding: var(--spacing-sm) var(--spacing-lg);
+   cursor: pointer;
+   transition: var(--transition);
+   border-radius: var(--border-radius-sm);
+ }
+ .tab.active {
+   background-color: var(--primary-color);
+   color: var(--white);
+ }
+ .table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   overflow: hidden;
+   box-shadow: var(--shadow-sm);
+ }
+ .table th, .table td {
+   padding: var(--spacing-md);
+   text-align: left;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .table th {
+   background-color: var(--gray-light);
+   font-weight: 600;
+   color: var(--text-gray);
+ }
+ .form-control {
+   width: 100%;
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+   margin-bottom: var(--spacing-md);
+ }
+ .form-control:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ textarea.form-control {
+   resize: vertical;
+   min-height: 100px;
+ }
+
+/* ========== 原有模块样式（完整兼容） ========== */
+ /* 图书借阅模块 */
+ .life-container {
+   padding: var(--spacing-xl) 0;
+ }
+ .life {
+   background-color: var(--white);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-md);
+   padding: var(--spacing-lg);
+   margin-bottom: var(--spacing-xl);
+ }
+ .life-icon {
+   font-size: 2rem;
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-md);
+   display: block;
+ }
+ .search-box {
+   display: flex;
+   gap: var(--spacing-md);
+   align-items: center;
+   margin-bottom: var(--spacing-lg);
+   flex-wrap: wrap;
+ }
+ .search-input {
+   flex: 1;
+   min-width: 200px;
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+ }
+ .search-input:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ .search-select {
+   min-width: 150px;
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+ }
+ .search-select:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ .search-btn {
+   background-color: var(--primary-color);
+   color: var(--white);
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   display: inline-flex;
+   align-items: center;
+   gap: var(--spacing-xs);
+ }
+ .search-btn:hover {
+   background-color: var(--primary-dark);
+ }
+ .tabs {
+   display: flex;
+   gap: 0;
+   background-color: var(--gray-light);
+   border-radius: var(--border-radius-sm);
+   margin-bottom: var(--spacing-lg);
+ }
+ .tab {
+   padding: var(--spacing-sm) var(--spacing-lg);
+   cursor: pointer;
+   transition: var(--transition);
+   border-radius: var(--border-radius-sm);
+ }
+ .tab.active {
+   background-color: var(--primary-color);
+   color: var(--white);
+ }
+ .form-group {
+   margin-bottom: var(--spacing-md);
+ }
+ .form-control {
+   width: 100%;
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+ }
+ .form-control:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ .time-group {
+   display: flex;
+   gap: var(--spacing-md);
+   flex-wrap: wrap;
+ }
+ .time-group .form-control {
+   flex: 1;
+   min-width: 150px;
+ }
+ .btn {
+   background-color: var(--primary-color);
+   color: var(--white);
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   font-weight: 500;
+   display: inline-block;
+   width: 100%;
+   text-align: center;
+ }
+ .btn:hover {
+   background-color: var(--primary-dark);
+ }
+ .record-table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   overflow: hidden;
+   box-shadow: var(--shadow-sm);
+ }
+ .record-table th, .record-table td {
+   padding: var(--spacing-md);
+   text-align: left;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .record-table th {
+   background-color: var(--gray-light);
+   font-weight: 600;
+   color: var(--text-gray);
+ }
+ .record-table tr:hover {
+   background-color: var(--gray-light);
+ }
+ .empty-tip {
+   text-align: center;
+   padding: var(--spacing-xl);
+   color: var(--text-light);
+   font-size: 1.1rem;
+ }
+ .operate-btn {
+   display: inline-flex;
+   gap: var(--spacing-xs);
+ }
+ .renew-btn {
+   color: var(--success-color);
+   font-size: 0.9rem;
+ }
+ .cancel-btn {
+   color: var(--danger-color);
+   font-size: 0.9rem;
+ }
+ /* 学习事务管理模块 */
+ .tasks {
+   padding: var(--spacing-xl) 0;
+ }
+ .tasks-container {
+   background-color: var(--white);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-md);
+   padding: var(--spacing-lg);
+   margin-bottom: var(--spacing-xl);
+ }
+ .tasks-icon {
+   font-size: 2rem;
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-md);
+   display: block;
+ }
+ .schedule-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: var(--spacing-lg);
+   padding-bottom: var(--spacing-md);
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .schedule-title {
+   font-family: var(--font-heading);
+   color: var(--primary-color);
+   font-size: 1.5rem;
+ }
+ .schedule-filters, .schedule-fliters {
+   display: flex;
+   gap: var(--spacing-lg);
+   align-items: center;
+   margin-bottom: var(--spacing-lg);
+   flex-wrap: wrap;
+ }
+ .filter-group {
+   display: flex;
+   align-items: center;
+   gap: var(--spacing-sm);
+ }
+ .filter-group label {
+   font-weight: 500;
+   color: var(--text-gray);
+ }
+ .filter-select {
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+   background-color: var(--white);
+   min-width: 180px;
+ }
+ .filter-select:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ .btn-primary {
+   background-color: var(--primary-color);
+   color: var(--white);
+ }
+ .btn-primary:hover {
+   background-color: var(--primary-dark);
+ }
+ .btn-success {
+   background-color: var(--success-color);
+   color: var(--white);
+ }
+ .btn-success:hover {
+   background-color: #16a34a;
+ }
+ .btn-secondary {
+   background-color: var(--secondary-color);
+   color: var(--white);
+ }
+ .btn-secondary:hover {
+   background-color: #475569;
+ }
+ .btn-analyze {
+   background-color: var(--info-color);
+   color: var(--white);
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   font-weight: 500;
+   margin-left: var(--spacing-md);
+ }
+ .btn-analyze:hover {
+   background-color: #0891b2;
+ }
+ .title {
+   font-family: var(--font-heading);
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-lg);
+   display: flex;
+   align-items: center;
+   gap: var(--spacing-sm);
+ }
+ .no-data {
+   text-align: center;
+   padding: var(--spacing-xl);
+   color: var(--text-light);
+   font-size: 1.1rem;
+ }
+ .result-box {
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   padding: var(--spacing-lg);
+   box-shadow: var(--shadow-sm);
+   margin-top: var(--spacing-lg);
+ }
+ .result-title {
+   font-weight: 600;
+   font-size: 1.2rem;
+   margin-bottom: var(--spacing-md);
+   color: var(--primary-color);
+ }
+ .score-info {
+   margin-bottom: var(--spacing-sm);
+   padding: var(--spacing-sm) 0;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .weak-info {
+   color: var(--danger-color);
+ }
+ .pass-info {
+   color: var(--warning-color);
+ }
+ .good-info {
+   color: var(--success-color);
+ }
+ textarea.form-control {
+   resize: vertical;
+   min-height: 100px;
+ }
