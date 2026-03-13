@@ -182,7 +182,7 @@ button {
   min-height: calc(100vh - 120px); /* 减去导航和底部高度 */
 }
 
-/* 登录/注册卡片通用样式 */
+/* ========== 登录/注册卡片样式 ========== */
 .login-container, .register-container {
   display: flex;
   justify-content: center;
@@ -925,6 +925,7 @@ button {
    margin-bottom: var(--spacing-md);
    display: block;
  }
+ /* 课表模块样式 */
  .schedule-header {
    display: flex;
    justify-content: space-between;
@@ -998,6 +999,7 @@ button {
  .btn-analyze:hover {
    background-color: #0891b2;
  }
+ /* 成绩分析结果样式 */
  .title {
    font-family: var(--font-heading);
    color: var(--primary-color);
@@ -1012,6 +1014,7 @@ button {
    color: var(--text-light);
    font-size: 1.1rem;
  }
+ /* 成绩分析结果样式 */
  .result-box {
    background-color: var(--white);
    border-radius: var(--border-radius-md);
@@ -1042,4 +1045,175 @@ button {
  textarea.form-control {
    resize: vertical;
    min-height: 100px;
+ }
+ /* 作业管理模块样式 */
+ .table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   overflow: hidden;
+   box-shadow: var(--shadow-sm);
+ }
+ .table th, .table td {
+   padding: var(--spacing-md);
+   text-align: left;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .table th {
+   background-color: var(--gray-light);
+   font-weight: 600;
+   color: var(--text-gray);
+ }
+ textarea.form-control {
+   resize: vertical;
+   min-height: 100px;
+ }
+ /* ========== 个人中心模块专属样式 ========== */
+ .user-container {
+   padding: var(--spacing-xl) 0;
+ }
+ .user {
+   background-color: var(--white);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-md);
+   padding: var(--spacing-lg);
+   margin-bottom: var(--spacing-xl);
+ }
+ .user-icon {
+   font-size: 2rem;
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-md);
+   display: block;
+ }
+ /* 个人中心标签页 */
+ .user .tab {
+   display: flex;
+   gap: var(--spacing-sm);
+   flex-wrap: wrap;
+   margin-bottom: var(--spacing-lg);
+   border-bottom: 1px solid var(--gray-light);
+   padding-bottom: var(--spacing-md);
+ }
+ .user .tab button {
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   background-color: var(--gray-light);
+   color: var(--text-color);
+   font-weight: 500;
+ }
+ .user .tab button.active {
+   background-color: var(--primary-color);
+   color: var(--white);
+ }
+ .user .tab button:hover:not(.active) {
+   background-color: var(--gray);
+ }
+ /* 小按钮样式 */
+ .btn-small {
+   padding: var(--spacing-xs) var(--spacing-md);
+   background-color: var(--primary-light);
+   color: var(--white);
+   border-radius: var(--border-radius-sm);
+   font-size: 0.9rem;
+ }
+ .btn-small:hover {
+   background-color: var(--primary-dark);
+ }
+ /* 个人信息表格 */
+ .table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: var(--white);
+   border-radius: var(--border-radius-md);
+   overflow: hidden;
+   box-shadow: var(--shadow-sm);
+ }
+ .table th, .table td {
+   padding: var(--spacing-md);
+   text-align: left;
+   border-bottom: 1px solid var(--gray-light);
+ }
+ .table th {
+   background-color: var(--gray-light);
+   font-weight: 600;
+   color: var(--text-gray);
+   width: 20%;
+ }
+ .table td {
+   width: 50%;
+ }
+ .table td:last-child {
+   width: 30%;
+   text-align: center;
+ }
+ /* 弹窗样式（修改信息用） */
+ .modal-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0,0,0,0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000;
+   display: none;
+ }
+ .modal-overlay.show {
+   display: flex;
+ }
+ .modal {
+   background-color: var(--white);
+   border-radius: var(--border-radius-lg);
+   box-shadow: var(--shadow-lg);
+   padding: var(--spacing-lg);
+   width: 100%;
+   max-width: 400px;
+ }
+ .modal-title {
+   font-family: var(--font-heading);
+   color: var(--primary-color);
+   margin-bottom: var(--spacing-lg);
+   font-size: 1.25rem;
+   text-align: center;
+ }
+ .modal-form .form-group {
+   margin-bottom: var(--spacing-md);
+ }
+ .modal-form label {
+   display: block;
+   margin-bottom: var(--spacing-xs);
+   font-weight: 500;
+ }
+ .modal-form input {
+   width: 100%;
+   padding: var(--spacing-sm) var(--spacing-md);
+   border: 1px solid var(--gray);
+   border-radius: var(--border-radius-sm);
+   font-family: var(--font-main);
+ }
+ .modal-form input:focus {
+   outline: none;
+   border-color: var(--primary-color);
+ }
+ .modal-footer {
+   display: flex;
+   gap: var(--spacing-md);
+   justify-content: flex-end;
+   margin-top: var(--spacing-lg);
+ }
+ .modal-footer button {
+   padding: var(--spacing-sm) var(--spacing-lg);
+   border-radius: var(--border-radius-sm);
+   font-weight: 500;
+ }
+ .btn-cancel {
+   background-color: var(--secondary-color);
+   color: var(--white);
+ }
+ .btn-confirm {
+   background-color: var(--primary-color);
+   color: var(--white);
  }
