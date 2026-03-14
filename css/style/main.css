@@ -174,13 +174,13 @@ button {
  .feature-card p {
    color: var(--text-light);
    font-size: 0.95rem;
-}
+ }
 
 /* 页面容器样式 */
 .page {
   padding: var(--spacing-xl) 0;
   min-height: calc(100vh - 120px); /* 减去导航和底部高度 */
-}
+ }
 
 /* ========== 登录/注册表单样式 ========== */
 .login-container，.register-container {
@@ -189,7 +189,7 @@ button {
   align-items: center;
   padding: var(--spacing-xl) 0;
   min-height: calc(100vh - 80px); /* 减去导航高度 */
-}
+ }
 
 .login-card, .register-card {
   background: var(--white);
@@ -198,34 +198,34 @@ button {
   padding: var(--spacing-xl);
   width: 100%;
   max-width: 400px;
-}
+ }
 
 /* 登录/注册标题样式 */
 .login-title, .register-title {
   text-align: center;
   margin-bottom: var(--spacing-xl);
-}
+ }
 
 .login-title h2, .register-title h2 {
   font-family: var(--font-heading);
   color: var(--primary-color);
   margin-bottom: var(--spacing-xs);
-}
+ }
 
 .login-title p, .register-title p {
   color: var(--text-light);
-}
+ }
 
 /* 表单通用样式 */
 .form-group {
   margin-bottom: var(--spacing-md);
-}
+ }
 
 .form-label {
   display: block;
   margin-bottom: var(--spacing-xs);
   font-weight: 500;
-}
+ }
 
 .form-input {
   width: 100%;
@@ -234,19 +234,19 @@ button {
   border-radius: var(--border-radius-sm);
   font-family: var(--font-main);
   transition: var(--transition);
-}
+ }
 
 .form-input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
-}
+ }
 
 /* ========== 登录表单补充样式 ========== */
 .input-wrapper {   
   position: relative; 
   margin-bottom: var(--spacing-md); /* 补充：表单组间距，替代.form-group的margin */
-} 
+ } 
 
 /* 基础输入框样式（通用） */
 .input-wrapper .form-input {
@@ -263,32 +263,32 @@ button {
   /* 兜底：清除默认样式 */
   outline: none;
   box-sizing: border-box;
-}
+ }
 
 /* 密码输入框：右侧留密码图标空间（叠加左侧padding） */
 .input-wrapper input[type="password"],
 .input-wrapper input[type="text"]:not(.no-right-padding) {
   padding-right: calc(var(--spacing-lg) + 12px); /* 留出图标空间 */
-}
+ }
 
 /* 输入框聚焦样式：强化交互反馈 */
 .input-wrapper .form-input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
-}
+ } 
 
 /* 禁用状态：区分不可输入的输入框 */
 .form-input:disabled {
   background-color: var(--gray-light);
   color: var(--text-light);
   cursor: not-allowed;
-}
+ }
 
 /* 输入框错误状态：关联错误提示 */
 .input-wrapper .form-input.error {
   border-color: var(--danger-color);
-}
+ }
 
 /* 输入框左侧图标 */
 .input-icon {   
@@ -302,12 +302,12 @@ button {
   height: 18px;
   pointer-events: none; /* 不干扰输入框聚焦 */
   transition: color 0.2s ease;
-} 
+ } 
 
 /* 聚焦时图标变色：强化反馈 */
 .input-wrapper .form-input:focus ~ .input-icon {
   color: var(--primary-color);
-}
+ }
 
 /* 错误提示文本 */
 .error-message {   
@@ -317,17 +317,17 @@ button {
   line-height: 1.4;
   /* 补充：默认隐藏，有错误时显示 */
   display: none;
-} 
+ } 
 
 /* 错误状态显示提示 */
 .input-wrapper .error-message.show {
   display: block;
-}
+ }
 
 /* 无左侧图标的输入框（如验证码），取消左侧padding */
 .form-input.no-left-icon {
   padding-left: var(--spacing-md);
-}
+ }
 
 /* 登录表单选项（记住密码/忘记密码） */  
 .form-options {      
@@ -335,7 +335,7 @@ button {
   justify-content: space-between;      
   align-items: center;      
   margin: var(--spacing-md) 0;  
-}  
+ }  
 
 .remember-me {       
   display: flex;       
@@ -344,21 +344,21 @@ button {
   color: var(--text-light);       
   font-size: 0.9rem;       
   cursor: pointer;  
-}  
+ }  
 
 .remember-me input {    
   width: auto;    
   accent-color: var(--primary-color);  
-}  
+ }  
 
 .forgot-password {    
   color: var(--primary-color);    
   font-size: 0.9rem;  
-}  
+ }  
  
 .forgot-password:hover {    
   text-decoration: underline;  
-} 
+ } 
 
 .register-btn {   
   display: inline-block;  
@@ -370,29 +370,29 @@ button {
   border: none;   
   border-radius: 4px;   
   cursor: pointer; 
-} 
+ } 
 
 .register-btn:hover {   
   background: var(--primary-dark); 
-}
+ }
 
 /* 注册提示 （登录页） */
 .register-tip {
   text-align: center;
   margin-top: var(--spacing-md);
   color: var(--text-light);
-}
+ }
 
 .register-tip a {
   color: var(--primary-color);
   font-weight: 500;
-}
+ }
 
 .logout-buttons, .help-buttons {
   display: flex;
   gap: var(--spacing-md);
   margin-top: var(--spacing-lg);
-}
+ }
 
 /* ========== 登录/注册按钮样式 ========== */
 .login-btn, .register-btn {
@@ -405,16 +405,16 @@ button {
   font-size: 1rem;
   transition: var(--transition);
   margin-top: var(--spacing-sm);
-}
+ }
 
 .login-btn:hover, .register-btn:hover {
   background-color: var(--primary-dark);
-}
+ }
 
 /* 手机号+验证码按钮布局 */
 .input-wrapper {
   position: relative;
-}
+ }
 
 .get-verify-btn {
   padding: 4px var(--spacing-sm);
@@ -426,12 +426,12 @@ button {
   color: var(--white);
   border-radius: var(--border-radius-sm);
   font-size: 0.85rem;
-}
+ }
 
 .get-verify-btn:disabled {
   background-color: var(--gray);
   cursor: not-allowed;
-}
+ }
 
 /* 密码显示/隐藏按钮 */
 .password-toggle {
@@ -453,23 +453,23 @@ button {
   /* 关键补充：不干扰输入框聚焦 */
   pointer-events: auto;
   z-index: 2;
-}
+ }
 
 .password-toggle:hover { 
   color: var(--primary-color); 
-}
+ }
 
 /* 登录提示（注册页） */
 .login-tip {
   text-align: center;
   margin-top: var(--spacing-md);
   color: var(--text-light);
-}
+ }
 
 .login-tip a {
   color: var(--primary-color);
   font-weight: 500;
-}
+ }
 
 /* 页脚样式 */ 
 .footer {   
@@ -481,7 +481,7 @@ button {
   margin-top: auto;
   /* 补充：避免页脚内容溢出 */
   width: 100%;
-} 
+ } 
 
  .footer-bottom {   
    text-align: center;   
@@ -490,7 +490,7 @@ button {
    border-top: 1px solid rgba(255,255,255,0.1); 
    /* 优化：文字大小适配小屏 */
    font-size: 0.9rem;
-} 
+ } 
 
  .feature-card { 
    padding: var(--spacing-lg); 
@@ -501,12 +501,12 @@ button {
    /* 优化：卡片间距 + 响应式适配基础 */
    margin-bottom: var(--spacing-md);
    transition: box-shadow 0.2s ease; /* 悬浮交互 */
-}
+ }
 
    /* 卡片悬浮效果：提升体验 */
   .feature-card:hover {
    box-shadow: var(--shadow-md);
-}
+ }
  
  .feature-card h3 {   
    font-family: var(--font-heading);   
@@ -515,7 +515,7 @@ button {
    /* 优化：标题字号统一 */
    font-size: 1.1rem;
    font-weight: 600;
-} 
+ } 
 
  .feature-card p {   
    color: var(--text-light);   
@@ -523,7 +523,7 @@ button {
    /* 优化：行高提升可读性 */
    line-height: 1.6;
    margin: 0; /* 清除默认边距 */
-}
+ }
 
 /* ========== 个人学习事务管理整体样式 ========== */
  .tasks {
@@ -1240,4 +1240,52 @@ button {
  .btn-confirm {
    background-color: var(--primary-color);
    color: var(--white);
+ }
+
+ /* 退出登录/帮助反馈卡片 */ 
+ .logout-container, 
+ .help-container {   
+   display: flex;   
+   justify-content: center;   
+   align-items: center;   
+   padding: var(--spacing-xl) 0; 
+ }
+
+ .logout-card, 
+ .help-card {   
+   background: var(--white);   
+   box-shadow: var(--shadow-md);   
+   border-radius: var(--border-radius-lg);   
+   padding: var(--spacing-xl);   
+   width: 100%;   
+   max-width: 400px;   
+   text-align: center; 
+ } 
+
+ .logout-card h2, 
+ .help-card h2 {   
+   font-family: var(--font-heading);   
+   color: var(--primary-color);  
+   margin-bottom: var(--spacing-md);
+ } 
+
+ .logout-buttons, 
+ .help-buttons {   
+   display: flex;  
+   gap: var(--spacing-md);   
+   margin-top: var(--spacing-lg); 
+ }
+
+ /* 页脚样式 */
+ .footer {
+   background-color: var(--text-color);
+   color: var(--white);
+   padding: var(--spacing-lg) 0;
+   margin-top: var(--spacing-xl);
+ }
+
+ .footer-bottom {
+   text-align: center;
+   padding-top: var(--spacing-md);
+   border-top: 1px solid rgba(255,255,255,0.1);
  }
