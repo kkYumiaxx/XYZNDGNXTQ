@@ -176,6 +176,7 @@
    .register-title h2 {
      font-size: 1.25rem;
   }
+  
    .login-title p,
    .register-title p,
    .login-tip,
@@ -248,34 +249,66 @@
    .search-box {
      flex-direction: column;
      gap: 8px;
+     
   }
    .search-input,
    .search-select,
    .search-btn {
      width: 100%;
   }
-   
+
+  /* 容器 */
+   .tasks-container,
+   .container {
+     padding: 15px 12px;
+  }
+   /* 标题 */
+   .schedule-title,
+   .title {
+     font-size: 18px;
+     margin-bottom: 12px;
+  }
+   /* 课表头部按钮竖排 */
+   .schedule-header {
+     flex-direction: column;
+     gap: 8px;
+     align-items: stretch;
+  }
+   .schedule-header .btn {
+     width: 100%;
+     margin-left: 0 !important;
+  }
+   /* 筛选栏竖排 */
+   .schedule-filters,
+   .filter-group {
+     flex-direction: column;
+     gap: 8px;
+     width: 100%;
+  }
+   .filter-select {
+     width: 100%;
+     padding: 10px;
+     font-size: 14px;
+  }
+  
+   /* 标签 tab 竖排 */
    .tabs {
      flex-direction: column;
      gap: 6px;
   }
+  
    .tab {
      width: 100%;
      text-align: center;
      padding: 10px;
   }
   
+  /* 表单 */
    .form-group {
      margin-bottom: 14px;
   }
 
    .form-group label {
-     font-size: 14px;
-     margin-bottom: 6px;
-     display: inline-block;
-  }
-
-   .form-label {
      font-size: 14px;
      margin-bottom: 6px;
      display: inline-block;
@@ -290,6 +323,57 @@
 
     textarea.form-control {
      resize: vertical;
+  }
+
+  /* 弹窗 */
+   .modal {
+     width: 90%;
+     padding: 15px;
+     margin: 20px auto;
+  }
+  
+   .modal-footer {
+     flex-direction: column;
+     gap: 8px;
+  }
+  
+   .modal-footer .btn {
+     width: 100%;
+  }
+  
+   /* 表格：小屏横向滚动 */
+   .record-table,
+   .table {
+     display: block;
+     overflow-x: auto;
+     white-space: nowrap;
+     font-size: 12px;
+  }
+  
+   /* 无数据提示 */
+   .no-data,
+   .empty-tip {
+     font-size: 14px;
+     text-align: center;
+     padding: 20px 0;
+  }
+  
+   /* 成绩分析 */
+   .result-box {
+     padding: 15px;
+     font-size: 14px;
+  }
+  
+   .score-info {
+     margin-bottom: 8px;
+  }
+  
+   /* 按钮全屏 */
+   .btn,
+   .btn-analyze {
+     width: 100%;
+     padding: 12px;
+     font-size: 15px;
   }
   
    .time-group {
