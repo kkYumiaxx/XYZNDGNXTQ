@@ -248,33 +248,86 @@ button {
   margin-bottom: var(--spacing-md); /* 补充：表单组间距，替代.form-group的margin */
 } 
 
-/* 密码输入框：补充右侧内边距 */
-.input-wrapper input[type="password"],
-.input-wrapper input[type="text"] {
-  padding: var(--spacing-sm) var(--spacing-md);
-  padding-right: calc(var(--spacing-lg) + 12px); /* 留出图标空间 */
+/* 基础输入框样式（通用） */
+.input-wrapper .form-input {
   width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  padding-left: var(--spacing-xl); /* 左侧给图标留空间 */
   border: 1px solid var(--gray);
   border-radius: var(--border-radius-sm);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-color);
+  /* 交互体验：聚焦/hover 反馈 */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  /* 兜底：清除默认样式 */
+  outline: none;
+  box-sizing: border-box;
 }
 
+/* 密码输入框：右侧留密码图标空间（叠加左侧padding） */
+.input-wrapper input[type="password"],
+.input-wrapper input[type="text"]:not(.no-right-padding) {
+  padding-right: calc(var(--spacing-lg) + 12px); /* 留出图标空间 */
+}
+
+/* 输入框聚焦样式：强化交互反馈 */
+.input-wrapper .form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
+}
+
+/* 禁用状态：区分不可输入的输入框 */
+.form-input:disabled {
+  background-color: var(--gray-light);
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+/* 输入框错误状态：关联错误提示 */
+.input-wrapper .form-input.error {
+  border-color: var(--danger-color);
+}
+
+/* 输入框左侧图标 */
 .input-icon {   
   position: absolute;   
   left: var(--spacing-sm);   
   top: 50%;   
   transform: translateY(-50%);   
   color: var(--text-light); 
+  /* 补充：图标大小+交互，避免点击穿透 */
+  width: 18px;
+  height: 18px;
+  pointer-events: none; /* 不干扰输入框聚焦 */
+  transition: color 0.2s ease;
 } 
 
-.form-input {   
-  padding-left: var(--spacing-xl); /* 给图标留空间 */ 
-} 
+/* 聚焦时图标变色：强化反馈 */
+.input-wrapper .form-input:focus ~ .input-icon {
+  color: var(--primary-color);
+}
 
+/* 错误提示文本 */
 .error-message {   
   color: var(--danger-color);   
   font-size: 0.85rem;   
   margin-top: var(--spacing-xs); 
+  line-height: 1.4;
+  /* 补充：默认隐藏，有错误时显示 */
+  display: none;
 } 
+
+/* 错误状态显示提示 */
+.input-wrapper .error-message.show {
+  display: block;
+}
+
+/* 无左侧图标的输入框（如验证码），取消左侧padding */
+.form-input.no-left-icon {
+  padding-left: var(--spacing-md);
+}
 
 /* 登录表单选项（记住密码/忘记密码） */  
 .form-options {      
