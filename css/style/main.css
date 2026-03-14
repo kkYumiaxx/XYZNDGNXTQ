@@ -3,7 +3,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+  font-family: "Microsoft Yahei", sans-serif;
+ }
 
 body {
   font-family: var(--font-main);
@@ -197,7 +198,7 @@ button {
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
  }
 
 /* 登录/注册标题样式 */
@@ -471,6 +472,18 @@ button {
   font-weight: 500;
  }
 
+/* 响应式适配 */
+ @media (max-width: 768px) {
+   .login-card, .register-card {
+     padding: var(--spacing-lg);
+     margin: 0 var(--spacing-sm);
+   }
+   
+   .form-actions {
+     flex-direction: column;
+   }
+ }
+
 /* 页脚样式 */ 
 .footer {   
   background-color: var(--text-color);   
@@ -492,6 +505,7 @@ button {
    font-size: 0.9rem;
  } 
 
+ /* 功能卡片样式 （补充完整上下文） */
  .feature-card { 
    padding: var(--spacing-lg); 
    background: var(--white); 
@@ -1172,19 +1186,6 @@ button {
    text-align: center;
  }
 
-  /* ========== 基础样式重置 ========== */
-* {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   font-family: "Microsoft Yahei", sans-serif;
- }
-
- body {
-   background-color: var(--bg-light);
-   color: var(--text-color);
- }
-
  /* ========== 消息通知页面容器 ========== */
  .page {
    max-width: 800px;
@@ -1404,12 +1405,39 @@ button {
  .footer {
    background-color: var(--text-color);
    color: var(--white);
-   padding: var(--spacing-lg) 0;
-   margin-top: var(--spacing-xl);
+   padding: var(--spacing-xl) 0 var(--spacing-md);
+   margin-top: auto; /* 关键：让页脚固定在页面底部 */);
+   width: 100%;
  }
 
+ /* ========== 页脚底部版权区域 ========== */
  .footer-bottom {
    text-align: center;
    padding-top: var(--spacing-md);
-   border-top: 1px solid rgba(255,255,255,0.1);
+   border-top: 1px solid rgba(255,255,255,0.1); /* 浅分隔线，提升层次感 */
+  max-width: 1200px;
+  margin: 0 auto; /* 版权区居中 */
+ }
+
+ .footer-bottom p {
+  font-size: 0.9rem;
+  color: var(--text-gray); /* 浅白色文字，避免过亮刺眼 */
+  line-height: 1.5;
+  margin: 0; /* 清除p标签默认边距 */
+ }
+
+ /* ========== 响应式适配（移动端优化） ========== */
+ @media (max-width: 768px) {
+   footer {
+    padding: var(--spacing-lg) 0 var(--spacing-sm);
+  }
+  
+  .footer-bottom {
+    padding-top: var(--spacing-sm);
+    margin: 0 var(--spacing-sm); /* 移动端左右留白 */
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem; /* 移动端字号缩小 */
+  }
  }
