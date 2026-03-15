@@ -501,7 +501,6 @@ button {
    padding-top: var(--spacing-md);
    padding-bottom: var(--spacing-md); /* 补充：底部留白更均衡 */  
    border-top: 1px solid rgba(255,255,255,0.1); 
-   /* 优化：文字大小适配小屏 */
    font-size: 0.9rem;
  } 
 
@@ -512,7 +511,6 @@ button {
    /* 核心补充：视觉容器感 */
    border-radius: var(--border-radius-md);
    box-shadow: var(--shadow-sm);
-   /* 优化：卡片间距 + 响应式适配基础 */
    margin-bottom: var(--spacing-md);
    transition: box-shadow 0.2s ease; /* 悬浮交互 */
  }
@@ -526,7 +524,6 @@ button {
    font-family: var(--font-heading);   
    margin-bottom: var(--spacing-sm);   
    color: var(--text-color); 
-   /* 优化：标题字号统一 */
    font-size: 1.1rem;
    font-weight: 600;
  } 
@@ -534,9 +531,8 @@ button {
  .feature-card p {   
    color: var(--text-light);   
    font-size: 0.95rem; 
-   /* 优化：行高提升可读性 */
    line-height: 1.6;
-   margin: 0; /* 清除默认边距 */
+   margin: 0; 
  }
 
 /* ========== 个人学习事务管理整体样式 ========== */
@@ -1406,24 +1402,25 @@ button {
    background-color: var(--text-color);
    color: var(--white);
    padding: var(--spacing-xl) 0 var(--spacing-md);
-   margin-top: auto; /* 关键：让页脚固定在页面底部 */);
+   margin-top: auto; /* 让页脚固定在页面底部 */);
    width: 100%;
  }
 
  /* ========== 页脚底部版权区域 ========== */
  .footer-bottom {
+   background-color: var(--primary-color);
+   color: var(--white);
    text-align: center;
-   padding-top: var(--spacing-md);
+   padding-top: var(--spacing-lg);
+   margin-top: var(--spacing-xl);
    border-top: 1px solid rgba(255,255,255,0.1); /* 浅分隔线，提升层次感 */
-  max-width: 1200px;
-  margin: 0 auto; /* 版权区居中 */
+   max-width: 1200px; 
  }
 
  .footer-bottom p {
-  font-size: 0.9rem;
-  color: var(--text-gray); /* 浅白色文字，避免过亮刺眼 */
-  line-height: 1.5;
-  margin: 0; /* 清除p标签默认边距 */
+   font-size: 0.9rem;
+   color: var(--text-gray); 
+   margin: 0; 
  }
 
  /* ========== 响应式适配（移动端优化） ========== */
@@ -1434,10 +1431,10 @@ button {
   
   .footer-bottom {
     padding-top: var(--spacing-sm);
-    margin: 0 var(--spacing-sm); /* 移动端左右留白 */
+    margin: 0 var(--spacing-sm);
   }
   
   .footer-bottom p {
-    font-size: 0.8rem; /* 移动端字号缩小 */
+    font-size: 0.8rem; 
   }
  }
