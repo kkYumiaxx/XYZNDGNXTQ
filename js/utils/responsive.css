@@ -1,0 +1,67 @@
+// ========== 响应式 + 页面切换工具函数 ==========
+
+// 显示某个页面，隐藏其他页面
+function showPage(pageId) {
+  // 把所有带 .page 的都隐藏
+  document.querySelectorAll('.page').forEach(el => {
+    el.classList.remove('active');
+  });
+
+  // 只显示你指定的页面
+  const target = document.getElementById(pageId);
+  if (target) {
+    target.classList.add('active');
+  }
+}
+
+// ========== 作业页面切换 ==========
+function goJob(index) {
+  showPage('page' + index);
+}
+
+// ========== 个人中心切换 ==========
+function goUser(index) {
+  showPage('p' + index);
+}
+
+// ========== 图书页面切换 ==========
+function switchTab(index) {
+  showPage('page' + index);
+}
+
+// ========== 消息通知（未读/已读） ==========
+function switchNotifyTab(type) {
+  // 切换内容
+  document.querySelectorAll('.notify-content').forEach(el => {
+    el.classList.remove('active');
+  });
+  const content = document.getElementById(type);
+  if (content) content.classList.add('active');
+
+  // 切换按钮高亮
+  document.querySelectorAll('.notify-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  const activeTab = document.querySelector(`.notify-tab[onclick="switchNotifyTab('${type}')"]`);
+  if (activeTab) activeTab.classList.add('active');
+}
+
+// ========== 退出登录 ==========
+function logout() {
+  if (confirm('确定要退出登录吗？')) {
+    alert('已退出登录');
+    showPage('page-login');
+  }
+}
+
+// ========== 手机端导航栏开关 ==========
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleBtn = document.getElementById('mobileMenuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  if (toggleBtn && navLinks) {
+    toggleBtn.addEventListener('click', function () {
+      navLinks.classList.toggle('show');
+    });
+  }
+});
