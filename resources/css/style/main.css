@@ -792,17 +792,17 @@ button {
 
 /* ==========  ========== */
  /* 图书借阅模块 */
- .life-container {
+ .book-container {
    padding: var(--spacing-xl) 0;
  }
- .life {
+ .book {
    background-color: var(--white);
    border-radius: var(--border-radius-lg);
    box-shadow: var(--shadow-md);
    padding: var(--spacing-lg);
    margin-bottom: var(--spacing-xl);
  }
- .life-icon {
+ .book-icon {
    font-size: 2rem;
    color: var(--primary-color);
    margin-bottom: var(--spacing-md);
@@ -942,167 +942,7 @@ button {
    color: var(--danger-color);
    font-size: 0.9rem;
  }
- /* 学习事务管理模块 */
- .tasks {
-   padding: var(--spacing-xl) 0;
- }
- .tasks-container {
-   background-color: var(--white);
-   border-radius: var(--border-radius-lg);
-   box-shadow: var(--shadow-md);
-   padding: var(--spacing-lg);
-   margin-bottom: var(--spacing-xl);
- }
- .tasks-icon {
-   font-size: 2rem;
-   color: var(--primary-color);
-   margin-bottom: var(--spacing-md);
-   display: block;
- }
- /* 课表模块样式 */
- .schedule-header {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin-bottom: var(--spacing-lg);
-   padding-bottom: var(--spacing-md);
-   border-bottom: 1px solid var(--gray-light);
- }
- .schedule-title {
-   font-family: var(--font-heading);
-   color: var(--primary-color);
-   font-size: 1.5rem;
- }
- .schedule-filters, .schedule-fliters {
-   display: flex;
-   gap: var(--spacing-lg);
-   align-items: center;
-   margin-bottom: var(--spacing-lg);
-   flex-wrap: wrap;
- }
- .filter-group {
-   display: flex;
-   align-items: center;
-   gap: var(--spacing-sm);
- }
- .filter-group label {
-   font-weight: 500;
-   color: var(--text-gray);
- }
- .filter-select {
-   padding: var(--spacing-sm) var(--spacing-md);
-   border: 1px solid var(--gray);
-   border-radius: var(--border-radius-sm);
-   font-family: var(--font-main);
-   background-color: var(--white);
-   min-width: 180px;
- }
- .filter-select:focus {
-   outline: none;
-   border-color: var(--primary-color);
- }
- .btn-primary {
-   background-color: var(--primary-color);
-   color: var(--white);
- }
- .btn-primary:hover {
-   background-color: var(--primary-dark);
- }
- .btn-success {
-   background-color: var(--success-color);
-   color: var(--white);
- }
- .btn-success:hover {
-   background-color: #16a34a;
- }
- .btn-secondary {
-   background-color: var(--secondary-color);
-   color: var(--white);
- }
- .btn-secondary:hover {
-   background-color: #475569;
- }
- .btn-analyze {
-   background-color: var(--info-color);
-   color: var(--white);
-   padding: var(--spacing-sm) var(--spacing-lg);
-   border-radius: var(--border-radius-sm);
-   font-weight: 500;
-   margin-left: var(--spacing-md);
- }
- .btn-analyze:hover {
-   background-color: #0891b2;
- }
- /* 成绩分析结果样式 */
- .title {
-   font-family: var(--font-heading);
-   color: var(--primary-color);
-   margin-bottom: var(--spacing-lg);
-   display: flex;
-   align-items: center;
-   gap: var(--spacing-sm);
- }
- .no-data {
-   text-align: center;
-   padding: var(--spacing-xl);
-   color: var(--text-light);
-   font-size: 1.1rem;
- }
- /* 成绩分析结果样式 */
- .result-box {
-   background-color: var(--white);
-   border-radius: var(--border-radius-md);
-   padding: var(--spacing-lg);
-   box-shadow: var(--shadow-sm);
-   margin-top: var(--spacing-lg);
- }
- .result-title {
-   font-weight: 600;
-   font-size: 1.2rem;
-   margin-bottom: var(--spacing-md);
-   color: var(--primary-color);
- }
- .score-info {
-   margin-bottom: var(--spacing-sm);
-   padding: var(--spacing-sm) 0;
-   border-bottom: 1px solid var(--gray-light);
- }
- .weak-info {
-   color: var(--danger-color);
- }
- .pass-info {
-   color: var(--warning-color);
- }
- .good-info {
-   color: var(--success-color);
- }
- textarea.form-control {
-   resize: vertical;
-   min-height: 100px;
- }
- /* 作业管理模块样式 */
- .table {
-   width: 100%;
-   border-collapse: collapse;
-   background-color: var(--white);
-   border-radius: var(--border-radius-md);
-   overflow: hidden;
-   box-shadow: var(--shadow-sm);
- }
- .table th, .table td {
-   padding: var(--spacing-md);
-   text-align: left;
-   border-bottom: 1px solid var(--gray-light);
- }
- .table th {
-   background-color: var(--gray-light);
-   font-weight: 600;
-   color: var(--text-gray);
- }
- textarea.form-control {
-   resize: vertical;
-   min-height: 100px;
- }
+
  /* ========== 个人中心模块专属样式 ========== */
  .user-container {
    padding: var(--spacing-xl) 0;
