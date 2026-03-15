@@ -59,20 +59,25 @@
      padding: 12px 0;
   }
 
-  .life-container {
+   .tasks-container, 
+   .container {
      padding: 20px;
   }
 
+   .schedule-header {
+     flex-direction: column;
+     align-items: flex-start;
+     gap: var(--spacing-md);
+  }
+  
    .schedule-filters, .schedule-fliters {
      flex-direction: column;
      align-items: flex-start;
      gap: var(--spacing-md);
   }
-   
-   .schedule-header {
-     flex-direction: column;
-     align-items: flex-start;
-     gap: var(--spacing-md);
+
+   .filter-group {
+     min-width: 180px;
   }
    
    .record-table, .table {
@@ -84,6 +89,7 @@
    .modal {
      margin: 0 var(--spacing-md);
      padding: var(--spacing-md);
+     width: 600px;
   }
    
    .tabs {
@@ -96,7 +102,10 @@
      padding: var(--spacing-sm);
   }
 
-
+  .life-container {
+     padding: 20px;
+  }
+  
    .search-box {
      gap: 10px;
   }
@@ -120,6 +129,27 @@
 
    .page {
      padding: var(--spacing-lg) 0;
+  }
+
+  .user-container {
+     padding: 20px;
+  }
+  
+   .user .tab {
+     gap: 10px;
+  }
+  
+   .table {
+     font-size: 14px;
+  }
+
+  .notify-tabs {
+     gap: 10px;
+  }
+  
+   .help-card,
+   .logout-card {
+     padding: 24px;
   }
  }
 
@@ -190,15 +220,6 @@
      gap: 6px;
   }
 
-  .logout-card, .help-card {
-    padding: var(--spacing-md);
-    margin: 0 var(--spacing-sm);
-  }
-
-  .logout-buttons, .help-buttons {
-    flex-direction: column;
-  }
-
    .register-card {
      padding: var(--spacing-md);
      margin: 0 var(--spacing-sm);
@@ -209,30 +230,124 @@
      padding: 2px var(--spacing-xs);
   }
 
-   .tasks-container {
-     padding: var(--spacing-md);
+   .tasks-container,
+   .container {
+     padding: 15px 12px;
   }
 
+   .schedule-title,
    .title {
-     font-size: 1.2rem;
-  }
+     font-size: 18px;
+     margin-bottom: 12px;
+   }
 
+    .schedule-header {
+     flex-direction: column;
+     gap: 8px;
+     align-items: stretch;
+   }
+  
+   .schedule-header .btn {
+     width: 100%;
+     margin-left: 0 !important;
+   }
+
+   .schedule-filters,
+   .filter-group {
+     flex-direction: column;
+     gap: 8px;
+     width: 100%;
+   } 
+  
    .filter-select {
      width: 100%;
-     min-width: unset;
+     padding: 10px;
+     font-size: 14px;
   }
 
-   .btn {
+   /* 标签 tab 竖排 */
+   .tabs {
+     flex-direction: column;
+     gap: 6px;
+  }
+   .tab {
      width: 100%;
-     justify-content: center;
+     text-align: center;
+     padding: 10px;
   }
-
+   /* 表单 */
+   .form-group {
+     margin-bottom: 14px;
+  }
+  
+   .form-label {
+     font-size: 14px;
+     margin-bottom: 6px;
+     display: inline-block;
+  }
+  
+   .form-control,
+   .form-input {
+     width: 100%;
+     padding: 10px;
+     font-size: 14px;
+   }
+  
+   textarea.form-control {
+     resize: vertical;
+   }
+  
+   /* 弹窗 */
+   .modal {
+     width: 90%;
+     padding: 15px;
+     margin: 20px auto;
+   }
+  
+   .modal-footer {
+     flex-direction: column;
+     gap: 8px;
+   }
+  
+   .modal-footer .btn {
+     width: 100%;
+   }
+  
+   /* 表格：小屏横向滚动 */
+   .record-table,
+   .table {
+     display: block;
+     overflow-x: auto;
+     white-space: nowrap;
+     font-size: 12px;
+   }
+  
+   /* 无数据提示 */
+   .no-data,
+   .empty-tip {
+     font-size: 14px;
+     text-align: center;
+     padding: 20px 0;
+   }
+  
+   /* 成绩分析 */
+   .result-box {
+     padding: 15px;
+     font-size: 14px;
+   }
+  
+   .score-info {
+     margin-bottom: 8px;
+   }
+      
+   /* 按钮全屏 */
+   .btn,
    .btn-analyze {
      width: 100%;
-     margin-left: 0;
-     margin-top: var(--spacing-md);
-  }
-
+     padding: 12px;
+     font-size: 15px;
+  } 
+ 
    .modal-footer {
      flex-direction: column;
   }
@@ -257,41 +372,7 @@
      width: 100%;
   }
 
-  /* 容器 */
-   .tasks-container,
-   .container {
-     padding: 15px 12px;
-  }
-   /* 标题 */
-   .schedule-title,
-   .title {
-     font-size: 18px;
-     margin-bottom: 12px;
-  }
-   /* 课表头部按钮竖排 */
-   .schedule-header {
-     flex-direction: column;
-     gap: 8px;
-     align-items: stretch;
-  }
-   .schedule-header .btn {
-     width: 100%;
-     margin-left: 0 !important;
-  }
-   /* 筛选栏竖排 */
-   .schedule-filters,
-   .filter-group {
-     flex-direction: column;
-     gap: 8px;
-     width: 100%;
-  }
-   .filter-select {
-     width: 100%;
-     padding: 10px;
-     font-size: 14px;
-  }
-  
-   /* 标签 tab 竖排 */
+  /* 标签tab竖排 */
    .tabs {
      flex-direction: column;
      gap: 6px;
@@ -303,77 +384,20 @@
      padding: 10px;
   }
   
-  /* 表单 */
+   /* 表单 */
    .form-group {
      margin-bottom: 14px;
   }
-
+  
    .form-group label {
      font-size: 14px;
      margin-bottom: 6px;
      display: inline-block;
   }
-
-   .form-control,
-   .form-input {
-     width: 100%;
+  
+   .form-control {
      font-size: 14px;
      padding: 10px;
-  }
-
-    textarea.form-control {
-     resize: vertical;
-  }
-
-  /* 弹窗 */
-   .modal {
-     width: 90%;
-     padding: 15px;
-     margin: 20px auto;
-  }
-  
-   .modal-footer {
-     flex-direction: column;
-     gap: 8px;
-  }
-  
-   .modal-footer .btn {
-     width: 100%;
-  }
-  
-   /* 表格：小屏横向滚动 */
-   .record-table,
-   .table {
-     display: block;
-     overflow-x: auto;
-     white-space: nowrap;
-     font-size: 12px;
-  }
-  
-   /* 无数据提示 */
-   .no-data,
-   .empty-tip {
-     font-size: 14px;
-     text-align: center;
-     padding: 20px 0;
-  }
-  
-   /* 成绩分析 */
-   .result-box {
-     padding: 15px;
-     font-size: 14px;
-  }
-  
-   .score-info {
-     margin-bottom: 8px;
-  }
-  
-   /* 按钮全屏 */
-   .btn,
-   .btn-analyze {
-     width: 100%;
-     padding: 12px;
-     font-size: 15px;
   }
   
    .time-group {
@@ -398,9 +422,120 @@
      overflow-x: auto;
      white-space: nowrap;
   }
+  
    .empty-tip {
      font-size: 14px;
      padding: 20px 0;
      text-align: center;
+  }
+
+   /* 个人中心容器 */
+   .user-container {
+     padding: 15px 12px;
+  }
+  
+   /* 顶部 tab 按钮竖排 */
+   .user .tab {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+  }
+  
+   .user .tab button {
+     width: 100%;
+     padding: 10px;
+     font-size: 14px;
+  }
+  
+   /* 表格横向滚动，不撑破屏幕 */
+   .table {
+     display: block;
+     overflow-x: auto;
+     white-space: nowrap;
+     font-size: 12px;
+  }
+  
+   /* 小按钮适配 */
+   .btn-small {
+     padding: 4px 8px;
+     font-size: 12px;
+  }
+  
+   /* 头像大小 */
+   #avatarImg {
+     width: 40px;
+     height: 40px;
+  }
+
+  /* 消息标签 */
+   .notify-tabs {
+     display: flex;
+     gap: 8px;
+  }
+  
+   .notify-tab {
+     flex: 1;
+     padding: 10px 0;
+     font-size: 14px;
+  }
+  
+   /* 消息卡片 */
+   .notify-item {
+     padding: 12px;
+     font-size: 14px;
+  }
+  
+   .notify-title {
+     font-size: 15px;
+  }
+  
+   .notify-desc {
+     font-size: 13px;
+  }
+  
+   .notify-time {
+     font-size: 12px;
+  }
+  
+   /* 帮助与反馈/退出登录 */
+   .help-container,
+   .logout-container {
+     padding: 15px 12px;
+  }
+  
+   .help-card,
+   .logout-card {
+     padding: 18px 16px;
+     margin: 0;
+  }
+  
+   .help-card h2,
+   .logout-card h2 {
+     font-size: 18px;
+  }
+  
+   textarea {
+     font-size: 14px;
+     padding: 10px;
+  }
+  
+   /* 按钮竖排 */
+   .help-buttons,
+   .logout-buttons {
+     flex-direction: column;
+     gap: 8px;
+  }
+  
+   .help-buttons button,
+   .logout-buttons button {
+     width: 100%;
+     padding: 12px;
+     font-size: 15px;
+  }
+  
+   /* 页脚 */
+   .footer-bottom {
+     padding: 12px 10px;
+     font-size: 13px;
   }
  }
