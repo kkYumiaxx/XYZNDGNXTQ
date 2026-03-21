@@ -204,38 +204,47 @@
     </div>
 </div>
                             
-        <!--个人学习事务管理--> 
-        <div class="page" id="page-tasks">
+    <!--个人学习事务管理--> 
+    <div class="page" id="page-tasks">
         <div class="tasks">   
-        <div class="tasks-container">                                
-        <i class="fas fa-tasks tasks-icon"></i>
-            
-                        课表查询/自定义
-                        <div class="container">
-                        <div class="schedule-header">
-                            <h2 class="schedule-title">课表查询/自定义</h2>
-                            <button class="btn btn-primary" id="customCourseBtn">
-                                 <i class="fas fa-plus"></i> 自定义课程/换课
-                            </button>
-                            <button class="btn btn-success" id="downloadScheduleBtn" style="margin-left: 10px;">
-                                 <i class="fas fa-download"></i> 下载课表    
-                            </button>
-                        </div>
-                    </div>              
+            <div class="tasks-container">                                
+                <i class="fas fa-tasks tasks-icon"></i>
 
-                <!-- 筛选区域 -->
-                <div class="schedule-filters">
-                    <div class="filter-group">
-                        <label for="weekdayFilter">星期：</label>
-                        <select id="weekdayFilter" class="filter-select">
-                             <option value="">全部</option>
-                             <option value="Monday">星期一</option>
-                             <option value="Tuesday">星期二</option>
-                             <option value="Wednesday">星期三</option>
-                             <option value="Thursday">星期四</option>
-                            <option value="Friday">星期五</option>
-                </select>
+            <div class="tasks-menu">
+                <button onclick="go('page-schedule')">课表查询/自定义</button>
+                <button onclick="go('page-mark')">成绩管理系统</button>
+                <button onclick="go('page-homework')">作业管理系统</button>
             </div>
+            
+            课表查询/自定义
+            <div class="container">
+                <div class="schedule-header">
+                    <h2 class="schedule-title">课表查询/自定义</h2>
+                    <button class="btn btn-primary" id="quersyScheduleBtn" style="margin-left: 10px;">                                  
+                        <i class="fas fa-search"></i> 课表查询                             
+                    </button>
+                    <button class="btn btn-primary" id="customCourseBtn" style="margin-middle: 10px;">
+                        <i class="fas fa-plus"></i> 自定义课程/换课
+                    </button>
+                    <button class="btn btn-success" id="downloadScheduleBtn" style="margin-right: 10px;">
+                        <i class="fas fa-download"></i> 下载课表    
+                    </button>
+                </div>
+            </div>              
+
+            <!-- 筛选区域 -->
+            <div class="schedule-filters">
+                <div class="filter-group">
+                    <label for="weekdayFilter">星期：</label>
+                    <select id="weekdayFilter" class="filter-select">
+                        <option value="">全部</option>
+                        <option value="Monday">星期一</option>
+                        <option value="Tuesday">星期二</option>
+                        <option value="Wednesday">星期三</option>
+                        <option value="Thursday">星期四</option>
+                        <option value="Friday">星期五</option>
+                    </select>
+                </div>
             <div class="filter-group">
                 <label for="sectionFilter">节次：</label>
                 <select id="sectionFilter" class="filter-select">
@@ -284,7 +293,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">课程名称</label>
-                    <input type="text" id="modalCourseName" class="form-input" placeholder="如：高等数学/换课-英语" required>
+                    <input type="text" id="modalCourseName" class="form-input" placeholder="如：数学/换课-英语" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">授课老师</label>
@@ -304,10 +313,13 @@
     </div>  
    
          成绩管理系统                   
-         <div class="container">         
-             <h2 class="title">             
-                 <i class="fas fa-history"></i> 查看历史成绩        
-             </h2> 
+         <div class="container">
+             <div class="mark-header">
+                 <h2 class="title">             
+                     <i class="fas fa-history"></i> 查看历史成绩        
+                 </h2>
+             </div>
+         </div>    
 
               <table class="record-table">
             <thead>
@@ -391,9 +403,14 @@
         <div class="score-info good-info">优势科目：<span class="good-list" id="good"></span></div>
     </div>
 
-                作业管理系统
-                <div class="container">
-    <h2 class="title"><i class="fas fa-book"></i> 作业管理系统</h2>
+    作业管理系统
+    <div class="container">
+        <div class="homework-header">
+            <h2 class="title">
+                <i class="fas fa-homework"></i> 作业管理系统
+            </h2>
+        </div>
+    </div>    
 
     <div class="tabs">
         <div class="tab active" onclick="go(0)">接收作业</div>
@@ -444,10 +461,10 @@
                     <th>状态</th>
                 </tr>
             </thead>
-            <tbody id="resultList"></tbody>
-        </table>
+                <tbody id="resultList"></tbody>
+            </table>
+        </div>
     </div>
-</div>
 </div> 
 </div>
 
@@ -457,13 +474,22 @@
             <div class="book">                         
                 <i class="fas fa-book book-icon"></i>
 
-             图书借阅
-             <div class="container">
-        <h2 class="title">
-            <i class="fas fa-book"></i> 图书馆藏书查询
-        </h2>
+            <div class="tasks-menu">                                   
+                <button onclick="go('page-search')">图书馆藏书查询</button>                                   
+                <button onclick="go('page-appointment')">预约借书/续借</button>                                   
+                <button onclick="go('page-record')">我的预约记录</button>                           
+            </div>    
 
-                 <!-- 搜索筛选区域 -->
+        图书馆藏书查询
+        <div class="container">
+            <div class="search-header">
+                <h2 class="title">
+                    <i class="fas fa-search"></i> 图书馆藏书查询
+                </h2>
+            </div>
+        </div>   
+
+        <!-- 搜索筛选区域 -->
         <div class="search-box">
             <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询">
             <select class="search-select" id="categoryFilter">
@@ -493,8 +519,16 @@
             <div class="tab" onclick="switchTab(1)">我的预约记录</div>
             <div class="tab" onclick="switchTab(2)">申请续借</div>
         </div>
-
-        <!-- 预约借书/续借 -->
+            
+        预约借书/续借
+        <div class="container">
+            <div class="appointment-header">
+                <h2 class="title">
+                    <i class="fas fa-appointment"></i> 预约借书/续借
+                </h2>
+            </div>    
+        </div>
+                
         <div class="page active" id="page0">
             <div class="form-group">
                 <label>选择书籍(可多选)</label>
@@ -516,7 +550,7 @@
                 </select>
             </div>
         </div>
-                 
+
             <div class="form-group">
                 <label>预约人姓名</label>
                 <input type="text" class="form-control" id="reserveName" placeholder="请输入姓名" required>
@@ -538,7 +572,15 @@
             <button class="btn" onclick="submitBorrow()">提交预约申请</button>
         </div>
 
-        <!-- 我的预约记录页面 -->
+        我的预约记录    
+        <div class="container">             
+            <div class="record-header">                 
+                <h2 class="title">                     
+                    <i class="fas fa-record"></i> 我的预约记录                
+                </h2>             
+            </div>    
+        </div>
+                
         <div class="page" id="page1">
             <table class="record-table" id="reserveTable">
                 <thead>
