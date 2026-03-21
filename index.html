@@ -206,31 +206,36 @@
                             
     <!--个人学习事务管理--> 
     <div class="page" id="page-tasks">
-        <div class="tasks">   
-            <div class="tasks-container">                                
-                <i class="fas fa-tasks tasks-icon"></i>
+        <div class="container">    
+            <div class="tasks">   
+                <div class="tasks-container">                                
+                    <i class="fas fa-tasks tasks-icon"></i>
 
-            <div class="tasks-menu">
-                <button onclick="go('page-schedule')">课表查询/自定义</button>
-                <button onclick="go('page-mark')">成绩管理系统</button>
-                <button onclick="go('page-homework')">作业管理系统</button>
+                    <div class="tasks-menu">
+                        <button onclick="go('page-schedule')">课表查询/自定义</button>
+                        <button onclick="go('page-mark')">成绩管理系统</button>
+                        <button onclick="go('page-homework')">作业管理系统</button>
+                    </div>
+                </div>    
             </div>
-            
+        </div>
+    </div>        
+    
             课表查询/自定义
-            <div class="container">
-                <div class="schedule-header">
-                    <h2 class="schedule-title">课表查询/自定义</h2>
-                    <button class="btn btn-primary" id="quersyScheduleBtn" style="margin-left: 10px;">                                  
-                        <i class="fas fa-search"></i> 课表查询                             
-                    </button>
-                    <button class="btn btn-primary" id="customCourseBtn" style="margin-middle: 10px;">
-                        <i class="fas fa-plus"></i> 自定义课程/换课
-                    </button>
-                    <button class="btn btn-success" id="downloadScheduleBtn" style="margin-right: 10px;">
-                        <i class="fas fa-download"></i> 下载课表    
-                    </button>
-                </div>
-            </div>              
+            <div class="page" id="page-schedule">    
+                <div class="container">
+                    <div class="schedule-header">
+                        <h2 class="schedule-title">课表查询/自定义</h2>
+                        <button class="btn btn-primary" id="quersyScheduleBtn" style="margin-left: 10px;">                                  
+                            <i class="fas fa-search"></i> 课表查询                             
+                        </button>
+                        <button class="btn btn-primary" id="customCourseBtn" style="margin-middle: 10px;">
+                            <i class="fas fa-plus"></i> 自定义课程/换课
+                        </button>
+                        <button class="btn btn-success" id="downloadScheduleBtn" style="margin-right: 10px;">
+                            <i class="fas fa-download"></i> 下载课表    
+                        </button>
+                    </div>
 
             <!-- 筛选区域 -->
             <div class="schedule-filters">
@@ -261,67 +266,70 @@
             </div>
         </div>
 
-    <!-- 自定义/换课弹窗 -->
-    <div class="modal-overlay" id="courseModal">
-        <div class="modal">
-            <h3 class="modal-title" id="modalTitle">自定义课程</h3>
-            <form id="courseForm">
-                <div class="form-group">
-                    <label class="form-label">星期</label>
-                    <select id="modalWeekday" class="form-input" required>
-                        <option value="">请选择</option>
-                        <option value="Monday">星期一</option>
-                        <option value="Tuesday">星期二</option>
-                        <option value="Wednesday">星期三</option>
-                        <option value="Thursday">星期四</option>
-                        <option value="Friday">星期五</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">节次</label>
-                    <select id="modalSection" class="form-input" required>
-                        <option value="">请选择</option>
-                        <option value="1">第1节 (08:00-08:40)</option>
-                        <option value="2">第2节 (08:50-09:30)</option>
-                        <option value="3">第3节 (10:00-10:40)</option>
-                        <option value="4">第4节 (10:50-11:30)</option>
-                        <option value="5">第5节 (14:20-15:00)</option>
-                        <option value="6">第6节 (15:10-15:50)</option>
-                        <option value="7">第7节 (16:00-16:40)</option>
-                        <option value="8">第8节 (16:50-17:30)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">课程名称</label>
-                    <input type="text" id="modalCourseName" class="form-input" placeholder="如：数学/换课-英语" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">授课老师</label>
-                    <input type="text" id="modalTeacher" class="form-input" placeholder="如：张老师">
-                </div> 
-                <div class="form-group">
-                    <label class="form-label">备注（换课说明）</label>
-                    <input type="text" id="modalRemark" class="form-input" placeholder="如：原课程调至周四第3节">
-                </div>
-                <input type="hidden" id="editMode" value="false">
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="closeModal">取消</button>
-                    <button type="submit" class="btn btn-primary">保存</button>
-                </div>
-            </form>
+        <!-- 自定义/换课弹窗 -->
+        <div class="modal-overlay" id="courseModal">
+            <div class="modal">
+                <h3 class="modal-title" id="modalTitle">自定义课程</h3>
+                <form id="courseForm">
+                    <div class="form-group">
+                        <label class="form-label">星期</label>
+                        <select id="modalWeekday" class="form-input" required>
+                            <option value="">请选择</option>
+                            <option value="Monday">星期一</option>
+                            <option value="Tuesday">星期二</option>
+                            <option value="Wednesday">星期三</option>
+                            <option value="Thursday">星期四</option>
+                            <option value="Friday">星期五</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">节次</label>
+                        <select id="modalSection" class="form-input" required>
+                            <option value="">请选择</option>
+                            <option value="1">第1节 (08:00-08:40)</option>
+                            <option value="2">第2节 (08:50-09:30)</option>
+                            <option value="3">第3节 (10:00-10:40)</option>
+                            <option value="4">第4节 (10:50-11:30)</option>
+                            <option value="5">第5节 (14:20-15:00)</option>
+                            <option value="6">第6节 (15:10-15:50)</option>
+                            <option value="7">第7节 (16:00-16:40)</option>
+                            <option value="8">第8节 (16:50-17:30)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">课程名称</label>
+                        <input type="text" id="modalCourseName" class="form-input" placeholder="如：数学/换课-英语" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">授课老师</label>
+                        <input type="text" id="modalTeacher" class="form-input" placeholder="如：张老师">
+                    </div> 
+                    <div class="form-group">
+                        <label class="form-label">备注（换课说明）</label>
+                        <input type="text" id="modalRemark" class="form-input" placeholder="如：原课程调至周四第3节">
+                    </div>
+                        <input type="hidden" id="editMode" value="false">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeModal">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>  
+    </div>              
+</div>                         
    
-         成绩管理系统                   
-         <div class="container">
+    成绩管理系统
+    <div class="page" id="page-mark">            
+        <div class="container">
              <div class="mark-header">
                  <h2 class="title">             
                      <i class="fas fa-history"></i> 查看历史成绩        
                  </h2>
-             </div>
-         </div>    
+             </div>    
 
-              <table class="record-table">
+        <!-- 我的成绩记录 -->
+        <table class="record-table">
             <thead>
                 <tr>
                     <th>序号</th>
@@ -343,7 +351,6 @@
         <div id="noData" class="no-data" style="display: none;">
             暂无记录 
         </div>
-    </div>
                         
         <!-- 筛选区域 -->
             <div class="schedule-fliters">
@@ -392,25 +399,27 @@
 
                 <button class="btn-analyze" onclick="analyzeScore()">开始分析成绩</button>
 
-    <!-- 分析结果 -->
-    <div class="result-box" id="result" style="display:none;">
-        <div class="result-title">📊 成绩统计结果</div>
-        <div class="score-info">平均分：<span id="avg"></span></div>
-        <div class="score-info">总分：<span id="total"></span></div>
-        <div class="score-info">及格科目数：<span id="passCount"></span></div>
-        <div class="score-info weak-info">薄弱/不及格科目：<span class="weak-list" id="weak"></span></div>
-        <div class="score-info pass-info">待提升科目：<span class="pass-list" id="medium"></span></div>
-        <div class="score-info good-info">优势科目：<span class="good-list" id="good"></span></div>
-    </div>
+            <!-- 分析结果 -->
+            <div class="result-box" id="result" style="display:none;">
+                <div class="result-title">📊 成绩统计结果</div>
+                <div class="score-info">平均分：<span id="avg"></span></div>
+                <div class="score-info">总分：<span id="total"></span></div>
+                <div class="score-info">及格科目数：<span id="passCount"></span></div>
+                <div class="score-info weak-info">薄弱/不及格科目：<span class="weak-list" id="weak"></span></div>
+                <div class="score-info pass-info">待提升科目：<span class="pass-list" id="medium"></span></div>
+                <div class="score-info good-info">优势科目：<span class="good-list" id="good"></span></div>
+            </div>
+        </div>     
+    </div>            
 
     作业管理系统
-    <div class="container">
-        <div class="homework-header">
-            <h2 class="title">
-                <i class="fas fa-homework"></i> 作业管理系统
-            </h2>
-        </div>
-    </div>    
+    <div class="page" id="page-homework">            
+        <div class="container">
+            <div class="homework-header">
+                <h2 class="title">
+                    <i class="fas fa-homework"></i> 作业管理系统
+                </h2>
+            </div>  
 
     <div class="tabs">
         <div class="tab active" onclick="go(0)">接收作业</div>
@@ -450,86 +459,90 @@
     <!-- 查询批改结果 -->
     <div class="page" id="page2">
         <h3>我的作业批改结果</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>科目</th>
-                    <th>作业内容</th>
-                    <th>我的答案</th>
-                    <th>得分</th>
-                    <th>评语</th>
-                    <th>状态</th>
-                </tr>
-            </thead>
-                <tbody id="resultList"></tbody>
-            </table>
-        </div>
-    </div>
-</div> 
-</div>
-
-    <!--图书借阅预约-->   
-      <div class="page" id="page-book">    
-         <div class="book-container">                    
-            <div class="book">                         
-                <i class="fas fa-book book-icon"></i>
-
-            <div class="tasks-menu">                                   
-                <button onclick="go('page-search')">图书馆藏书查询</button>                                   
-                <button onclick="go('page-appointment')">预约借书/续借</button>                                   
-                <button onclick="go('page-record')">我的预约记录</button>                           
-            </div>    
-
-        图书馆藏书查询
-        <div class="container">
-            <div class="search-header">
-                <h2 class="title">
-                    <i class="fas fa-search"></i> 图书馆藏书查询
-                </h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>科目</th>
+                        <th>作业内容</th>
+                        <th>我的答案</th>
+                        <th>得分</th>
+                        <th>评语</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                    <tbody id="resultList"></tbody>
+                </table>
             </div>
-        </div>   
-
-        <!-- 搜索筛选区域 -->
-        <div class="search-box">
-            <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询">
-            <select class="search-select" id="categoryFilter">
-                <option value="">全部分类</option>
-                <option value="文学">文学类</option>
-                <option value="理科">理科类</option>
-                <option value="工科">工科类</option>
-                <option value="社科">社科类</option>
-                <option value="教辅">教辅类</option>
-                <option value="艺术">艺术类</option>
-                <option value="英语">英语类</option>
-                <option value="法律">法律类</option>
-                <option value="心理学">心理学类</option>
-                <option value="政治">政治类</option>
-                <option value="地理">地理类</option>                     
-                <option value="信息技术">电脑类</option>
-                <option value="其他">其他类型</option>
-                
-            </select>
-            <button class="search-btn" onclick="searchBooks()">
-                <i class="fas fa-search"></i> 搜索
-            </button>
         </div>
+    </div> 
+ 
+    <!--图书借阅预约-->   
+    <div class="page" id="page-book">    
+        <div class="book-container">                    
+            <div class="book"> 
+                <div class="book-container">
+                    <i class="fas fa-book book-icon"></i>
 
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab(0)">发起预约</div>go
-            <div class="tab" onclick="switchTab(1)">我的预约记录</div>
-            <div class="tab" onclick="switchTab(2)">申请续借</div>
+                    <div class="book-mebooknu">                                   
+                        <button onclick="go('page-search')">图书馆藏书查询</button>                                   
+                        <button onclick="go('page-calendar-check')">预约借书/续借</button>                                   
+                        <button onclick="go('page-record')">我的预约记录</button>                           
+                    </div>
+                </div>
+            </div> 
+        </div>    
+    </div>
+    
+        图书馆藏书查询
+        <div class="page" id="page-search">        
+            <div class="container">
+                <div class="search-header">
+                    <h2 class="title">
+                        <i class="fas fa-search"></i> 图书馆藏书查询
+                    </h2>
+                </div>    
+
+            <!-- 搜索筛选区域 -->
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询">
+                <select class="search-select" id="categoryFilter">
+                    <option value="">全部分类</option>
+                    <option value="文学">文学类</option>
+                    <option value="理科">理科类</option>
+                    <option value="工科">工科类</option>
+                    <option value="社科">社科类</option>
+                    <option value="教辅">教辅类</option>
+                    <option value="艺术">艺术类</option>
+                    <option value="英语">英语类</option>
+                    <option value="法律">法律类</option>
+                    <option value="心理学">心理学类</option>
+                    <option value="政治">政治类</option>
+                    <option value="地理">地理类</option>                     
+                    <option value="信息技术">电脑类</option>
+                    <option value="其他">其他类型</option>    
+                </select>
+                <button class="search-btn" onclick="searchBooks()">
+                    <i class="fas fa-search"></i> 搜索
+                </button>
+            </div>
         </div>
+    </div>               
             
         预约借书/续借
-        <div class="container">
-            <div class="appointment-header">
-                <h2 class="title">
-                    <i class="fas fa-appointment"></i> 预约借书/续借
-                </h2>
-            </div>    
-        </div>
+        <div class="page" id="page-calendar-check">       
+            <div class="container">
+                <div class="calendar-check-header">
+                    <h2 class="title">
+                        <i class="fas fa-calendar-check"></i> 预约借书/续借
+                    </h2>
+                </div>          
+
+            <div class="tabs">             
+                <div class="tab active" onclick="switchTab(0)">发起预约</div>go             
+                <div class="tab" onclick="switchTab(1)">我的预约记录</div>             
+                <div class="tab" onclick="switchTab(2)">申请续借</div>         
+            </div>
                 
-        <div class="page active" id="page0">
             <div class="form-group">
                 <label>选择书籍(可多选)</label>
                 <select class="form-control" id="borrowBook" multiple size="13"required>    
@@ -549,7 +562,6 @@
                     <option value="其他">其他类型</option>
                 </select>
             </div>
-        </div>
 
             <div class="form-group">
                 <label>预约人姓名</label>
@@ -557,9 +569,9 @@
             </div>
             <div class="form-group">
                 <label>班级</label>
-            <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
-        </div>
-        <div class="form-group">
+                <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
+            </div>
+            <div class="form-group">
                 <label>联系电话</label>
                 <input type="tel" class="form-control" id="reservePhone" placeholder="请输入电话" required>
             </div>
@@ -568,20 +580,21 @@
                 <div class="time-group">
                     <input type="date" class="form-control" id="takeDate" placeholder="取书日期" required>
                     <input type="time" class="form-control" id="takeTime" placeholder="取书时间" required>
+                </div>
+                <button class="btn" onclick="submitBorrow()">提交预约申请</button>
             </div>
-            <button class="btn" onclick="submitBorrow()">提交预约申请</button>
         </div>
-
-        我的预约记录    
-        <div class="container">             
-            <div class="record-header">                 
-                <h2 class="title">                     
-                    <i class="fas fa-record"></i> 我的预约记录                
-                </h2>             
-            </div>    
-        </div>
+    </div>            
+            
+        我的预约记录
+        <div class="page" id="page-record">        
+            <div class="container">             
+                <div class="record-header">                 
+                    <h2 class="title">                     
+                        <i class="fas fa-record"></i> 我的预约记录                
+                    </h2>
+                </div>    
                 
-        <div class="page" id="page1">
             <table class="record-table" id="reserveTable">
                 <thead>
                     <tr>
@@ -603,23 +616,21 @@
             </div>
         </div>
     </div>
-</div>
-</div>
 
-<!--个人中心-->  
-<div class="page" id="page-user">          
-    <div class="user-container">                    
-        <div class="user">                         
-            <i class="fas fa-user user-icon"></i>
-            <div class="tab">
-                <button onclick="go(0)" class="active">个人信息</button>
-                <button onclick="go(1)">消息通知</button>
-                <button onclick="go('page-help')">帮助与反馈</button>
-                <button onclick="go('page-logout')">退出登录</button>
-            </div>
-        </div>       
-    </div>
-</div>
+    <!--个人中心-->  
+    <div class="page" id="page-user">          
+        <div class="user-container">                    
+            <div class="user">                         
+                <i class="fas fa-user user-icon"></i>
+                <div class="tab">
+                    <button onclick="go(0)" class="active">个人信息</button>
+                    <button onclick="go(1)">消息通知</button>
+                    <button onclick="go('page-help')">帮助与反馈</button>
+                    <button onclick="go('page-logout')">退出登录</button>
+                </div>
+            </div>       
+        </div>
+    </div>      
                 
  <!-- 个人信息 -->
  <div class="page active" id="p0">
@@ -678,9 +689,9 @@
                  <td id="roleText">普通用户</td>
                  <td><button class="btn-small" onclick="editPermission()">权限设置</button></td>
              </tr>
-        </div>
-    </tbody>
-</table>
+         </tbody>
+     </table>
+ </div>     
 
      <!-- 消息通知 -->
      <div class="page" id="p1">
@@ -710,30 +721,30 @@
 
      <!-- 帮助与反馈 -->
      <div class="page" id="page-help">
-       <div class="help-container">
-         <div class="help-card">
-            <h2>帮助与反馈</h2>
-            <textarea placeholder="请输入你的问题或建议..." rows="5"></textarea>
-            <div class="help-buttons">
-                <button onclick="go('page-user')">返回</button>
-                <button onclick="submitFeedback()">提交反馈</button>
+         <div class="help-container">
+             <div class="help-card">
+                <h2>帮助与反馈</h2>
+                <textarea placeholder="请输入你的问题或建议..." rows="5"></textarea>
+                <div class="help-buttons">
+                    <button onclick="go('page-user')">返回</button>
+                    <button onclick="submitFeedback()">提交反馈</button>
+                </div>
             </div>
-          </div>
         </div>
     </div> 
                  
     <!-- 退出登录 -->
     <div class="page" id="page-logout">
-      <div class="logout-container">
-        <div class="logout-card">
-          <h2>确认退出登录？</h2>
-          <p>退出后将返回登录页面</p>
-          <div class="logout-buttons">
-            <button onclick="go('page-user')">取消</button>
-            <button onclick="logout()">确认退出</button>
-          </div>
+        <div class="logout-container">
+            <div class="logout-card">
+                <h2>确认退出登录？</h2>
+                <p>退出后将返回登录页面</p>
+                <div class="logout-buttons">
+                    <button onclick="go('page-user')">取消</button>
+                    <button onclick="logout()">确认退出</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>                         
                  
     <div class="footer-bottom">
