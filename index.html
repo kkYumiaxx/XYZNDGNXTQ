@@ -478,7 +478,7 @@
  
     <!--图书借阅预约-->   
     <div class="page" id="page-book">    
-        <div class="book-container">                    
+        <div class="container">                    
             <div class="book"> 
                 <div class="book-container">
                     <i class="fas fa-book book-icon"></i>
@@ -619,82 +619,85 @@
 
     <!--个人中心-->  
     <div class="page" id="page-user">          
-        <div class="user-container">                    
-            <div class="user">                         
-                <i class="fas fa-user user-icon"></i>
-                <div class="tab">
-                    <button onclick="go(0)" class="active">个人信息</button>
-                    <button onclick="go(1)">消息通知</button>
-                    <button onclick="go('page-help')">帮助与反馈</button>
-                    <button onclick="go('page-logout')">退出登录</button>
-                </div>
+        <div class="container">                    
+            <div class="user"> 
+                <div class="user-container">
+                    <i class="fas fa-user user-icon"></i>
+                    <div class="tab">
+                        <button onclick="go('page-profile')">个人信息</button>
+                        <button onclick="go('page-notice')">消息通知</button>
+                        <button onclick="go('page-help')">帮助与反馈</button>
+                        <button onclick="go('page-logout')">退出登录</button>
+                    </div>
+                </div>    
             </div>       
         </div>
     </div>      
                 
- <!-- 个人信息 -->
- <div class="page active" id="p0">
-     <table class="table">
-         <thead>
-             <tr>
-                 <th>信息项</th>
-                 <th>详情</th>
-                 <th>操作</th>
-             </tr>
-         </thead>
-         <tbody>
-             <tr>
-                 <td>头像</td>
-                 <td><img id="avatarImg" src="https://via.placeholder.com/50" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
-                 <td><button class="btn-small" onclick="changeAvatar()">更换头像</button></td>
-             </tr>
-             <tr>
-                 <td>昵称</td>
-                 <td id="nicknameText">🐶🐰</td>
-                 <td><button class="btn-small" onclick="editNickname()">修改昵称</button></td>
-             </tr>
-             <tr>
-                 <td>帐号ID</td>
-                 <td>1022481008</td>
-                 <td>—</td>
-             </tr>
-             <tr>
-                 <td>手机号</td>
-                 <td id="phoneText">18960635621</td>
-                 <td><button class="btn-small" onclick="changePhone()">更换手机号</button></td>
-             </tr>
-             <tr>
-                 <td>密码</td>
-                 <td>******</td>
-                 <td><button class="btn-small" onclick="changePassword()">更改密码</button></td>
-             </tr>
-             <tr>                 
-                 <td>姓名</td>                 
-                 <td>李四</td>             
-             </tr>             
-             <tr>                 
-                 <td>班级</td>                 
-                 <td>高一2班</td>             
-             </tr>             
-             <tr>                 
-                 <td>班主任</td>                 
-                 <td>王老师</td>             
-             </tr>             
-             <tr>                 
-                 <td>学号</td>                 
-                 <td>8</td>             
-             </tr>
-             <tr>
-                 <td>权限设置</td>
-                 <td id="roleText">普通用户</td>
-                 <td><button class="btn-small" onclick="editPermission()">权限设置</button></td>
-             </tr>
-         </tbody>
-     </table>
- </div>     
-
+     <!-- 个人信息 -->
+     <div class="page" id="page-profile">
+         <div class="profile-container">
+             <thead>
+                 <tr>
+                     <th>信息项</th>
+                     <th>详情</th>
+                     <th>操作</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr>
+                     <td>头像</td>
+                     <td><img id="avatarImg" src="https://via.placeholder.com/50" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                     <td><button class="btn-small" onclick="changeAvatar()">更换头像</button></td>
+                 </tr>
+                 <tr>
+                     <td>昵称</td>
+                     <td id="nicknameText">🐶🐰</td>
+                     <td><button class="btn-small" onclick="editNickname()">修改昵称</button></td>
+                 </tr>
+                 <tr>
+                    <td>帐号ID</td>
+                    <td>1022481008</td>
+                    <td>—</td>
+                 </tr>
+                 <tr>
+                     <td>手机号</td>
+                     <td id="phoneText">18960635621</td>
+                     <td><button class="btn-small" onclick="changePhone()">更换手机号</button></td>
+                 </tr>
+                 <tr>
+                     <td>密码</td>
+                     <td>******</td>
+                     <td><button class="btn-small" onclick="changePassword()">更改密码</button></td>
+                 </tr>
+                 <tr>                 
+                     <td>姓名</td>                 
+                     <td>李四</td>             
+                 </tr>             
+                 <tr>                 
+                     <td>班级</td>                 
+                     <td>高一2班</td>             
+                 </tr>             
+                 <tr>                 
+                     <td>班主任</td>                 
+                     <td>王老师</td>             
+                 </tr>             
+                 <tr>                 
+                     <td>学号</td>                 
+                     <td>8</td>             
+                 </tr>
+                 <tr>
+                     <td>权限设置</td>
+                     <td id="roleText">普通用户</td>
+                     <td><button class="btn-small" onclick="editPermission()">权限设置</button></td>
+                 </tr>
+             </tbody>
+         </table>
+     </div>     
+ </div> 
+    
      <!-- 消息通知 -->
-     <div class="page" id="p1">
+     <div class="page" id="page-notice">
          <div class="notify-tabs">
              <button class="notify-tab active" onclick="switchNotifyTab('unread')">未读消息</button>
              <button class="notify-tab" onclick="switchNotifyTab('read')">已读消息</button>
