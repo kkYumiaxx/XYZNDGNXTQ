@@ -78,18 +78,3 @@
     </div>
 </div>
                             
-    <!--个人学习事务管理--> 
-    <div class="page" id="page-tasks">
-        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">    
-            <div class="tasks">                                   
-                <i class="fas fa-tasks tasks-icon"></i>
-
-                    <div class="tasks-menu">
-                        <button onclick="go('page-schedule')">课表查询/自定义</button>
-                        <button onclick="go('page-mark')">成绩管理系统</button>
-                        <button onclick="go('page-homework')">作业管理系统</button>
-                    </div>
-                </div>    
-            </div>
-        </div>        
-    
