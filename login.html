@@ -47,3 +47,136 @@
         </div>
     </div>
 </div> 
+
+<script>
+// ================= 页面初始化 =================
+window.onload = function() {
+    // 绑定登录表单提交
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateLogin()) {
+            handleLogin();
+        }
+    });
+
+    // 密码显示/隐藏切换（如果需要）
+    const passwordInput = document.getElementById('password');
+    const passwordToggle = document.createElement('i');
+    passwordToggle.className = 'fas fa-eye-slash input-icon';
+    passwordToggle.style.right = '15px';
+    passwordToggle.style.cursor = 'pointer';
+    passwordToggle.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+        }
+    });
+    document.querySelector('#page-login .input-wrapper').appendChild(passwordToggle);
+
+    // 尝试从本地存储读取记住的密码
+    loadRememberedPassword();
+};
+
+// ================= 登录表单验证 =================
+function validateLogin() {
+    let isValid = true;
+    const userID = document.getElementById('userID').value.trim();
+    const password = document.getElementById('password').value;
+
+    // 验证账号ID
+    if (!userID) {
+        showError('usernameError', '请输入学生帐号ID');
+        isValid = false;
+    } else {
+        hideError('usernameError');
+    }
+
+    // 验证密码
+    if (!password) {
+        showError('passwordError', '请输入密码');
+        isValid = false;
+    } else if (password.length < 6) {
+        showError('passwordError', '密码长度不能少于6位');
+        isValid = false;
+    } else {
+        hideError('passwordError');
+    }
+
+    return isValid;
+}
+
+// ================= 辅助函数：显示/隐藏错误 =================
+function showError(id, text) {
+    const errorEl = document.getElementById(id);
+    errorEl.innerText = text;
+    errorEl.style.display = 'block';
+}
+
+function hideError(id) {
+    const errorEl = document.getElementById(id);
+    errorEl.style.display = 'none';
+}
+
+// ================= 记住密码功能 =================
+function loadRememberedPassword() {
+    const rememberMe = localStorage.getItem('rememberMe');
+    const savedUserID = localStorage.getItem('savedUserID');
+    const savedPassword = localStorage.getItem('savedPassword');
+
+    if (rememberMe === 'true' && savedUserID) {
+        document.getElementById('userID').value = savedUserID;
+        document.getElementById('password').value = savedPassword;
+        document.getElementById('remember-me').checked = true;
+    }
+}
+
+// ================= 核心登录逻辑 =================
+function handleLogin() {
+    // 获取输入
+    const userID = document.getElementById('userID').value.trim();
+    const password = document.getElementById('password').value;
+    const remember = document.getElementById('remember-me').checked;
+
+    // 从本地存储获取注册信息（与注册页面联动）
+    const registeredUser = localStorage.getItem('userInfo');
+    if (!registeredUser) {
+        alert('未检测到注册信息，请先注册！');
+        window.location.href = 'register.html';
+        return;
+    }
+
+    const userData = JSON.parse(registeredUser);
+
+    // 验证账号和密码
+    if (userData.userID === userID && userData.password === password) {
+        // 登录成功
+        alert('登录成功！');
+        
+        // 处理记住密码逻辑
+        if (remember) {
+            localStorage.setItem('rememberMe', 'true');
+            localStorage.setItem('savedUserID', userID);
+            localStorage.setItem('savedPassword', password);
+        } else {
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('savedUserID');
+            localStorage.removeItem('savedPassword');
+        }
+
+        // 保存登录状态
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+
+        // 跳转至主页（个人中心）
+        window.location.href = 'index.html#page-user';
+    } else {
+        // 登录失败
+        alert('账号ID或密码错误，请重新输入！');
+    }
+}
+</script>
