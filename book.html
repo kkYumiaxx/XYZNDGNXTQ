@@ -151,3 +151,147 @@
             </div>
         </div>
     </div>
+
+<script>
+// ================= 全局图书数据（模拟） =================
+const bookData = [
+  { title: "三国演义", author: "罗贯中", category: "文学", isbn: "9787020002207" },
+  { title: "高等数学", author: "同济大学", category: "工科", isbn: "9787040588094" },
+  { title: "C++程序设计", author: "谭浩强", category: "信息技术", isbn: "9787302366607" },
+  { title: "英语听力入门", author: "张民伦", category: "英语", isbn: "9787567557475" },
+  { title: "心理学与生活", author: "津巴多", category: "心理学", isbn: "9787115263193" },
+  { title: "数据结构", author: "严蔚敏", category: "工科", isbn: "9787302330443" }
+];
+
+// 预约存储
+let reserveList = JSON.parse(localStorage.getItem('reserveList')) || [];
+
+// ================= 通用页面切换 =================
+function go(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  document.getElementById(pageId).style.display = 'block';
+}
+
+// ================= 搜索图书 =================
+function searchBooks() {
+  const key = document.getElementById('searchKey').value.toLowerCase().trim();
+  const category = document.getElementById('categoryFilter').value;
+
+  let results = bookData;
+
+  if (key) {
+    results = results.filter(b => 
+      b.title.toLowerCase().includes(key) ||
+      b.author.toLowerCase().includes(key) ||
+      b.isbn.includes(key)
+    );
+  }
+
+  if (category) {
+    results = results.filter(b => b.category === category);
+  }
+
+  // 渲染搜索结果（你可以自行改成列表渲染）
+  alert(`搜索到 ${results.length} 本图书（模拟结果）`);
+  console.log(results);
+}
+
+// ================= 预约提交 =================
+function submitBorrow() {
+  const name = document.getElementById('reserveName').value.trim();
+  const cls = document.getElementById('classroom').value.trim();
+  const phone = document.getElementById('reservePhone').value.trim();
+  const date = document.getElementById('takeDate').value;
+  const time = document.getElementById('takeTime').value;
+
+  if (!name || !cls || !phone || !date || !time) {
+    alert('请填写完整预约信息');
+    return;
+  }
+
+  const selectedBooks = Array.from(document.getElementById('borrowBook').selectedOptions)
+    .map(opt => opt.value).filter(v => v);
+
+  if (selectedBooks.length === 0) {
+    alert('请至少选择一本书籍');
+    return;
+  }
+
+  const reserveItem = {
+    name,
+    class: cls,
+    phone,
+    date,
+    time,
+    books: selectedBooks,
+    status: "待取书",
+    id: Date.now()
+  };
+
+  reserveList.push(reserveItem);
+  localStorage.setItem('reserveList', JSON.stringify(reserveList));
+
+  alert('预约申请提交成功！');
+  go('page-record');
+  renderReserveList();
+}
+
+// ================= 渲染预约记录 =================
+function renderReserveList() {
+  const tbody = document.getElementById('reserveList');
+  const emptyTip = document.getElementById('emptyTip');
+
+  tbody.innerHTML = '';
+
+  if (reserveList.length === 0) {
+    emptyTip.style.display = 'block';
+    return;
+  }
+
+  emptyTip.style.display = 'none';
+
+  reserveList.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${item.books.join(' / ')}</td>
+      <td>${item.date}</td>
+      <td>${item.time}</td>
+      <td>—</td>
+      <td>${item.name}</td>
+      <td>${item.status}</td>
+      <td><button onclick="cancelReserve(${item.id})">取消</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ================= 取消预约 =================
+function cancelReserve(id) {
+  if (!confirm("确定要取消该预约吗？")) return;
+
+  reserveList = reserveList.filter(item => item.id !== id);
+  localStorage.setItem('reserveList', JSON.stringify(reserveList));
+  renderReserveList();
+  alert("预约已取消");
+}
+
+// ================= 续借书籍 =================
+function renewBook() {
+  const select = document.getElementById('borrowBook');
+  const selected = Array.from(select.selectedOptions).map(o => o.value);
+
+  if (selected.length === 0) {
+    alert("请选择要续借的书籍");
+    return;
+  }
+
+  alert(`已为您选中 ${selected.length} 本书籍进行续借（模拟成功）`);
+}
+
+// ================= 页面初始化 =================
+window.onload = function() {
+  go('page-book-search'); // 默认进入搜索页
+  renderReserveList();
+};
+</script>
+
