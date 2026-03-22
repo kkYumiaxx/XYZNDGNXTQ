@@ -1,0 +1,95 @@
+<!-- 注册 -->        
+<div class="page" id="page-register">
+    <div class="register-container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+        <div class="register-card">
+            <div class="register-title">
+                <h2>校园学习管理器</h2>
+                <p>填写信息完成注册</p>
+            </div>
+        
+        <!-- 注册表单 -->
+        <form id="registerForm" class="register-form">
+            
+            <!-- 姓名输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" class="form-input" id="name" placeholder="请输入真实姓名" required>
+                </div>
+                <div class="error-message" id="nameError" style="display: none;">请输入真实姓名</div>
+            </div>
+            
+            <!--学生帐号ID输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-id-card input-icon"></i>
+                    <input type="text" class="form-input" id="userID" placeholder="请输入学生帐号ID" required>
+                </div>
+                <div class="error-message" id="userIDError" style="display: none;">请输入学生帐号ID</div>
+            </div>
+            
+            <!-- 手机号输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-phone input-icon"></i>
+                    <input type="tel" class="form-input" id="phone" placeholder="请输入手机号" required pattern="^1[3-9]\d{9}$">
+                    <button type="button" class="get-verify-btn" id="getVerifyBtn">获取验证码</button>
+                </div>
+                <div class="error-message" id="phoneError" style="display: none;">请输入有效的11位手机号（仅数字）</div>
+            </div> 
+            
+            <!-- 验证码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-shield-halved input-icon"></i>
+                    <input type="text" class="form-input" id="verifyCode" placeholder="请输入验证码" required pattern="\d{6}">
+                </div>
+                <div class="error-message" id="verifyCodeError" style="display: none;">验证码格式错误（6位数字）</div>
+            </div>    
+            
+            <!-- 密码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" class="form-input" id="password" placeholder="请设置密码（≥6位）" required minlength="6">
+                    <i class="fas fa-eye-slash password-toggle" id="passwordToggle"></i>
+                </div>
+                <div class="error-message" id="passwordError" style="display: none;">密码长度不能少于6位</div>
+            </div>
+            
+            <!-- 确认密码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" class="form-input" id="confirmPwd" placeholder="请确认密码" required>
+                </div>
+                <div class="error-message" id="confirmPwdError" style="display: none;">两次输入的密码不一致</div>
+            </div>
+            
+                <!-- 注册按钮 -->
+                <button type="submit" class="register-btn" id="registerBtn">注册</button>
+            </form>
+        
+                <!-- 登录提示（跳转回登录页） -->
+                <div class="login-tip">
+                已有账号？<a href="login.html">立即登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+                            
+    <!--个人学习事务管理--> 
+    <div class="page" id="page-tasks">
+        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">    
+            <div class="tasks">                                   
+                <i class="fas fa-tasks tasks-icon"></i>
+
+                    <div class="tasks-menu">
+                        <button onclick="go('page-schedule')">课表查询/自定义</button>
+                        <button onclick="go('page-mark')">成绩管理系统</button>
+                        <button onclick="go('page-homework')">作业管理系统</button>
+                    </div>
+                </div>    
+            </div>
+        </div>        
+    
