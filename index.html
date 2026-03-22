@@ -265,6 +265,29 @@
                 </select>
             </div>
         </div>
+                    
+        课表查询结果
+        <div id="queryScheduleResult" class="schedule-result" style="margin-top: 20px;">
+            <div class="container">
+                <div class="result-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; background: #fff; border-radius: 8px 8px 0 0;">
+                    <h3 class="result-title" style="margin: 0; font-size: 16px; color: #333; font-weight: 600; display: flex; align-items: center;">
+                        <i class="fas fa-search" style="color: #007bff; margin-right: 8px;"></i> 课表查询结果
+                        <span id="resultKeyword" style="font-size: 14px; color: #666; margin-left: 10px;"></span>
+                    </h3>
+                    <div class="result-actions">
+                </div>
+             </div>  
+
+           <div id="resultList" class="result-list" style="margin-top: 15px;"> 
+           </div>
+
+           <div id="emptyTip" class="empty-tip" style="text-align: center; padding: 40px 0; color: #999; display: none;">
+            <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+            <p>暂无匹配的课表数据</p>
+        </div>
+    </div>
+</div>     
+                
 
         <!-- 自定义/换课弹窗 -->
         <div class="modal-overlay" id="courseModal">
@@ -310,8 +333,8 @@
                     </div>
                         <input type="hidden" id="editMode" value="false">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="closeModal">取消</button>
-                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-secondary" id="closeModal" style="margin-left: 10px;">取消</button>
+                        <button type="submit" class="btn btn-primary" style="margin-right: 10px;">保存</button>
                     </div>
                 </form>
             </div>
@@ -478,13 +501,13 @@
  
     <!--图书借阅预约-->   
     <div class="page" id="page-book">    
-        <div class="book-container">                    
+        <div class="container">                    
             <div class="book"> 
                 <div class="book-container">
                     <i class="fas fa-book book-icon"></i>
 
-                    <div class="book-mebooknu">                                   
-                        <button onclick="go('page-search')">图书馆藏书查询</button>                                   
+                    <div class="book-menu">                                   
+                        <button onclick="go('page-book-search')">图书馆藏书查询</button>                                   
                         <button onclick="go('page-calendar-check')">预约借书/续借</button>                                   
                         <button onclick="go('page-record')">我的预约记录</button>                           
                     </div>
@@ -494,18 +517,20 @@
     </div>
     
         图书馆藏书查询
-        <div class="page" id="page-search">        
-            <div class="container">
-                <div class="search-header">
-                    <h2 class="title">
-                        <i class="fas fa-search"></i> 图书馆藏书查询
+        <div class="page" id="page-book-search">        
+            <div class="container"style="max-width: 768px; margin: 20px auto; padding: 0 15px;" >
+                <div class="book-search-header" id="book-search-header" style="padding: 15px 0; border-bottom: 1px solid #eee; margin-bottom: 20px;">
+                    <h2 class="title" style="margin: 0; font-size: 18px; color: #333; display: flex; align-items: center;">
+                        <i class="fas fa-book-search" style="color: #007bff; margin-right: 8px;"></i> 图书馆藏书查询
                     </h2>
                 </div>    
 
             <!-- 搜索筛选区域 -->
-            <div class="search-box">
-                <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询">
-                <select class="search-select" id="categoryFilter">
+            <div class="search-box" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询"
+                    style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                <select class="search-select" id="categoryFilter"
+                    style="min-width: 120px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; color: #666;">
                     <option value="">全部分类</option>
                     <option value="文学">文学类</option>
                     <option value="理科">理科类</option>
@@ -521,8 +546,9 @@
                     <option value="信息技术">电脑类</option>
                     <option value="其他">其他类型</option>    
                 </select>
-                <button class="search-btn" onclick="searchBooks()">
-                    <i class="fas fa-search"></i> 搜索
+                <button class="search-btn" onclick="searchBooks()"
+                    style="padding: 10px 20px; border: none; border-radius: 4px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <i class="fas fa-book-search"></i> 搜索
                 </button>
             </div>
         </div>
@@ -530,22 +556,22 @@
             
         预约借书/续借
         <div class="page" id="page-calendar-check">       
-            <div class="container">
-                <div class="calendar-check-header">
-                    <h2 class="title">
-                        <i class="fas fa-calendar-check"></i> 预约借书/续借
+            <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+                <div class="calendar-check-header" style="padding: 15px 0; border-bottom: 1px solid #eee; style="margin-bottom: 20px;">
+                    <h2 class="title" style="margin: 0; font-size: 18px; color: #333; display: flex; align-items: center;">
+                        <i class="fas fa-calendar-check" style="color: #007bff; margin-right: 8px;"></i> 预约借书/续借
                     </h2>
                 </div>          
 
-            <div class="tabs">             
-                <div class="tab active" onclick="switchTab(0)">发起预约</div>go             
-                <div class="tab" onclick="switchTab(1)">我的预约记录</div>             
-                <div class="tab" onclick="switchTab(2)">申请续借</div>         
-            </div>
-                
-            <div class="form-group">
-                <label>选择书籍(可多选)</label>
-                <select class="form-control" id="borrowBook" multiple size="13"required>    
+                <div class="calendar-check-menu">                                                            
+                    <button onclick="go('page-appointment')">发起预约</button>                                                                                                  
+                </div>
+        
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;"
+                    style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">选择书籍(可多选)</label>
+                <select class="form-control" id="borrowBook" multiple size="13"required
+                    style="min-width: 120px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; color: #666;">    
                     <option value="">请选择书籍类型</option>
                     <option value="文学">文学类</option>                 
                     <option value="理科">理科类</option>                 
@@ -561,8 +587,19 @@
                     <option value="信息技术">电脑类</option>
                     <option value="其他">其他类型</option>
                 </select>
-            </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;"
+                    style="padding: 10px 20px; border: none; border-radius: 4px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <button class="btn btn-secondary" onclick="renewBook()">
+                        <i class="fas fa-redo"></i> 续借选中书籍
+                    </button>    
+                    <button class="calendar-check-btn" onclick="go('page-appointment')"
+                        style="padding: 10px 20px; border: none; border-radius: 4px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">                     
+                        <i class="fas fa-calendar-check"></i> 立即预约                 
+                    </button>
+                </div>   
+            </div>   
 
+        <div class="page" id="page-appointment">        
             <div class="form-group">
                 <label>预约人姓名</label>
                 <input type="text" class="form-control" id="reserveName" placeholder="请输入姓名" required>
@@ -584,11 +621,12 @@
                 <button class="btn" onclick="submitBorrow()">提交预约申请</button>
             </div>
         </div>
-    </div>            
+    </div>
+</div>            
             
         我的预约记录
         <div class="page" id="page-record">        
-            <div class="container">             
+            <div class="container" style="margin-top: 20px;">             
                 <div class="record-header">                 
                     <h2 class="title">                     
                         <i class="fas fa-record"></i> 我的预约记录                
@@ -623,8 +661,8 @@
             <div class="user">                         
                 <i class="fas fa-user user-icon"></i>
                 <div class="tab">
-                    <button onclick="go(0)" class="active">个人信息</button>
-                    <button onclick="go(1)">消息通知</button>
+                    <button onclick="go('page-profile')" class="active">个人信息</button>
+                    <button onclick="go('page-notice')">消息通知</button>
                     <button onclick="go('page-help')">帮助与反馈</button>
                     <button onclick="go('page-logout')">退出登录</button>
                 </div>
@@ -633,7 +671,7 @@
     </div>      
                 
  <!-- 个人信息 -->
- <div class="page active" id="p0">
+ <div class="page" id="page-profile">
      <table class="table">
          <thead>
              <tr>
