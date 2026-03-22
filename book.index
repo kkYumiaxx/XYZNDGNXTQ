@@ -1,0 +1,153 @@
+<!--图书借阅预约-->   
+    <div class="page" id="page-book">    
+        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">                    
+            <div class="book"> 
+                <i class="fas fa-book book-icon"></i>
+
+                <div class="book-menu">                                   
+                    <button onclick="go('page-book-search')">图书馆藏书查询</button>                                   
+                    <button onclick="go('page-calendar-check')">预约借书/续借</button>                                   
+                    <button onclick="go('page-record')">我的预约记录</button>                           
+                </div>
+            </div> 
+        </div>    
+    </div>
+    
+        图书馆藏书查询
+        <div class="page" id="page-book-search">        
+            <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;" >
+                <div class="book-search-header" id="book-search-header" style="padding: 15px 0; border-bottom: 1px solid #eee; margin-bottom: 20px;">
+                    <h2 class="title" style="margin: 0; font-size: 18px; color: #333; display: flex; align-items: center;">
+                        <i class="fas fa-book-search" style="color: #007bff; margin-right: 8px;"></i> 图书馆藏书查询
+                    </h2>
+                </div>    
+
+            <!-- 搜索筛选区域 -->
+            <div class="search-box" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <input type="text" class="search-input" id="searchKey" placeholder="输入书名/作者/ISBN查询"
+                    style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                <select class="search-select" id="categoryFilter"
+                    style="min-width: 120px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; color: #666;">
+                    <option value="">全部分类</option>
+                    <option value="文学">文学类</option>
+                    <option value="理科">理科类</option>
+                    <option value="工科">工科类</option>
+                    <option value="社科">社科类</option>
+                    <option value="教辅">教辅类</option>
+                    <option value="艺术">艺术类</option>
+                    <option value="英语">英语类</option>
+                    <option value="法律">法律类</option>
+                    <option value="心理学">心理学类</option>
+                    <option value="政治">政治类</option>
+                    <option value="地理">地理类</option>                     
+                    <option value="信息技术">电脑类</option>
+                    <option value="其他">其他类型</option>    
+                </select>
+                <button class="search-btn" onclick="searchBooks()"
+                    style="padding: 10px 20px; border: none; border-radius: 4px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <i class="fas fa-book-search"></i> 搜索
+                </button>
+            </div>
+        </div>
+    </div>               
+            
+        预约借书/续借
+        <div class="page" id="page-calendar-check">       
+            <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+                <div class="calendar-check-header" style="padding: 15px 0; border-bottom: 1px solid #eee; style="margin-bottom: 20px;">
+                    <h2 class="title" style="margin: 0; font-size: 18px; color: #333; display: flex; align-items: center;">
+                        <i class="fas fa-calendar-check" style="color: #007bff; margin-right: 8px;"></i> 预约借书/续借
+                    </h2>
+                </div>          
+
+                <div class="calendar-check-menu">                                                            
+                    <button onclick="go('page-appointment')">发起预约</button>                                                                                                  
+                </div>
+        
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600;"
+                    style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">选择书籍(可多选)</label>
+                <select class="form-control" id="borrowBook" multiple size="13"required
+                    style="min-width: 120px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; color: #666;">    
+                    <option value="">请选择书籍类型</option>
+                    <option value="文学">文学类</option>                 
+                    <option value="理科">理科类</option>                 
+                    <option value="工科">工科类</option>                                                                    
+                    <option value="社科">社科类</option>                
+                    <option value="教辅">教辅类</option>                 
+                    <option value="艺术">艺术类</option>                 
+                    <option value="英语">英语类</option>                 
+                    <option value="法律">法律类</option>                 
+                    <option value="心理学">心理学类</option>                 
+                    <option value="政治">政治类</option>                 
+                    <option value="地理">地理类</option>
+                    <option value="信息技术">电脑类</option>
+                    <option value="其他">其他类型</option>
+                </select>
+                <div style="display: flex; gap: 10px; margin-top: 20px; justify-content: flex-end;"
+                    style="padding: 10px 20px; border: none; border-radius: 4px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <button class="btn btn-secondary" onclick="renewBook()">
+                        <i class="fas fa-redo"></i> 续借选中书籍
+                    </button>    
+                    <button class="calendar-check-btn" onclick="go('page-appointment')"
+                        style="padding: 10px 20px; border: none; border-radius: 4px; background: #007bff; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">                     
+                        <i class="fas fa-calendar-check"></i> 立即预约                 
+                    </button>
+                </div>   
+            </div>   
+
+        <div class="page" id="page-appointment">        
+            <div class="form-group">
+                <label>预约人姓名</label>
+                <input type="text" class="form-control" id="reserveName" placeholder="请输入姓名" required>
+            </div>
+            <div class="form-group">
+                <label>班级</label>
+                <input type="text" class="form-control" id="classroom" placeholder="请输入班级"required>
+            </div>
+            <div class="form-group">
+                <label>联系电话</label>
+                <input type="tel" class="form-control" id="reservePhone" placeholder="请输入电话" required>
+            </div>
+            <div class="form-group">
+                <label>预计取书时间</label>
+                <div class="time-group">
+                    <input type="date" class="form-control" id="takeDate" placeholder="取书日期" required>
+                    <input type="time" class="form-control" id="takeTime" placeholder="取书时间" required>
+                </div>
+                <button class="btn" onclick="submitBorrow()">提交预约申请</button>
+            </div>
+        </div>
+    </div>
+</div>            
+            
+        我的预约记录
+        <div class="page" id="page-record">        
+            <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">             
+                <div class="record-header" style="padding: 15px 0; border-bottom: 1px solid #eee; style="margin-bottom: 20px;">                 
+                    <h2 class="title" style="margin: 0; font-size: 18px; color: #333; display: flex; align-items: center;">                     
+                        <i class="fas fa-record" style="color: #007bff; margin-right: 8px;"></i> 我的预约记录                
+                    </h2>
+                </div>    
+                
+            <table class="record-table" id="reserveTable">
+                <thead>
+                    <tr>
+                        <th>书籍</th>
+                        <th>取书日期</th>
+                        <th>取书时间</th>
+                        <th>还书时间</th>
+                        <th>预约人姓名</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="reserveList">
+                    <!-- 预约记录动态渲染 -->
+                </tbody>
+            </table>
+            <div class="empty-tip" id="emptyTip" style="display: none;">
+                暂无预约记录
+            </div>
+        </div>
+    </div>
