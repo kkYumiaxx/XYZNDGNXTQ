@@ -290,3 +290,288 @@
             </div>
         </div>
     </div> 
+<script>
+// ==========================
+// 全局数据存储（本地模拟）
+// ==========================
+let scheduleData = [
+  { weekday: "Monday", section: 1, courseName: "数学", teacher: "李老师", remark: "" },
+  { weekday: "Wednesday", section: 3, courseName: "英语", teacher: "王老师", remark: "" },
+  { weekday: "Friday", section: 5, courseName: "物理", teacher: "张老师", remark: "" }
+];
+
+let scoreData = [
+  { semester: "第一学期", time: "2025-01", examType: "期末考", subject: "数学", score: 92, comment: "基础扎实", status: "已查" },
+  { semester: "第二学期", time: "2025-07", examType: "第二次月考", subject: "语文", score: 85, comment: "阅读需提升", status: "已查" },
+  { semester: "第一学期", time: "2024-12", examType: "期中考", subject: "英语", score: 78, comment: "一般", status: "已查" }
+];
+
+let homeworkData = {
+  tasks: [
+    { id: 1, subject: "数学", content: "习题1-10题", deadline: "2026-03-25" },
+    { id: 2, subject: "英语", content: "背单词U10", deadline: "2026-03-22" }
+  ],
+  submissions: [
+    { subject: "数学", answer: "已完成", score: 88, comment: "步骤完整", status: "已批改" }
+  ]
+};
+
+// ==========================
+// 通用页面切换（go 函数）
+// ==========================
+function go(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  if (typeof pageId === 'number') {
+    document.querySelectorAll('.tabs .page')[pageId].style.display = 'block';
+  } else {
+    document.getElementById(pageId).style.display = 'block';
+  }
+}
+
+// ==========================
+// 课表查询 & 渲染
+// ==========================
+function renderScheduleResult(data) {
+  const resultList = document.getElementById('resultList');
+  const emptyTip = document.getElementById('emptyTip');
+  resultList.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    emptyTip.style.display = 'block';
+    return;
+  }
+  emptyTip.style.display = 'none';
+
+  data.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'schedule-item';
+    div.innerHTML = `
+      <div>${item.weekday === 'Monday' ? '星期一' : 
+           item.weekday === 'Tuesday' ? '星期二' : 
+           item.weekday === 'Wednesday' ? '星期三' : 
+           item.weekday === 'Thursday' ? '星期四' : '星期五'}</div>
+      <div>第${item.section}节</div>
+      <div>${item.courseName}</div>
+      <div>${item.teacher || '—'}</div>
+      <div>${item.remark || '—'}</div>
+      <button onclick="editCourse('${item.weekday}',${item.section})">编辑</button>
+    `;
+    resultList.appendChild(div);
+  });
+}
+
+// 课表查询
+function querySchedule() {
+  const weekday = document.getElementById('weekdayFilter').value;
+  const section = document.getElementById('sectionFilter').value;
+
+  let filtered = scheduleData;
+  if (weekday) filtered = filtered.filter(x => x.weekday === weekday);
+  if (section) filtered = filtered.filter(x => x.section == section);
+
+  renderScheduleResult(filtered);
+}
+
+// ==========================
+// 自定义课程 / 编辑课程
+// ==========================
+let editMode = false;
+let editWeekday = "";
+let editSection = 0;
+
+function openCourseModal() {
+  document.getElementById('courseModal').style.display = 'flex';
+  document.getElementById('editMode').value = 'false';
+  document.getElementById('courseForm').reset();
+  editMode = false;
+}
+
+function editCourse(weekday, section) {
+  const item = scheduleData.find(x => x.weekday === weekday && x.section == section);
+  if (!item) return;
+
+  document.getElementById('modalWeekday').value = item.weekday;
+  document.getElementById('modalSection').value = item.section;
+  document.getElementById('modalCourseName').value = item.courseName;
+  document.getElementById('modalTeacher').value = item.teacher;
+  document.getElementById('modalRemark').value = item.remark;
+
+  document.getElementById('editMode').value = 'true';
+  editWeekday = weekday;
+  editSection = section;
+  editMode = true;
+
+  document.getElementById('courseModal').style.display = 'flex';
+}
+
+// 关闭弹窗
+function closeModal() {
+  document.getElementById('courseModal').style.display = 'none';
+}
+
+// 保存自定义课程
+document.getElementById('courseForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const weekday = document.getElementById('modalWeekday').value;
+  const section = document.getElementById('modalSection').value;
+  const courseName = document.getElementById('modalCourseName').value.trim();
+  const teacher = document.getElementById('modalTeacher').value.trim();
+  const remark = document.getElementById('modalRemark').value.trim();
+
+  if (!weekday || !section || !courseName) return;
+
+  if (editMode) {
+    const index = scheduleData.findIndex(x => x.weekday === editWeekday && x.section == editSection);
+    if (index !== -1) {
+      scheduleData[index] = { weekday, section, courseName, teacher, remark };
+    }
+  } else {
+    scheduleData.push({ weekday, section, courseName, teacher, remark });
+  }
+
+  closeModal();
+  querySchedule();
+});
+
+// ==========================
+// 成绩管理：渲染成绩
+// ==========================
+function renderScoreList(data) {
+  const list = document.getElementById('recordList');
+  const noData = document.getElementById('noData');
+  list.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    noData.style.display = 'block';
+    return;
+  }
+  noData.style.display = 'none';
+
+  data.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td>${item.semester}</td>
+      <td>${item.time}</td>
+      <td>${item.examType}</td>
+      <td>${item.subject}</td>
+      <td>可查看</td>
+      <td>${item.score}</td>
+      <td>${item.comment}</td>
+      <td>${item.status}</td>
+    `;
+    list.appendChild(tr);
+  });
+}
+
+// 成绩过滤
+function filterScore() {
+  const semester = document.getElementById('semesterFilter').value;
+  const examType = document.getElementById('examTypeFilter').value;
+  const subject = document.getElementById('subjectFilter').value;
+
+  let filtered = scoreData;
+  if (semester) filtered = filtered.filter(x => x.semester === semester);
+  if (examType) filtered = filtered.filter(x => x.examType === examType);
+  if (subject) filtered = filtered.filter(x => x.subject === subject);
+
+  renderScoreList(filtered);
+}
+
+// 成绩分析
+function analyzeScore() {
+  const resultBox = document.getElementById('result');
+  if (scoreData.length === 0) return;
+
+  const scores = scoreData.map(x => Number(x.score));
+  const avg = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
+  const total = scores.reduce((a, b) => a + b, 0);
+  const passCount = scores.filter(x => x >= 60).length;
+
+  const weak = scoreData.filter(x => x.score < 60).map(x => x.subject).join(' / ');
+  const medium = scoreData.filter(x => x.score >= 60 && x.score < 80).map(x => x.subject).join(' / ');
+  const good = scoreData.filter(x => x.score >= 80).map(x => x.subject).join(' / ');
+
+  document.getElementById('avg').innerText = avg;
+  document.getElementById('total').innerText = total;
+  document.getElementById('passCount').innerText = passCount;
+  document.getElementById('weak').innerText = weak || '无';
+  document.getElementById('medium').innerText = medium || '无';
+  document.getElementById('good').innerText = good || '无';
+
+  resultBox.style.display = 'block';
+}
+
+// ==========================
+// 作业管理：渲染作业
+// ==========================
+function renderTaskList() {
+  const select = document.getElementById('taskId');
+  const tbody = document.querySelector('#page0 tbody');
+  select.innerHTML = '';
+  tbody.innerHTML = '';
+
+  homeworkData.tasks.forEach(item => {
+    select.innerHTML += `<option value="${item.id}">${item.subject} - ${item.content}</option>`;
+    tbody.innerHTML += `
+      <tr>
+        <td>${item.subject}</td>
+        <td>${item.content}</td>
+        <td>${item.deadline}</td>
+      </tr>
+    `;
+  });
+}
+
+// 提交作业
+function submitTask() {
+  const taskId = document.getElementById('taskId').value;
+  const answer = document.getElementById('answer').value.trim();
+  if (!taskId || !answer) return alert('请选择作业并填写内容');
+
+  const task = homeworkData.tasks.find(x => x.id == taskId);
+  if (!task) return;
+
+  homeworkData.submissions.push({
+    subject: task.subject,
+    answer,
+    score: '—',
+    comment: '待批改',
+    status: '待批改'
+  });
+
+  alert('提交成功！');
+  renderResultList();
+}
+
+// 渲染批改结果
+function renderResultList() {
+  const tbody = document.querySelector('#page2 tbody');
+  tbody.innerHTML = '';
+
+  homeworkData.submissions.forEach(item => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${item.subject}</td>
+        <td>—</td>
+        <td>${item.answer}</td>
+        <td>${item.score}</td>
+        <td>${item.comment}</td>
+        <td>${item.status}</td>
+      </tr>
+    `;
+  });
+}
+
+// ==========================
+// 页面加载时初始化
+// ==========================
+window.onload = function() {
+  go('page-tasks');
+  renderTaskList();
+  renderResultList();
+  renderScoreList(scoreData);
+  renderScheduleResult(scheduleData);
+};
+                                          </script>
