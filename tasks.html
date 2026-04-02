@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人学习事物管理</title>
+    <!-- 字体链接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<!--个人学习事务管理--> 
+    <div class="page" id="page-tasks">
+        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">    
+            <div class="tasks">                                   
+                <i class="fas fa-tasks tasks-icon"></i>
+
+                    <div class="tasks-menu">
+                        <button onclick="go('page-schedule')">课表查询/自定义</button>
+                        <button onclick="go('page-mark')">成绩管理系统</button>
+                        <button onclick="go('page-homework')">作业管理系统</button>
+                    </div>
+                </div>    
+            </div>
+        </div>        
+    
+            课表查询/自定义
+            <div class="page" id="page-schedule">    
+                <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+                    <div class="schedule-header">
+                        <h2 class="schedule-title">课表查询/自定义</h2>
+                        <button class="btn btn-primary" id="quersyScheduleBtn" style="margin-left: 10px;">                                  
+                            <i class="fas fa-search"></i> 课表查询                             
+                        </button>
+                        <button class="btn btn-primary" id="customCourseBtn" style="margin-middle: 10px;">
+                            <i class="fas fa-plus"></i> 自定义课程/换课
+                        </button>
+                        <button class="btn btn-success" id="downloadScheduleBtn" style="margin-right: 10px;">
+                            <i class="fas fa-download"></i> 下载课表    
+                        </button>
+                    </div>
+
+            <!-- 筛选区域 -->
+            <div class="schedule-filters">
+                <div class="filter-group">
+                    <label for="weekdayFilter">星期：</label>
+                    <select id="weekdayFilter" class="filter-select">
+                        <option value="">全部</option>
+                        <option value="Monday">星期一</option>
+                        <option value="Tuesday">星期二</option>
+                        <option value="Wednesday">星期三</option>
+                        <option value="Thursday">星期四</option>
+                        <option value="Friday">星期五</option>
+                    </select>
+                </div>
+            <div class="filter-group">
+                <label for="sectionFilter">节次：</label>
+                <select id="sectionFilter" class="filter-select">
+                    <option value="">全部</option>
+                    <option value="1">第1节 (08:00-08:40)</option>
+                    <option value="2">第2节 (08:50-09:30)</option>
+                    <option value="3">第3节 (10:00-10:40)</option>
+                    <option value="4">第4节 (10:50-11:30)</option>
+                    <option value="5">第5节 (14:20-15:00)</option>
+                    <option value="6">第6节 (15:10-15:50)</option>
+                    <option value="7">第7节 (16:00-16:40)</option>
+                    <option value="8">第8节 (16:50-17:30)</option>
+                </select>
+            </div>
+        </div>
+                    
+        课表查询结果
+        <div id="queryScheduleResult" class="schedule-result" style="margin-top: 20px;">
+            <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+                <div class="result-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; background: #fff; border-radius: 8px 8px 0 0;">
+                    <h3 class="result-title" style="margin: 0; font-size: 16px; color: #333; font-weight: 600; display: flex; align-items: center;">
+                        <i class="fas fa-search" style="color: #007bff; margin-right: 8px;"></i> 课表查询结果
+                        <span id="resultKeyword" style="font-size: 14px; color: #666; margin-left: 10px;"></span>
+                    </h3>
+                    <div class="result-actions">
+                </div>
+             </div>  
+
+           <div id="resultList" class="result-list" style="margin-top: 15px;"> 
+           </div>
+
+           <div id="emptyTip" class="empty-tip" style="text-align: center; padding: 40px 0; color: #999; display: none;">
+            <i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 15px; opacity: 0.5;"></i>
+            <p>暂无匹配的课表数据</p>
+        </div>
+    </div>
+</div>     
+                
+
+        <!-- 自定义/换课弹窗 -->
+        <div class="modal-overlay" id="courseModal">
+            <div class="modal">
+                <h3 class="modal-title" id="modalTitle">自定义课程</h3>
+                <form id="courseForm">
+                    <div class="form-group">
+                        <label class="form-label">星期</label>
+                        <select id="modalWeekday" class="form-input" required>
+                            <option value="">请选择</option>
+                            <option value="Monday">星期一</option>
+                            <option value="Tuesday">星期二</option>
+                            <option value="Wednesday">星期三</option>
+                            <option value="Thursday">星期四</option>
+                            <option value="Friday">星期五</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">节次</label>
+                        <select id="modalSection" class="form-input" required>
+                            <option value="">请选择</option>
+                            <option value="1">第1节 (08:00-08:40)</option>
+                            <option value="2">第2节 (08:50-09:30)</option>
+                            <option value="3">第3节 (10:00-10:40)</option>
+                            <option value="4">第4节 (10:50-11:30)</option>
+                            <option value="5">第5节 (14:20-15:00)</option>
+                            <option value="6">第6节 (15:10-15:50)</option>
+                            <option value="7">第7节 (16:00-16:40)</option>
+                            <option value="8">第8节 (16:50-17:30)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">课程名称</label>
+                        <input type="text" id="modalCourseName" class="form-input" placeholder="如：数学/换课-英语" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">授课老师</label>
+                        <input type="text" id="modalTeacher" class="form-input" placeholder="如：张老师">
+                    </div> 
+                    <div class="form-group">
+                        <label class="form-label">备注（换课说明）</label>
+                        <input type="text" id="modalRemark" class="form-input" placeholder="如：原课程调至周四第3节">
+                    </div>
+                        <input type="hidden" id="editMode" value="false">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeModal" style="margin-left: 10px;">取消</button>
+                        <button type="submit" class="btn btn-primary" style="margin-right: 10px;">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>              
+</div>                         
+   
+    成绩管理系统
+    <div class="page" id="page-mark">            
+        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+             <div class="mark-header">
+                 <h2 class="title">             
+                     <i class="fas fa-history"></i> 查看历史成绩        
+                 </h2>
+             </div>    
+
+        <!-- 我的成绩记录 -->
+        <table class="record-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>学期</th>
+                    <th>时间</th>
+                    <th>考试类型</th>                     
+                    <th>科目</th>                     
+                    <th>答题卡</th>                     
+                    <th>成绩</th>
+                    <th>评语</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody id="recordList">
+                <!-- 记录会自动渲染在这里 -->
+            </tbody>
+        </table>
+
+        <div id="noData" class="no-data" style="display: none;">
+            暂无记录 
+        </div>
+                        
+        <!-- 筛选区域 -->
+            <div class="schedule-fliters">
+                <div class="filter-group">
+                    <label for="semesterFilter">学期：</label>
+                    <select id="semesterFilter" class="filter-select">
+                        <option value="">全部</option>
+                        <option value="the first semester">第一学期</option>
+                        <option value="the second semester">第二学期</option>
+                        <option value="the third semester">第三学期</option>
+                        <option value="the fourth semester">第四学期</option>
+                        <option value="the fifth semester">第五学期</option>
+                        <option value="the sixth semester">第六学期</option>
+                    </select>
+                </div> 
+            </div> 
+              <div class="schedule-fliters">                                      
+                  <div class="filter-group">                                              
+                      <label for="semesterFilter">学期：</label>                                              
+                      <select id="examTypeFilter" class="filter-select">                                                      
+                          <option value="">全部</option>                                                       
+                          <option value="the first semester">第一次月考</option>                                                       
+                          <option value="the second semester">期中考</option>                                                       
+                          <option value="the third semester">第二次月考</option>                                                      
+                          <option value="the fourth semester">期末考</option>                                                                      
+                    </select>                              
+                </div>
+            </div>       
+              <div class="schedule-fliters">                     
+                <div class="filter-group">                         
+                    <label for="subjectFilter">学科：</label>                         
+                    <select id="subjectFilter" class="filter-select">                             
+                        <option value="">全部</option>                              
+                        <option value="Chinese">语文</option>                              
+                        <option value="math">数学</option>                              
+                        <option value="English">英语</option>                             
+                        <option value="physics">物理</option>                            
+                        <option value="chemistry">化学</option>
+                        <option value="biology">生物</option>
+                        <option value="politics">政治</option>                                                     
+                        <option value="history">历史</option>                         
+                        <option value="geography">地理</option>
+                    </select> 
+                </div>
+             </div>
+
+                <button class="btn-analyze" onclick="analyzeScore()">开始分析成绩</button>
+
+            <!-- 分析结果 -->
+            <div class="result-box" id="result" style="display:none;">
+                <div class="result-title">📊 成绩统计结果</div>
+                <div class="score-info">平均分：<span id="avg"></span></div>
+                <div class="score-info">总分：<span id="total"></span></div>
+                <div class="score-info">及格科目数：<span id="passCount"></span></div>
+                <div class="score-info weak-info">薄弱/不及格科目：<span class="weak-list" id="weak"></span></div>
+                <div class="score-info pass-info">待提升科目：<span class="pass-list" id="medium"></span></div>
+                <div class="score-info good-info">优势科目：<span class="good-list" id="good"></span></div>
+            </div>
+        </div>     
+    </div>            
+
+    作业管理系统
+    <div class="page" id="page-homework">            
+        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+            <div class="homework-header">
+                <h2 class="title">
+                    <i class="fas fa-homework"></i> 作业管理系统
+                </h2>
+            </div>  
+
+    <div class="tabs">
+        <div class="tab active" onclick="go(0)">接收作业</div>
+        <div class="tab" onclick="go(1)">提交作业</div>
+        <div class="tab" onclick="go(2)">查询批改结果</div>
+    </div>
+
+    <!-- 接收作业 -->
+    <div class="page active" id="page0">
+        <h3>已发布作业</h3>
+        <table class="table" id="taskList">
+            <thead>
+                <tr>
+                    <th>科目</th>
+                    <th>作业内容</th>
+                    <th>截止时间</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- 提交作业 -->
+    <div class="page" id="page1">
+        <h3>提交作业</h3>
+        <div class="form-group">
+            <label>选择作业</label>
+            <select class="form-control" id="taskId"></select>
+        </div>
+        <div class="form-group">
+            <label>你的答案/内容</label>
+            <textarea class="form-control" id="answer" rows="4"></textarea>
+        </div>
+        <button class="btn" onclick="submitTask()">提交作业</button>
+    </div>
+
+    <!-- 查询批改结果 -->
+    <div class="page" id="page2">
+        <h3>我的作业批改结果</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>科目</th>
+                        <th>作业内容</th>
+                        <th>我的答案</th>
+                        <th>得分</th>
+                        <th>评语</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                    <tbody id="resultList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+<script>
+// ==========================
+// 全局数据存储（本地模拟）
+// ==========================
+let scheduleData = [
+  { weekday: "Monday", section: 1, courseName: "数学", teacher: "李老师", remark: "" },
+  { weekday: "Wednesday", section: 3, courseName: "英语", teacher: "王老师", remark: "" },
+  { weekday: "Friday", section: 5, courseName: "物理", teacher: "张老师", remark: "" }
+];
+
+let scoreData = [
+  { semester: "第一学期", time: "2025-01", examType: "期末考", subject: "数学", score: 92, comment: "基础扎实", status: "已查" },
+  { semester: "第二学期", time: "2025-07", examType: "第二次月考", subject: "语文", score: 85, comment: "阅读需提升", status: "已查" },
+  { semester: "第一学期", time: "2024-12", examType: "期中考", subject: "英语", score: 78, comment: "一般", status: "已查" }
+];
+
+let homeworkData = {
+  tasks: [
+    { id: 1, subject: "数学", content: "习题1-10题", deadline: "2026-03-25" },
+    { id: 2, subject: "英语", content: "背单词U10", deadline: "2026-03-22" }
+  ],
+  submissions: [
+    { subject: "数学", answer: "已完成", score: 88, comment: "步骤完整", status: "已批改" }
+  ]
+};
+
+// ==========================
+// 通用页面切换（go 函数）
+// ==========================
+function go(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  if (typeof pageId === 'number') {
+    document.querySelectorAll('.tabs .page')[pageId].style.display = 'block';
+  } else {
+    document.getElementById(pageId).style.display = 'block';
+  }
+}
+
+// ==========================
+// 课表查询 & 渲染
+// ==========================
+function renderScheduleResult(data) {
+  const resultList = document.getElementById('resultList');
+  const emptyTip = document.getElementById('emptyTip');
+  resultList.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    emptyTip.style.display = 'block';
+    return;
+  }
+  emptyTip.style.display = 'none';
+
+  data.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'schedule-item';
+    div.innerHTML = `
+      <div>${item.weekday === 'Monday' ? '星期一' : 
+           item.weekday === 'Tuesday' ? '星期二' : 
+           item.weekday === 'Wednesday' ? '星期三' : 
+           item.weekday === 'Thursday' ? '星期四' : '星期五'}</div>
+      <div>第${item.section}节</div>
+      <div>${item.courseName}</div>
+      <div>${item.teacher || '—'}</div>
+      <div>${item.remark || '—'}</div>
+      <button onclick="editCourse('${item.weekday}',${item.section})">编辑</button>
+    `;
+    resultList.appendChild(div);
+  });
+}
+
+// 课表查询
+function querySchedule() {
+  const weekday = document.getElementById('weekdayFilter').value;
+  const section = document.getElementById('sectionFilter').value;
+
+  let filtered = scheduleData;
+  if (weekday) filtered = filtered.filter(x => x.weekday === weekday);
+  if (section) filtered = filtered.filter(x => x.section == section);
+
+  renderScheduleResult(filtered);
+}
+
+// ==========================
+// 自定义课程 / 编辑课程
+// ==========================
+let editMode = false;
+let editWeekday = "";
+let editSection = 0;
+
+function openCourseModal() {
+  document.getElementById('courseModal').style.display = 'flex';
+  document.getElementById('editMode').value = 'false';
+  document.getElementById('courseForm').reset();
+  editMode = false;
+}
+
+function editCourse(weekday, section) {
+  const item = scheduleData.find(x => x.weekday === weekday && x.section == section);
+  if (!item) return;
+
+  document.getElementById('modalWeekday').value = item.weekday;
+  document.getElementById('modalSection').value = item.section;
+  document.getElementById('modalCourseName').value = item.courseName;
+  document.getElementById('modalTeacher').value = item.teacher;
+  document.getElementById('modalRemark').value = item.remark;
+
+  document.getElementById('editMode').value = 'true';
+  editWeekday = weekday;
+  editSection = section;
+  editMode = true;
+
+  document.getElementById('courseModal').style.display = 'flex';
+}
+
+// 关闭弹窗
+function closeModal() {
+  document.getElementById('courseModal').style.display = 'none';
+}
+
+// 保存自定义课程
+document.getElementById('courseForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const weekday = document.getElementById('modalWeekday').value;
+  const section = document.getElementById('modalSection').value;
+  const courseName = document.getElementById('modalCourseName').value.trim();
+  const teacher = document.getElementById('modalTeacher').value.trim();
+  const remark = document.getElementById('modalRemark').value.trim();
+
+  if (!weekday || !section || !courseName) return;
+
+  if (editMode) {
+    const index = scheduleData.findIndex(x => x.weekday === editWeekday && x.section == editSection);
+    if (index !== -1) {
+      scheduleData[index] = { weekday, section, courseName, teacher, remark };
+    }
+  } else {
+    scheduleData.push({ weekday, section, courseName, teacher, remark });
+  }
+
+  closeModal();
+  querySchedule();
+});
+
+// ==========================
+// 成绩管理：渲染成绩
+// ==========================
+function renderScoreList(data) {
+  const list = document.getElementById('recordList');
+  const noData = document.getElementById('noData');
+  list.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    noData.style.display = 'block';
+    return;
+  }
+  noData.style.display = 'none';
+
+  data.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td>${item.semester}</td>
+      <td>${item.time}</td>
+      <td>${item.examType}</td>
+      <td>${item.subject}</td>
+      <td>可查看</td>
+      <td>${item.score}</td>
+      <td>${item.comment}</td>
+      <td>${item.status}</td>
+    `;
+    list.appendChild(tr);
+  });
+}
+
+// 成绩过滤
+function filterScore() {
+  const semester = document.getElementById('semesterFilter').value;
+  const examType = document.getElementById('examTypeFilter').value;
+  const subject = document.getElementById('subjectFilter').value;
+
+  let filtered = scoreData;
+  if (semester) filtered = filtered.filter(x => x.semester === semester);
+  if (examType) filtered = filtered.filter(x => x.examType === examType);
+  if (subject) filtered = filtered.filter(x => x.subject === subject);
+
+  renderScoreList(filtered);
+}
+
+// 成绩分析
+function analyzeScore() {
+  const resultBox = document.getElementById('result');
+  if (scoreData.length === 0) return;
+
+  const scores = scoreData.map(x => Number(x.score));
+  const avg = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
+  const total = scores.reduce((a, b) => a + b, 0);
+  const passCount = scores.filter(x => x >= 60).length;
+
+  const weak = scoreData.filter(x => x.score < 60).map(x => x.subject).join(' / ');
+  const medium = scoreData.filter(x => x.score >= 60 && x.score < 80).map(x => x.subject).join(' / ');
+  const good = scoreData.filter(x => x.score >= 80).map(x => x.subject).join(' / ');
+
+  document.getElementById('avg').innerText = avg;
+  document.getElementById('total').innerText = total;
+  document.getElementById('passCount').innerText = passCount;
+  document.getElementById('weak').innerText = weak || '无';
+  document.getElementById('medium').innerText = medium || '无';
+  document.getElementById('good').innerText = good || '无';
+
+  resultBox.style.display = 'block';
+}
+
+// ==========================
+// 作业管理：渲染作业
+// ==========================
+function renderTaskList() {
+  const select = document.getElementById('taskId');
+  const tbody = document.querySelector('#page0 tbody');
+  select.innerHTML = '';
+  tbody.innerHTML = '';
+
+  homeworkData.tasks.forEach(item => {
+    select.innerHTML += `<option value="${item.id}">${item.subject} - ${item.content}</option>`;
+    tbody.innerHTML += `
+      <tr>
+        <td>${item.subject}</td>
+        <td>${item.content}</td>
+        <td>${item.deadline}</td>
+      </tr>
+    `;
+  });
+}
+
+// 提交作业
+function submitTask() {
+  const taskId = document.getElementById('taskId').value;
+  const answer = document.getElementById('answer').value.trim();
+  if (!taskId || !answer) return alert('请选择作业并填写内容');
+
+  const task = homeworkData.tasks.find(x => x.id == taskId);
+  if (!task) return;
+
+  homeworkData.submissions.push({
+    subject: task.subject,
+    answer,
+    score: '—',
+    comment: '待批改',
+    status: '待批改'
+  });
+
+  alert('提交成功！');
+  renderResultList();
+}
+
+// 渲染批改结果
+function renderResultList() {
+  const tbody = document.querySelector('#page2 tbody');
+  tbody.innerHTML = '';
+
+  homeworkData.submissions.forEach(item => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${item.subject}</td>
+        <td>—</td>
+        <td>${item.answer}</td>
+        <td>${item.score}</td>
+        <td>${item.comment}</td>
+        <td>${item.status}</td>
+      </tr>
+    `;
+  });
+}
+
+// ==========================
+// 页面加载时初始化
+// ==========================
+window.onload = function() {
+  go('page-tasks');
+  renderTaskList();
+  renderResultList();
+  renderScoreList(scoreData);
+  renderScheduleResult(scheduleData);
+};
+</body>
+</html>
+                                          </script>

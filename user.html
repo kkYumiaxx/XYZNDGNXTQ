@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <!-- 字体链接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>   
+<body>    
+<!--个人中心-->  
+    <div class="page" id="page-user">          
+        <div class="container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">                    
+            <div class="user">
+                <i class="fas fa-user user-icon" style="color: #007bff; margin-right: 8px;"></i>
+                    <div class="tab">
+                        <button onclick="go('page-profile')" class="active">个人信息</button>
+                        <button onclick="go('page-notice')">消息通知</button>
+                        <button onclick="go('page-help')">帮助与反馈</button>
+                        <button onclick="go('page-logout')">退出登录</button>
+                    </div>   
+                </div>          
+                
+ <!-- 个人信息 -->
+ <div class="page" id="page-profile">
+     <div class="profile-container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;"> 
+         <table class="table">
+             <thead>
+                 <tr>
+                     <th>信息项</th>
+                     <th>详情</th>
+                     <th>操作</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr>
+                     <td>头像</td>
+                     <td><img id="avatarImg" src="https://via.placeholder.com/50" alt="头像" style="width:50px;height:50px;border-radius:50%;"></td>
+                     <td><button class="btn-small" onclick="changeAvatar()">更换头像</button></td>
+                 </tr>
+                 <tr>
+                     <td>昵称</td>
+                     <td id="nicknameText">🐶🐰</td>
+                     <td><button class="btn-small" onclick="editNickname()">修改昵称</button></td>
+                 </tr>
+                 <tr>
+                     <td>帐号ID</td>
+                     <td>1022481008</td>
+                     <td>—</td>
+                 </tr>
+                 <tr>
+                     <td>手机号</td>
+                     <td id="phoneText">18960635621</td>
+                     <td><button class="btn-small" onclick="changePhone()">更换手机号</button></td>
+                 </tr>
+                 <tr>
+                     <td>密码</td>
+                     <td>******</td>
+                     <td><button class="btn-small" onclick="changePassword()">更改密码</button></td>
+                 </tr>
+                 <tr>                 
+                     <td>姓名</td>                 
+                     <td>李四</td>             
+                 </tr>             
+                 <tr>                 
+                     <td>班级</td>                 
+                     <td>高一2班</td>             
+                 </tr>             
+                 <tr>                 
+                     <td>班主任</td>                 
+                     <td>王老师</td>             
+                 </tr>             
+                 <tr>                 
+                     <td>学号</td>                 
+                     <td>8</td>             
+                 </tr>
+                 <tr>
+                     <td>权限设置</td>
+                     <td id="roleText">普通用户</td>
+                     <td><button class="btn-small" onclick="editPermission()">权限设置</button></td>
+                 </tr>
+             </tbody>
+         </table>
+     </div>     
+ </div>     
+
+     <!-- 消息通知 -->
+     <div class="page" id="page-notice">
+         <div class="notify-tabs" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+             <button class="notify-tab active" onclick="switchNotifyTab('unread')">未读消息</button>
+             <button class="notify-tab" onclick="switchNotifyTab('read')">已读消息</button>
+         </div>
+     </div>
+                 
+     <!-- 未读消息 -->
+     <div class="notify-content active" id="unread">
+         <div class="notify-item unread">
+             <div class="notify-title">【系统】新书上架提醒</div>
+             <div class="notify-desc">《Python编程：从入门到实践》已到馆，可预约借阅</div>
+             <div class="notify-time">2026-03-05 10:23</div>
+         </div>
+     </div>
+
+     <!-- 已读消息 -->
+     <div class="notify-content" id="read">
+         <div class="notify-item read">
+             <div class="notify-title">【系统】密码修改成功</div>
+             <div class="notify-desc">您的账号密码已于2026-03-01修改成功</div>
+             <div class="notify-time">2026-03-01 14:30</div>
+         </div>
+     </div>
+
+     <!-- 帮助与反馈 -->
+     <div class="page" id="page-help">
+         <div class="help-container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+             <div class="help-card">
+                <h2>帮助与反馈</h2>
+                <textarea placeholder="请输入你的问题或建议..." rows="5"></textarea>
+                <div class="help-buttons">
+                    <button onclick="go('page-user')" style="padding: 8px 20px; border: 1px solid #ddd; border-radius: 4px; background: #f8f9fa; color: #666; cursor: pointer;">返回</button>
+                    <button onclick="submitFeedback()" style="padding: 8px 20px; border: none solid none; border-radius: 4px; background: #dc3545; color: #fff; cursor: pointer;">提交反馈</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+                 
+        <!-- 退出登录 -->
+        <div class="page" id="page-logout">
+            <div class="logout-container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+                <div class="logout-card">
+                    <h2>确认退出登录？</h2>
+                    <p>退出后将返回登录页面</p>
+                    <div class="logout-buttons">
+                        <button onclick="go('page-user')" style="padding: 8px 20px; border: 1px solid #ddd; border-radius: 4px; background: #f8f9fa; color: #666; cursor: pointer;">取消</button>
+                        <button onclick="logout()" style="padding: 8px 20px; border: none solid none; border-radius: 4px; background: #dc3545; color: #fff; cursor: pointer;">确认退出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+</div> 
+
+<script>
+// ================= 全局状态 =================
+let notifyTab = "unread"; // 默认显示未读消息
+
+// ================= 核心切换函数 =================
+function go(pageName) {
+  // 隐藏所有 page
+  document.querySelectorAll(".page").forEach(page => {
+    page.style.display = "none";
+  });
+  // 显示目标 page
+  document.getElementById(pageName).style.display = "block";
+}
+
+// 绑定 tab 按钮跳转（你原有的 go 函数逻辑）
+function switchTab(targetPage) {
+  go(targetPage);
+}
+
+// ================= 消息 Tab 切换 =================
+function switchNotifyTab(tab) {
+  notifyTab = tab;
+  // 隐藏所有内容
+  document.querySelectorAll(".notify-content").forEach(item => {
+    item.style.display = "none";
+  });
+  // 移除所有 tab 激活态
+  document.querySelectorAll(".notify-tab").forEach(t => {
+    t.classList.remove("active");
+  });
+  // 激活当前 tab 和内容
+  document.getElementById(tab).style.display = "block";
+  event.target.classList.add("active");
+}
+
+// ================= 帮助与反馈：提交反馈 =================
+function submitFeedback() {
+  const textarea = document.querySelector("#page-help textarea");
+  const content = textarea.value.trim();
+  if (!content) {
+    alert("请输入反馈内容！");
+    return;
+  }
+  // 模拟提交成功
+  alert("反馈提交成功！我们会尽快处理～");
+  textarea.value = "";
+}
+
+// ================= 退出登录：确认退出 =================
+function logout() {
+  if (confirm("确定要退出登录吗？")) {
+    alert("已退出登录！");
+    go("page-user"); // 退回个人中心
+  }
+}
+
+// ================= 页面初始化 =================
+window.onload = function() {
+  // 默认进入「个人信息」页面
+  go("page-profile");
+};
+</script>
+</body>
+</html>    

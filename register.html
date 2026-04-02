@@ -1,0 +1,249 @@
+<!-- 注册 -->        
+<div class="page" id="page-register">
+    <div class="register-container" style="max-width: 768px; margin: 20px auto; padding: 0 15px;">
+        <div class="register-card">
+            <div class="register-title">
+                <h2>校园学习管理器</h2>
+                <p>填写信息完成注册</p>
+            </div>
+        
+        <!-- 注册表单 -->
+        <form id="registerForm" class="register-form">
+            
+            <!-- 姓名输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" class="form-input" id="name" placeholder="请输入真实姓名" required>
+                </div>
+                <div class="error-message" id="nameError" style="display: none;">请输入真实姓名</div>
+            </div>
+            
+            <!--学生帐号ID输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-id-card input-icon"></i>
+                    <input type="text" class="form-input" id="userID" placeholder="请输入学生帐号ID" required>
+                </div>
+                <div class="error-message" id="userIDError" style="display: none;">请输入学生帐号ID</div>
+            </div>
+            
+            <!-- 手机号输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-phone input-icon"></i>
+                    <input type="tel" class="form-input" id="phone" placeholder="请输入手机号" required pattern="^1[3-9]\d{9}$">
+                    <button type="button" class="get-verify-btn" id="getVerifyBtn">获取验证码</button>
+                </div>
+                <div class="error-message" id="phoneError" style="display: none;">请输入有效的11位手机号（仅数字）</div>
+            </div> 
+            
+            <!-- 验证码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-shield-halved input-icon"></i>
+                    <input type="text" class="form-input" id="verifyCode" placeholder="请输入验证码" required pattern="\d{6}">
+                </div>
+                <div class="error-message" id="verifyCodeError" style="display: none;">验证码格式错误（6位数字）</div>
+            </div>    
+            
+            <!-- 密码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" class="form-input" id="password" placeholder="请设置密码（≥6位）" required minlength="6">
+                    <i class="fas fa-eye-slash password-toggle" id="passwordToggle"></i>
+                </div>
+                <div class="error-message" id="passwordError" style="display: none;">密码长度不能少于6位</div>
+            </div>
+            
+            <!-- 确认密码输入框 -->
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" class="form-input" id="confirmPwd" placeholder="请确认密码" required>
+                </div>
+                <div class="error-message" id="confirmPwdError" style="display: none;">两次输入的密码不一致</div>
+            </div>
+            
+                <!-- 注册按钮 -->
+                <button type="submit" class="register-btn" id="registerBtn">注册</button>
+            </form>
+        
+                <!-- 登录提示（跳转回登录页） -->
+                <div class="login-tip">
+                已有账号？<a href="login.html">立即登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ================= 全局变量 =================
+let countdown = 60; // 验证码倒计时秒数
+let countTimer = null; // 定时器ID
+
+// ================= 页面初始化 =================
+window.onload = function() {
+    // 绑定表单提交事件
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // 阻止默认提交
+        if (validateForm()) { // 验证通过后执行注册
+            register();
+        }
+    });
+
+    // 绑定密码显示/隐藏切换
+    const passwordToggle = document.getElementById('passwordToggle');
+    passwordToggle.addEventListener('click', function() {
+        togglePassword('password', this);
+    });
+
+    // 绑定获取验证码按钮
+    document.getElementById('getVerifyBtn').addEventListener('click', sendVerifyCode);
+};
+
+// ================= 表单验证函数 =================
+function validateForm() {
+    let isValid = true;
+
+    // 1. 验证姓名
+    const name = document.getElementById('name').value.trim();
+    if (!name) {
+        showError('nameError', '请输入真实姓名');
+        isValid = false;
+    } else {
+        hideError('nameError');
+    }
+
+    // 2. 验证账号ID
+    const userID = document.getElementById('userID').value.trim();
+    if (!userID) {
+        showError('userIDError', '请输入学生帐号ID');
+        isValid = false;
+    } else {
+        hideError('userIDError');
+    }
+
+    // 3. 验证手机号
+    const phone = document.getElementById('phone').value.trim();
+    const phonePattern = /^1[3-9]\d{9}$/;
+    if (!phonePattern.test(phone)) {
+        showError('phoneError', '请输入有效的11位手机号（仅数字）');
+        isValid = false;
+    } else {
+        hideError('phoneError');
+    }
+
+    // 4. 验证验证码
+    const verifyCode = document.getElementById('verifyCode').value.trim();
+    const codePattern = /^\d{6}$/;
+    if (!codePattern.test(verifyCode)) {
+        showError('verifyCodeError', '验证码格式错误（6位数字）');
+        isValid = false;
+    } else {
+        hideError('verifyCodeError');
+    }
+
+    // 5. 验证密码
+    const password = document.getElementById('password').value;
+    if (password.length < 6) {
+        showError('passwordError', '密码长度不能少于6位');
+        isValid = false;
+    } else {
+        hideError('passwordError');
+    }
+
+    // 6. 验证确认密码
+    const confirmPwd = document.getElementById('confirmPwd').value;
+    if (confirmPwd !== password) {
+        showError('confirmPwdError', '两次输入的密码不一致');
+        isValid = false;
+    } else {
+        hideError('confirmPwdError');
+    }
+
+    return isValid;
+}
+
+// ================= 辅助函数：显示/隐藏错误提示 =================
+function showError(id, text) {
+    const errorEl = document.getElementById(id);
+    errorEl.innerText = text;
+    errorEl.style.display = 'block';
+}
+
+function hideError(id) {
+    const errorEl = document.getElementById(id);
+    errorEl.style.display = 'none';
+}
+
+// ================= 密码显示/隐藏切换 =================
+function togglePassword(inputId, toggleIcon) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    } else {
+        input.type = 'password';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    }
+}
+
+// ================= 发送验证码（倒计时） =================
+function sendVerifyCode() {
+    const phone = document.getElementById('phone').value.trim();
+    const phonePattern = /^1[3-9]\d{9}$/;
+
+    // 先验证手机号
+    if (!phonePattern.test(phone)) {
+        showError('phoneError', '请输入有效的11位手机号（仅数字）');
+        return;
+    }
+    hideError('phoneError');
+
+    const btn = document.getElementById('getVerifyBtn');
+    // 禁用按钮并开始倒计时
+    btn.disabled = true;
+    btn.innerText = `${countdown}秒后重新获取`;
+
+    countTimer = setInterval(() => {
+        countdown--;
+        btn.innerText = `${countdown}秒后重新获取`;
+
+        if (countdown <= 0) {
+            clearInterval(countTimer);
+            btn.disabled = false;
+            btn.innerText = '获取验证码';
+            countdown = 60; // 重置倒计时
+        }
+    }, 1000);
+
+    // 模拟发送验证码请求（实际项目中替换为AJAX）
+    console.log('发送验证码到手机号：', phone);
+    alert('验证码已发送至您的手机，请注意查收（模拟）');
+}
+
+// ================= 注册逻辑 =================
+function register() {
+    // 获取表单数据
+    const userData = {
+        name: document.getElementById('name').value.trim(),
+        userID: document.getElementById('userID').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        password: document.getElementById('password').value
+    };
+
+    // 模拟保存到本地存储（实际项目中替换为后端接口请求）
+    localStorage.setItem('userInfo', JSON.stringify(userData));
+
+    // 模拟注册成功
+    alert('注册成功！即将跳转到登录页');
+    
+    // 跳转到登录页
+    window.location.href = 'login.html';
+}
+</script>
+                            
